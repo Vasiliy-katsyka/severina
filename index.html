@@ -1865,7 +1865,7 @@
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>information-outline</title><path d="M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11V17Z" /></svg>
         <span id="aboutLabel">About</span>
       </button>
-      <button class="bottom-button" id="miningButton" onclick="openMiningPopup()" disabled="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>minecraft</title><path d="M4,2H20A2,2 0 0,1 22,4V20A2,2 0 0,1 20,22H4A2,2 0 0,1 2,20V4A2,2 0 0,1 4,2M6,6V10H10V12H8V18H10V16H14V18H16V12H14V10H18V6H14V10H10V6H6Z" /></svg><span id="miningLabel">Mining</span></button>
+      <button class="bottom-button" id="miningButton" onclick="openMiningPopup()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>minecraft</title><path d="M4,2H20A2,2 0 0,1 22,4V20A2,2 0 0,1 20,22H4A2,2 0 0,1 2,20V4A2,2 0 0,1 4,2M6,6V10H10V12H8V18H10V16H14V18H16V12H14V10H18V6H14V10H10V6H6Z" /></svg><span id="miningLabel">Mining</span></button>
       <button class="bottom-button" id="airdropButton" onclick="openAirdrop()">
         <svg>
           <image href="https://i.ibb.co/2F4T168/KV-3-1-removebg-preview.png" width="23" height="23" /> 
@@ -1933,420 +1933,49 @@
     </div>
 
     <div class="popup" id="miningPopup">
-      <h2 id="miningPopupTitle">Mining</h2>
-      <!--<div class="daily-combo-container">
-        <div class="daily-combo-title" id="dailyComboTitle">Daily combo</div>
-        <div class="combo-cards">
-          <div class="combo-card" id="comboCard1">?</div>
-          <div class="combo-card" id="comboCard2">?</div>
-          <div class="combo-card" id="comboCard3">?</div>
-        </div>
-        <div class="combo-reward">
-          <img src="https://github.com/Vasiliy-katsyka/fdsguai/blob/main/images/coin/coin-lobster.png?raw=true" alt="Coin Texture" width="20" height="20">
-          <span>+5,000,000</span>
-        </div>
-      </div>-->
+      <h2 id="miningPopupTitle">GayKombat Media</h2> 
       <div class="mining-tabs">
-        <button class="mining-button active" id="marketsTabButton" onclick="showMiningTab('markets')">Markets</button>
-        <button class="mining-button" id="teamTabButton" onclick="showMiningTab('team')">Team</button>
-        <button class="mining-button" id="legalTabButton" onclick="showMiningTab('legal')">Legal</button>
+        <button class="mining-button active" id="seriesTabButton" onclick="showMiningTab('series')">Series</button>
         <button class="mining-button" id="specialsTabButton" onclick="showMiningTab('specials')">Specials</button>
       </div>
       <div class="mining-card-wrapper" id="miningCardWrapper">
-        <!-- Markets Tab Cards -->
-        <div class="mining-container" id="marketsTab" style="display: none">
-          <div class="mining-card">
-            <img src="https://cdn.midjourney.com/ca86efa0-5195-44c0-9d82-816b1b766d43/0_1.png" alt="Card image" />
-            <h3 id="stackingTitle">Stacking</h3>
+        <!-- Series Tab Cards -->
+        <div class="mining-container" id="seriesTab">
+          <div class="mining-card" data-card-type="lovevictor">
+            <img src="https://totalwellnessandbariatrics.com/wp-content/uploads/want-to-lose-weight.jpg" alt="Love, Victor"> 
+            <h3 id="lovevictorTitle">Lose Weight</h3>
             <div class="card-info">
-              <span id="stackingProfit">Profit/hour: <a class="gold-text">+300 clicks</a></span>
-              <span class="card-price" id="stackingPrice">Price: 1000 clicks</span>
-              <span class="card-level" id="stackingLevel">Level: 0</span>
+              <span id="lovevictorProfit">Profit/hour: <a class="gold-text">+3000 clicks</a></span>
+              <span class="card-price" id="lovevictorPrice">Price: 1000 clicks</span>
+              <span class="card-level" id="lovevictorLevel">Level: 0</span>
             </div>
-            <button class="buy-button" onclick="buyCard('stacking')">Buy</button>
-            <div class="timer-overlay" id="stackingTimerOverlay">
-              <span class="timer-text" id="stackingTimer">30</span>
-              <div class="spinner" id="stackingSpinner"></div>
+            <button class="buy-button" onclick="buyCard('lovevictor')">Buy</button>
+            <div class="timer-overlay" id="lovevictorTimerOverlay">
+              <span class="timer-text" id="lovevictorTimer">30</span>
+              <div class="spinner" id="lovevictorSpinner"></div>
             </div>
           </div>
-          <div class="mining-card">
-            <img src="https://cdn.midjourney.com/4443868e-14af-488b-96a9-79e273a91a43/0_3.png" alt="Card image" />
-            <h3 id="btcTitle">BTC Pairs</h3>
-            <div class="card-info">
-              <span id="btcProfit">Profit/hour: <a class="gold-text">+900 clicks</a></span>
-              <span class="card-price" id="btcPrice">Price: 8000 clicks</span>
-              <span class="card-level" id="btcLevel">Level: 0</span>
-            </div>
-            <button class="buy-button" onclick="buyCard('btc')">Buy</button>
-            <div class="timer-overlay" id="btcTimerOverlay">
-              <span class="timer-text" id="btcTimer">30</span>
-              <div class="spinner" id="btcSpinner"></div>
-            </div>
-          </div>
-          <div class="mining-card">
-            <img src="https://cdn.midjourney.com/2a2b7d0c-9650-47d7-ac4c-3703a4778838/0_2.png" alt="Card image" />
-            <h3 id="ethTitle">ETH Pairs</h3>
-            <div class="card-info">
-              <span id="ethProfit">Profit/hour: <a class="gold-text">+1000 clicks</a></span>
-              <span class="card-price" id="ethPrice">Price: 10000 clicks</span>
-              <span class="card-level" id="ethLevel">Level: 0</span>
-            </div>
-            <button class="buy-button" onclick="buyCard('eth')">Buy</button>
-            <div class="timer-overlay" id="ethTimerOverlay">
-              <span class="timer-text" id="ethTimer">30</span>
-              <div class="spinner" id="ethSpinner"></div>
-            </div>
-          </div>
-          <div class="mining-card">
-            <img src="https://avatars.githubusercontent.com/u/131016009?s=280&v=4" alt="Card image" />
-            <h3 id="tonTitle">TON Pairs</h3>
-            <div class="card-info">
-              <span id="tonProfit">Profit/hour: <a class="gold-text">+500 clicks</a></span>
-              <span class="card-price" id="tonPrice">Price: 2000 clicks</span>
-              <span class="card-level" id="tonLevel">Level: 0</span>
-            </div>
-            <button class="buy-button" onclick="buyCard('ton')">Buy</button>
-            <div class="timer-overlay" id="tonTimerOverlay">
-              <span class="timer-text" id="tonTimer">30</span>
-              <div class="spinner" id="tonSpinner"></div>
-            </div>
-          </div>
-          <div class="mining-card">
-            <img src="https://s2.coinmarketcap.com/static/img/coins/200x200/28850.png" alt="Card image" />
-            <h3 id="notTitle">NOT Pairs</h3>
-            <div class="card-info">
-              <span id="notProfit">Profit/hour: <a class="gold-text">+600 clicks</a></span>
-              <span class="card-price" id="notPrice">Price: 3000 clicks</span>
-              <span class="card-level" id="notLevel">Level: 0</span>
-            </div>
-            <button class="buy-button" onclick="buyCard('not')">Buy</button>
-            <div class="timer-overlay" id="notTimerOverlay">
-              <span class="timer-text" id="notTimer">30</span>
-              <div class="spinner" id="notSpinner"></div>
-            </div>
-          </div>
-          <div class="mining-card">
-            <img src="https://cdn.midjourney.com/1eb021d4-7560-4338-81a7-ceff508d81c8/0_2.png" alt="Card image" />
-            <h3 id="gamefiTitle">GameFI Tokens</h3>
-            <div class="card-info">
-              <span id="gamefiProfit">Profit/hour: <a class="gold-text">+700 clicks</a></span>
-              <span class="card-price" id="gamefiPrice">Price: 4000 clicks</span>
-              <span class="card-level" id="gamefiLevel">Level: 0</span>
-            </div>
-            <button class="buy-button" onclick="buyCard('gamefi')">Buy</button>
-            <div class="timer-overlay" id="gamefiTimerOverlay">
-              <span class="timer-text" id="gamefiTimer">30</span>
-              <div class="spinner" id="gamefiSpinner"></div>
-            </div>
-          </div>
-          <div class="mining-card">
-            <img src="https://cdn.midjourney.com/a46da306-830e-4397-ae07-ba13f97cbfa3/0_1.png" alt="Card image" />
-            <h3 id="memeTitle">Meme Coins</h3>
-            <div class="card-info">
-              <span id="memeProfit">Profit/hour: <a class="gold-text">+800 clicks</a></span>
-              <span class="card-price" id="memePrice">Price: 5000 clicks</span>
-              <span class="card-level" id="memeLevel">Level: 0</span>
-            </div>
-            <button class="buy-button" onclick="buyCard('meme')">Buy</button>
-            <div class="timer-overlay" id="memeTimerOverlay">
-              <span class="timer-text" id="memeTimer">30</span>
-              <div class="spinner" id="memeSpinner"></div>
-            </div>
-          </div>
-          <div class="mining-card">
-            <img src="https://cdn.midjourney.com/713596bf-7d82-4adc-bbb5-d1bb36c85414/0_0.png" alt="Card image" />
-            <h3 id="shitTitle">Shit Coins</h3>
-            <div class="card-info">
-              <span id="shitProfit">Profit/hour: <a class="gold-text">+900 clicks</a></span>
-              <span class="card-price" id="shitPrice">Price: 6000 clicks</span>
-              <span class="card-level" id="shitLevel">Level: 0</span>
-            </div>
-            <button class="buy-button" onclick="buyCard('shit')">Buy</button>
-            <div class="timer-overlay" id="shitTimerOverlay">
-              <span class="timer-text" id="shitTimer">30</span>
-              <div class="spinner" id="shitSpinner"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Team Tab Cards -->
-        <div class="mining-container" id="teamTab" style="display: none">
-          <div class="mining-card">
-            <img src="https://cdn.midjourney.com/59bcb9c9-112c-4a86-ba01-d4f73dba2ae9/0_2.png" alt="Card image" />
-            <h3 id="seoTitle">SEO</h3>
-            <div class="card-info">
-              <span id="seoProfit">Profit/hour: <a class="gold-text">+30 clicks</a></span>
-              <span class="card-price" id="seoPrice">Price: 500 clicks</span>
-              <span class="card-level" id="seoLevel">Level: 0</span>
-            </div>
-            <button class="buy-button" onclick="buyCard('seo')">Buy</button>
-            <div class="timer-overlay" id="seoTimerOverlay">
-              <span class="timer-text" id="seoTimer">30</span>
-              <div class="spinner" id="seoSpinner"></div>
-            </div>
-          </div>
-          <div class="mining-card">
-            <img src="https://cdn.midjourney.com/cef8f033-096a-44aa-8705-76478c0cafd6/0_0.png" alt="Card image" />
-            <h3 id="influencerTitle">Influencers</h3>
-            <div class="card-info">
-              <span id="influencerProfit">Profit/hour: <a class="gold-text">+60 clicks</a></span>
-              <span class="card-price" id="influencerPrice">Price: 600 clicks</span>
-              <span class="card-level" id="influencerLevel">Level: 0</span>
-            </div>
-            <button class="buy-button" onclick="buyCard('influencer')">Buy</button>
-            <div class="timer-overlay" id="influencerTimerOverlay">
-              <span class="timer-text" id="influencerTimer">30</span>
-              <div class="spinner" id="influencerSpinner"></div>
-            </div>
-          </div>
-          <div class="mining-card">
-            <img src="https://cdn.midjourney.com/23ffa0ba-e226-4d43-92ed-6273e209fc97/0_2.png" alt="Card image" />
-            <h3 id="minerTitle">Miners</h3>
-            <div class="card-info">
-              <span id="minerProfit">Profit/hour: <a class="gold-text">+100 clicks</a></span>
-              <span class="card-price" id="minerPrice">Price: 800 clicks</span>
-              <span class="card-level" id="minerLevel">Level: 0</span>
-            </div>
-            <button class="buy-button" onclick="buyCard('miner')">Buy</button>
-            <div class="timer-overlay" id="minerTimerOverlay">
-              <span class="timer-text" id="minerTimer">30</span>
-              <div class="spinner" id="minerSpinner"></div>
-            </div>
-          </div>
-          <div class="mining-card">
-            <img src="https://cdn.midjourney.com/a570837e-b7d9-4e60-882a-37a143a6380f/0_2.png" alt="Card image" />
-            <h3 id="itTeamTitle">IT Team</h3>
-            <div class="card-info">
-              <span id="itTeamProfit">Profit/hour: <a class="gold-text">+150 clicks</a></span>
-              <span class="card-price" id="itTeamPrice">Price: 700 clicks</span>
-              <span class="card-level" id="itTeamLevel">Level: 0</span>
-            </div>
-            <button class="buy-button" onclick="buyCard('itTeam')">Buy</button>
-            <div class="timer-overlay" id="itTeamTimerOverlay">
-              <span class="timer-text" id="itTeamTimer">30</span>
-              <div class="spinner" id="itTeamSpinner"></div>
-            </div>
-          </div>
-          <div class="mining-card">
-            <img src="https://cdn.midjourney.com/d86dc31d-13b0-4a2c-be36-d4716f6e8ad9/0_1.png" alt="Card image" />
-            <h3 id="hackTitle">Hacking Team</h3>
-            <div class="card-info">
-              <span id="hackProfit">Profit/hour: <a class="gold-text">+1000 clicks</a></span>
-              <span class="card-price" id="hackPrice">Price: 1000 clicks</span>
-              <span class="card-level" id="hackLevel">Level: 0</span>
-            </div>
-            <button class="buy-button" onclick="buyCard('hack')">Buy</button>
-            <div class="timer-overlay" id="hackTimerOverlay">
-              <span class="timer-text" id="hackTimer">30</span>
-              <div class="spinner" id="hackSpinner"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Legal Tab Cards -->
-        <div class="mining-container" id="legalTab" style="display: none">
-          <div class="mining-card">
-            <img src="https://cdn.midjourney.com/bd4920d7-3c05-4ea5-acf1-800ce24df81d/0_0.png" alt="Card image" />
-            <h3 id="usaTitle">License USA</h3>
-            <div class="card-info">
-              <span id="usaProfit">Profit/hour: <a class="gold-text">+2000 clicks</a></span>
-              <span class="card-price" id="usaPrice">Price: 12000 clicks</span>
-              <span class="card-level" id="usaLevel">Level: 0</span>
-            </div>
-            <button class="buy-button" onclick="buyCard('usa')">Buy</button>
-            <div class="timer-overlay" id="usaTimerOverlay">
-              <span class="timer-text" id="usaTimer">30</span>
-              <div class="spinner" id="usaSpinner"></div>
-            </div>
-          </div>
-          <div class="mining-card">
-            <img src="https://cdn.midjourney.com/e1d359a8-6310-446c-b06b-d0808c4b3b2b/0_0.png" alt="Card image" />
-            <h3 id="koreaTitle">License Korea</h3>
-            <div class="card-info">
-              <span id="krProfit">Profit/hour: <a class="gold-text">+4000 clicks</a></span>
-              <span class="card-price" id="krPrice">Price: 17000 clicks</span>
-              <span class="card-level" id="krLevel">Level: 0</span>
-            </div>
-            <button class="buy-button" onclick="buyCard('kr')">Buy</button>
-            <div class="timer-overlay" id="krTimerOverlay">
-              <span class="timer-text" id="krTimer">30</span>
-              <div class="spinner" id="krSpinner"></div>
-            </div>
-          </div>
-          <div class="mining-card">
-            <img src="https://cdn.midjourney.com/3d7e85a7-6be6-41ad-9a7f-0a184f558bc3/0_2.png" alt="Card image" />
-            <h3 id="uaeTitle">Licence UAE</h3>
-            <div class="card-info">
-              <span id="uaeProfit">Profit/hour: <a class="gold-text">+2500 clicks</a></span>
-              <span class="card-price" id="uaePrice">Price: 15000 clicks</span>
-              <span class="card-level" id="uaeLevel">Level: 0</span>
-            </div>
-            <button class="buy-button" onclick="buyCard('uae')">Buy</button>
-            <div class="timer-overlay" id="uaeTimerOverlay">
-              <span class="timer-text" id="uaeTimer">30</span>
-              <div class="spinner" id="uaeSpinner"></div>
-            </div>
-          </div>
-          <div class="mining-card">
-            <img src="https://cdn.midjourney.com/9c6d32f3-d1f7-4492-bc0e-0ea581ccbae5/0_1.png" alt="Card image" />
-            <h3 id="europeTitle">Licence Europe</h3>
-            <div class="card-info">
-              <span id="europeProfit">Profit/hour: <a class="gold-text">+3000 clicks</a></span>
-              <span class="card-price" id="europePrice">Price: 18000 clicks</span>
-              <span class="card-level" id="europeLevel">Level: 0</span>
-            </div>
-            <button class="buy-button" onclick="buyCard('europe')">Buy</button>
-            <div class="timer-overlay" id="europeTimerOverlay">
-              <span class="timer-text" id="europeTimer">30</span>
-              <div class="spinner" id="europeSpinner"></div>
-            </div>
-          </div>
-          <div class="mining-card">
-            <img src="https://cdn.midjourney.com/24a8b056-4c31-45f8-9746-8cc496c8829f/0_3.png" alt="Card image" />
-            <h3 id="australiaTitle">Licence Australia</h3>
-            <div class="card-info">
-              <span id="australiaProfit">Profit/hour: <a class="gold-text">+3500 clicks</a></span>
-              <span class="card-price" id="australiaPrice">Price: 21000 clicks</span>
-              <span class="card-level" id="australiaLevel">Level: 0</span>
-            </div>
-            <button class="buy-button" onclick="buyCard('australia')">Buy</button>
-            <div class="timer-overlay" id="australiaTimerOverlay">
-              <span class="timer-text" id="australiaTimer">30</span>
-              <div class="spinner" id="australiaSpinner"></div>
-            </div>
-          </div>
-          <div class="mining-card">
-            <img src="https://cdn.midjourney.com/eda716d0-eea8-4f81-9d65-4f8b8820f920/0_1.png" alt="Card image" />
-            <h3 id="japanTitle">License Japan</h3>
-            <div class="card-info">
-              <span id="japanProfit">Profit/hour: <a class="gold-text">+4000 clicks</a></span>
-              <span class="card-price" id="japanPrice">Price: 24000 clicks</span>
-              <span class="card-level" id="japanLevel">Level: 0</span>
-            </div>
-            <button class="buy-button" onclick="buyCard('japan')">Buy</button>
-            <div class="timer-overlay" id="japanTimerOverlay">
-              <span class="timer-text" id="japanTimer">30</span>
-              <div class="spinner" id="japanSpinner"></div>
-            </div>
-          </div>
-          <div class="mining-card">
-            <img src="https://cdn.midjourney.com/26249c54-08bd-411e-a458-103a5cb2ec85/0_0.png" alt="Card image" />
-            <h3 id="nigeriaTitle">License Nigeria</h3>
-            <div class="card-info">
-              <span id="nigeriaProfit">Profit/hour: <a class="gold-text">+4500 clicks</a></span>
-              <span class="card-price" id="nigeriaPrice">Price: 27000 clicks</span>
-              <span class="card-level" id="nigeriaLevel">Level: 0</span>
-            </div>
-            <button class="buy-button" onclick="buyCard('nigeria')">Buy</button>
-            <div class="timer-overlay" id="nigeriaTimerOverlay">
-              <span class="timer-text" id="nigeriaTimer">30</span>
-              <div class="spinner" id="nigeriaSpinner"></div>
-            </div>
-          </div>
-        </div>
-
+    
         <!-- Specials Tab Cards -->
         <div class="mining-container" id="specialsTab" style="display: none">
-          <div class="mining-card">
-            <img src="https://cdn.midjourney.com/38a76a7a-3500-4e1c-befb-10ee43a03043/0_0.png" alt="Card image" />
-            <h3 id="durovTitle">Pavel Durov Arrested</h3>
+          <div class="mining-card" data-card-type="heartstopper3">
+            <img src="https://i0.wp.com/thenerdsofcolor.org/wp-content/uploads/2024/09/en_gb_hs_s3_main_charlie_and_nick_-_main_key_art_4_x_5_v_1080px1350p_rgb_pre_1.jpg?resize=1080%2C1200&ssl=1" alt="Heartstopper 3"> 
+            <h3 id="heartstopper3Title">Heartstopper 3</h3>
             <div class="card-info">
-              <span id="durovProfit">Profit/hour: <a class="gold-text">+50000 clicks</a></span>
-              <span class="card-price" id="durovPrice">Price: 4000 clicks</span>
-              <span class="card-level" id="durovLevel">Level: 0</span>
+              <span id="heartstopper3Profit">Profit/hour: <a class="gold-text">+1000 clicks</a></span>
+              <span class="card-price" id="heartstopper3Price">Price: 8000 clicks</span>
+              <span class="card-level" id="heartstopper3Level">Level: 0</span>
             </div>
-            <button class="buy-button" onclick="buyCard('durov')">Buy</button>
-            <div class="timer-overlay" id="durovTimerOverlay">
-              <span class="timer-text" id="durovTimer">30</span>
-              <div class="spinner" id="durovSpinner"></div>
+            <button class="buy-button" onclick="buyCard('heartstopper3')">Buy</button>
+            <div class="timer-overlay" id="heartstopper3TimerOverlay">
+              <span class="timer-text" id="heartstopper3Timer">30</span>
+              <div class="spinner" id="heartstopper3Spinner"></div>
             </div>
           </div>
-          <div class="mining-card">
-            <img src="https://cdn.midjourney.com/0807afad-4c91-416a-abe3-eb0524d1a38f/0_0.png" alt="Card image" />
-            <h3 id="deadpoolTitle">Deadpool & Wolverine</h3>
-            <div class="card-info">
-              <span id="deadpoolProfit">Profit/hour: <a class="gold-text">+10000 clicks</a></span>
-              <span class="card-price" id="deadpoolPrice">Price: 40000 clicks</span>
-              <span class="card-level" id="deadpoolLevel">Level: 0</span>
-            </div>
-            <button class="buy-button" onclick="buyCard('deadpool')">Buy</button>
-            <div class="timer-overlay" id="deadpoolTimerOverlay">
-              <span class="timer-text" id="deadpoolTimer">30</span>
-              <div class="spinner" id="deadpoolSpinner"></div>
-            </div>
-          </div>
-          <div class="mining-card">
-            <img src="https://res.cloudinary.com/vivaticket/image/fetch/q_auto:eco,f_auto/https://backendcdn.vivaticket.it/img_eventi_new/390x390_668faffe2bbba.png" alt="Card image" />
-            <h3 id="edTitle">Ed Sheeran 2025</h3>
-            <div class="card-info">
-              <span id="edProfit">Profit/hour: <a class="gold-text">+5000 clicks</a></span>
-              <span class="card-price" id="edPrice">Price: 15000 clicks</span>
-              <span class="card-level" id="edLevel">Level: 0</span>
-            </div>
-            <button class="buy-button" onclick="buyCard('ed')">Buy</button>
-            <div class="timer-overlay" id="edTimerOverlay">
-              <span class="timer-text" id="edTimer">30</span>
-              <div class="spinner" id="edSpinner"></div>
-            </div>
-          </div>
-          <div class="mining-card">
-            <img src="https://cdn.midjourney.com/7e926b4c-798f-4096-970f-e449325eeea2/0_2.png" alt="Card image" />
-            <h3 id="users30Title">We have 30 users!</h3>
-            <div class="card-info">
-              <span id="us6Profit">Profit/hour: <a class="gold-text">+1000 clicks</a></span>
-              <span class="card-price" id="us6Price">Price: 10000 clicks</span>
-              <span class="card-level" id="us6Level">Level: 0</span>
-            </div>
-            <button class="buy-button" onclick="buyCard('us6')">Buy</button>
-            <div class="timer-overlay" id="us6TimerOverlay">
-              <span class="timer-text" id="us6Timer">30</span>
-              <div class="spinner" id="us6Spinner"></div>
-            </div>
-          </div>
-          <div class="mining-card">
-            <img src="https://cdn.midjourney.com/237acce7-9b4d-4830-8ce3-61da736d7e67/0_0.png" alt="Card image" />
-            <h3 id="elonTitle">Elon Musk</h3>
-            <div class="card-info">
-              <span id="elonProfit">Profit/hour: <a class="gold-text">+1000 clicks</a></span>
-              <span class="card-price" id="elonPrice">Price: 10000 clicks</span>
-              <span class="card-level" id="elonLevel">Level: 0</span>
-            </div>
-            <button class="buy-button" onclick="buyCard('elon')">Buy</button>
-            <div class="timer-overlay" id="elonTimerOverlay">
-              <span class="timer-text" id="elonTimer">30</span>
-              <div class="spinner" id="elonSpinner"></div>
-            </div>
-          </div>
-          <div class="mining-card">
-            <img src="https://cdn.midjourney.com/0fea593b-1cfe-4948-969a-202b5413c044/0_1.png" alt="Card image" />
-            <h3 id="dubaiTitle">Dubai Office</h3>
-            <div class="card-info">
-              <span id="dubaiProfit">Profit/hour: <a class="gold-text">+5000 clicks</a></span>
-              <span class="card-price" id="dubaiPrice">Price: 23000 clicks</span>
-              <span class="card-level" id="dubaiLevel">Level: 0</span>
-            </div>
-            <button class="buy-button" onclick="buyCard('dubai')">Buy</button>
-            <div class="timer-overlay" id="dubaiTimerOverlay">
-              <span class="timer-text" id="dubaiTimer">30</span>
-              <div class="spinner" id="dubaiSpinner"></div>
-            </div>
-          </div>
-          <div class="mining-card">
-            <img src="https://cdn.midjourney.com/e90db955-acb9-4317-b6ca-29b2354997d1/0_2.png" alt="Card image" />
-            <h3 id="cityTitle">Lobster City</h3>
-            <div class="card-info">
-              <span id="cityProfit">Profit/hour: <a class="gold-text">+3000 clicks</a></span>
-              <span class="card-price" id="cityPrice">Price: 1,000,000 clicks</span>
-              <span class="card-level" id="cityLevel">Level: 0</span>
-            </div>
-            <button class="buy-button" onclick="buyCard('city')">Buy</button>
-            <div class="timer-overlay" id="cityTimerOverlay">
-              <span class="timer-text" id="cityTimer">30</span>
-              <div class="spinner" id="citySpinner"></div>
-            </div>
-          </div>
+    
+          <!-- Add more Specials cards here following the same structure --> 
         </div>
-      </div>
+      </div> 
     </div>
 
     <div class="popup settings-popup" id="settingsPopup">
@@ -3954,196 +3583,21 @@
 
     // Mining card data
     const miningCards = {
-      seo: {
-        profitPerHour: 30,
-        price: 500,
-        level: 0,
-        imageUrl: "https://cdn.midjourney.com/59bcb9c9-112c-4a86-ba01-d4f73dba2ae9/0_2.png"
-        ,
-        cooldown: 10 
-      },
-      influencer: {
-        profitPerHour: 60,
-        price: 600,
-        level: 0,
-        imageUrl: "https://cdn.midjourney.com/cef8f033-096a-44aa-8705-76478c0cafd6/0_0.png",
-        cooldown: 10 
-      },
-      miner: {
-        profitPerHour: 100,
-        price: 800,
-        level: 0,
-        imageUrl: "https://cdn.midjourney.com/23ffa0ba-e226-4d43-92ed-6273e209fc97/0_2.png",
-        cooldown: 10 
-      },
-      stacking: {
-        profitPerHour: 405, 
+      lovevictor: { 
+        profitPerHour: 3000, 
         price: 1000,
         level: 0,
-        imageUrl: "https://cdn.midjourney.com/ca86efa0-5195-44c0-9d82-816b1b766d43/0_1.png",
+        imageUrl: "https://totalwellnessandbariatrics.com/wp-content/uploads/want-to-lose-weight.jpg", 
         cooldown: 10 
       },
-      btc: {
-        profitPerHour: 115, 
+      // Specials 
+      heartstopper3: { 
+        profitPerHour: 1000, 
         price: 8000,
         level: 0,
-        imageUrl: "https://cdn.midjourney.com/4443868e-14af-488b-96a9-79e273a91a43/0_3.png",
+        imageUrl: "https://i0.wp.com/thenerdsofcolor.org/wp-content/uploads/2024/09/en_gb_hs_s3_main_charlie_and_nick_-_main_key_art_4_x_5_v_1080px1350p_rgb_pre_1.jpg?resize=1080%2C1200&ssl=1", 
         cooldown: 10 
       },
-      eth: {
-        profitPerHour: 150, 
-        price: 10000,
-        level: 0,
-        imageUrl: "https://cdn.midjourney.com/2a2b7d0c-9650-47d7-ac4c-3703a4778838/0_2.png",
-        cooldown: 10 
-      },
-      ton: { 
-        profitPerHour: 500, 
-        price: 2000,
-        level: 0,
-        imageUrl: "https://avatars.githubusercontent.com/u/131016009?s=280&v=4",
-        cooldown: 10  
-      },
-      not: { 
-        profitPerHour: 600,
-        price: 3000,
-        level: 0,
-        imageUrl: "https://s2.coinmarketcap.com/static/img/coins/200x200/28850.png",
-        cooldown: 10 
-      },
-      gamefi: { 
-        profitPerHour: 500, 
-        price: 4000,
-        level: 0,
-        imageUrl: "https://cdn.midjourney.com/1eb021d4-7560-4338-81a7-ceff508d81c8/0_2.png",
-        cooldown: 10  
-      },
-      meme: { 
-        profitPerHour: 800, 
-        price: 5000,
-        level: 0,
-        imageUrl: "https://cdn.midjourney.com/a46da306-830e-4397-ae07-ba13f97cbfa3/0_1.png",
-        cooldown: 10  
-      },
-      shit: { 
-        profitPerHour: 500, 
-        price: 6000,
-        level: 0,
-        imageUrl: "https://cdn.midjourney.com/713596bf-7d82-4adc-bbb5-d1bb36c85414/0_0.png",
-        cooldown: 10 
-      },
-      itTeam: {
-        profitPerHour: 150,
-        price: 700,
-        level: 0,
-        imageUrl: "https://cdn.midjourney.com/a570837e-b7d9-4e60-882a-37a143a6380f/0_2.png",
-        cooldown: 10 
-      },
-      hack: {
-        profitPerHour: 700,
-        price: 1000,
-        level: 0,
-        imageUrl: "https://cdn.midjourney.com/d86dc31d-13b0-4a2c-be36-d4716f6e8ad9/0_1.png",
-        cooldown: 10  
-      },
-      ed: {
-        profitPerHour: 3000,
-        price: 15000,
-        level: 0,
-        imageUrl: "https://res.cloudinary.com/vivaticket/image/fetch/q_auto:eco,f_auto/https://backendcdn.vivaticket.it/img_eventi_new/390x390_668faffe2bbba.png",
-        cooldown: 10  
-      },
-      us6: {
-        profitPerHour: 1000,
-        price: 10000,
-        level: 0,
-        imageUrl: "https://cdn.midjourney.com/7e926b4c-798f-4096-970f-e449325eeea2/0_2.png",
-        cooldown: 10  
-      },
-      elon: {
-        profitPerHour: 1000,
-        price: 10000,
-        level: 0,
-        imageUrl: "https://cdn.midjourney.com/237acce7-9b4d-4830-8ce3-61da736d7e67/0_0.png",
-        cooldown: 10  
-      },
-      dubai: {
-        profitPerHour: 5000,
-        price: 23000,
-        level: 0,
-        imageUrl: "https://cdn.midjourney.com/0fea593b-1cfe-4948-969a-202b5413c044/0_1.png",
-        cooldown: 10  
-      },
-      city: {
-        profitPerHour: 3000,
-        price: 1000000,
-        level: 0,
-        imageUrl: "https://cdn.midjourney.com/e90db955-acb9-4317-b6ca-29b2354997d1/0_2.png",
-        cooldown: 10  
-      },
-      deadpool: {
-        profitPerHour: 1000,
-        price: 40000,
-        level: 0,
-        imageUrl: "https://cdn.midjourney.com/0807afad-4c91-416a-abe3-eb0524d1a38f/0_0.png",
-        cooldown: 10  
-      },
-      durov: {
-        profitPerHour: 5000,
-        price: 4000,
-        level: 0,
-        imageUrl: "https://cdn.midjourney.com/38a76a7a-3500-4e1c-befb-10ee43a03043/0_0.png",
-        cooldown: 10  
-      },
-      usa: {
-        profitPerHour: 2000, 
-        price: 12000,
-        level: 0,
-        imageUrl: "https://cdn.midjourney.com/bd4920d7-3c05-4ea5-acf1-800ce24df81d/0_0.png",
-        cooldown: 10  
-      },
-      uae: { 
-        profitPerHour: 2500, 
-        price: 15000,
-        level: 0,
-        imageUrl: "https://cdn.midjourney.com/3d7e85a7-6be6-41ad-9a7f-0a184f558bc3/0_2.png",
-        cooldown: 10 
-      },
-      kr: { 
-        profitPerHour: 4000, 
-        price: 17000,
-        level: 0,
-        imageUrl: "https://cdn.midjourney.com/3d7e85a7-6be6-41ad-9a7f-0a184f558bc3/0_2.png",
-        cooldown: 10 
-      },
-      europe: { 
-        profitPerHour: 3000, 
-        price: 18000,
-        level: 0,
-        imageUrl: "https://cdn.midjourney.com/9c6d32f3-d1f7-4492-bc0e-0ea581ccbae5/0_1.png",
-        cooldown: 10 
-      },
-      australia: { 
-        profitPerHour: 3500, 
-        price: 21000,
-        level: 0,
-        imageUrl: "https://cdn.midjourney.com/24a8b056-4c31-45f8-9746-8cc496c8829f/0_3.png",
-        cooldown: 10 
-      },
-      japan: { 
-        profitPerHour: 4000, 
-        price: 24000,
-        level: 0,
-        imageUrl: "https://cdn.midjourney.com/eda716d0-eea8-4f81-9d65-4f8b8820f920/0_1.png",
-        cooldown: 10  
-      },
-      nigeria: { 
-        profitPerHour: 4500, 
-        price: 27000,
-        level: 0,
-        imageUrl: "https://cdn.midjourney.com/26249c54-08bd-411e-a458-103a5cb2ec85/0_0.png",
-        cooldown: 10 
-      }
     };
     document.getElementById('leaderboardButton').addEventListener('click', openLeaderboardPopup); 
     function updateLeaderboard() {
@@ -4621,11 +4075,23 @@
       }
     }
 
+    let coinSize = 300; // Initial size of the coin in pixels
+
+    const coin1 = document.querySelector('.coin');
+    coin1.style.width = coinSize + 'px'; 
+    coin1.style.height = coinSize + 'px';
+
     // Function to handle coin click
     function clickCoin(event) {
       const touches = event.touches || event.changedTouches; 
 
       if (touches) {
+        coinSize += 10;
+        coin1.style.width = coinSize + 'px';
+        coin1.style.height = coinSize + 'px';
+
+        // Apply smooth transition
+        coin1.style.transition = 'width 0.3s ease, height 0.3s ease'; 
         for (let i = 0; i < touches.length; i++) {
           let touchX = touches[i].clientX;
           let touchY = touches[i].clientY;
