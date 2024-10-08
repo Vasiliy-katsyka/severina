@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,21 +18,31 @@
       height: 100vh;
       margin: 0;
     }
-
-    .container {
-      background-color: var(--tg-theme-secondary-bg-color);
-      padding: 20px;
-      border-radius: 8px;
-      text-align: center;
+    
+    h3 {
+      color: var(--tg-theme-hint-color);
+    }
+    
+    a {
+      color: var(--tg-theme-link-color);
+      font-size: 20px;
+      text-decoration: none; 
+    }
+    
+    .maintenance-gif {
+      width: 200px; /* Adjust width as needed */
+      margin-bottom: 20px; 
+      border-radius: 20px;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>App is under maintenance</h1>
-    <h3>Stay tuned on our telegram channel:</h3>
-    <a href='https://t.me/kviai1'>t.me/kviai1</a>
-  </div>
+  <img src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/471bed93658133.5e6a321ec581d.gif" 
+       alt="Maintenance GIF" 
+       class="maintenance-gif">
+  <h1>App is under maintenance</h1>
+  <h3>We are working hard, try agian later. <a href='https://t.me/kviai1'>Learn More ></a></h3>
+  
 
   <script>
     // Initialize Telegram Web App
