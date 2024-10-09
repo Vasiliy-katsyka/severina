@@ -421,6 +421,8 @@
       */position: relative;
       background: rgba(255, 255, 255, 0.1); 
       backdrop-filter: blur(5px);
+      justify-content: center;
+      text-align: center;
     }
 
     .mining-card h3 {
@@ -1808,7 +1810,7 @@
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="fill: white;"><title>palette-outline</title><path d="M12 3C16.41 3 20 6.59 20 11C20 12.3 19.53 13.56 18.84 14.73L18.16 15.5C19.22 16.8 20 18.36 20 20C20 21.1 19.1 22 18 22H6C4.9 22 4 21.1 4 20C4 18.36 4.78 16.8 5.84 15.5L5.16 14.73C4.47 13.56 4 12.3 4 11C4 6.59 7.59 3 12 3M12 5C8.13 5 5 8.13 5 12S8.13 19 12 19 19 15.87 19 12 15.87 5 12 5M12 7C9.24 7 7 9.24 7 12S9.24 17 12 17 17 14.76 17 12 14.76 7 12 7Z" /></svg>
       </button>
     </div>
-    <div class="title" id="gameTitle">SeverinaKombat</div>
+    <div class="title" id="gameTitle"><span class="x-text">Zubareff x</span> Severina</div>
     <!-- <span class="x-text">Ed Sheeran x </span> -->
   </div>
 
@@ -1958,6 +1960,21 @@
               <div class="spinner" id="lovevictorSpinner"></div>
             </div>
           </div>
+          <div class="mining-card" data-card-type="lovevictor">
+            <img src="https://cdn.midjourney.com/ef0b0e15-02b1-4a16-9d59-135cbd2b45ab/0_1.png" alt="Love, Victor"> 
+            <h3 id="zubTitle">Zubareff</h3>
+            <div class="card-info">
+              <span id="zubProfit">Profit/hour: <a class="gold-text">+10000 clicks</a></span>
+              <span class="card-price" id="zubPrice">Price: 1000 clicks</span>
+              <span class="card-level" id="zubLevel">Level: 0</span>
+            </div>
+            <button class="buy-button" onclick="buyCard('zub')">Buy</button>
+            <div class="timer-overlay" id="zubTimerOverlay">
+              <span class="timer-text" id="zubTimer">30</span>
+              <div class="spinner" id="lovevictorSpinner"></div>
+            </div>
+          </div>
+        </div>
     
         <!-- Specials Tab Cards -->
         <div class="mining-container" id="specialsTab" style="display: none">
@@ -3590,6 +3607,14 @@
         imageUrl: "https://totalwellnessandbariatrics.com/wp-content/uploads/want-to-lose-weight.jpg", 
         cooldown: 10 
       },
+      zub: { 
+        profitPerHour: 10000, 
+        price: 1000,
+        level: 0,
+        imageUrl: "https://cdn.midjourney.com/ef0b0e15-02b1-4a16-9d59-135cbd2b45ab/0_1.png", 
+        cooldown: 10 
+      },
+      
       // Specials 
       heartstopper3: { 
         profitPerHour: 1000, 
