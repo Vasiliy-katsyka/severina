@@ -68,8 +68,8 @@
     }
 
     .coin {
-      width: 260px;
-      height: 260px;
+      width: 300px;
+      height: 300px;
       border-radius: 50%;
       opacity: 100%;
       cursor: pointer;
@@ -4331,6 +4331,27 @@
         profit: 1000,
         description: "Classic and elegant" 
       },
+      {
+        name: "Swimmer",
+        imageUrl: "https://i.ibb.co/pPnLVMB/Background-Eraser-20241009-164759230.png",
+        price: 100000,
+        profit: 1000,
+        description: "18+" 
+      },
+      {
+        name: "ROCK METALL",
+        imageUrl: "https://i.ibb.co/9tjShvG/Background-Eraser-20241009-164438456.png",
+        price: 1000000,
+        profit: 1000,
+        description: "She loves rock (VERY FAT!!)" 
+      },
+      {
+        name: "Barbie",
+        imageUrl: "https://i.ibb.co/HGwR7zh/Background-Eraser-20241009-165225581.png",
+        price: 5000000,
+        profit: 1000,
+        description: "I'm a barbie girl" 
+      },
     ];
 
 
@@ -6283,6 +6304,9 @@
       }
     }
     createSnapshot();
+    if (!localStorage.getItem('snapshotMade')) {
+      createSnapshot();
+    }
 
     // Function to create a bubble
     function createBubble() {
