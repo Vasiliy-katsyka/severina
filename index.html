@@ -5707,6 +5707,14 @@
       }
     }
 
+    function addCommas1(number) {
+      return number.toLocaleString();
+    }
+
+    function truncateDecimal(number) {
+      return Math.floor(number);
+    }
+
     function calculateAirdrop() {
       let balanceLOB = 0;
       let leagueLOB = 0;
@@ -5734,11 +5742,11 @@
       totalLOB = Math.round(totalLOB);
 
       // Update airdrop display 
-      document.getElementById('balanceAirdrop').textContent = `Balance: ${balanceLOB.toFixed(2)} $SVR`;
-      document.getElementById('leagueAirdrop').textContent = `League Bonus: ${leagueLOB.toFixed(2)} $SVR`;
-      document.getElementById('profitAirdrop').textContent = `Profit/hour Bonus: ${profitLOB.toFixed(2)} $SVR`;
-      document.getElementById('skinsAirdrop').textContent = `Skins Bonus: ${skinsLOB} $SVR`;
-      document.getElementById('totalLOB').textContent = `Total: ${totalLOB} $SVR`;
+      document.getElementById('balanceAirdrop').textContent = `Balance: ${addCommas1(truncateDecimal(balanceLOB))} $SVR`;
+      document.getElementById('leagueAirdrop').textContent = `League Bonus: ${addCommas1(truncateDecimal(leagueLOB))} $SVR`;
+      document.getElementById('profitAirdrop').textContent = `Profit/hour Bonus: ${addCommas1(truncateDecimal(profitLOB))} $SVR`;
+      document.getElementById('skinsAirdrop').textContent = `Skins Bonus: ${addCommas1(truncateDecimal(skinsLOB))} $SVR`;
+      document.getElementById('totalLOB').textContent = `Total: ${addCommas1(truncateDecimal(totalLOB))} $SVR`;
 
       // Update checkmarks 
       document.getElementById('balanceCheck').classList.add('green');
