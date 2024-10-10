@@ -1942,7 +1942,7 @@
         <!-- Series Tab Cards -->
         <div class="mining-container" id="seriesTab">
           <div class="mining-card" data-card-type="lovevictor">
-            <img src="https://totalwellnessandbariatrics.com/wp-content/uploads/want-to-lose-weight.jpg" alt="Love, Victor"> 
+            <img src="https://cdn.midjourney.com/e6295192-dac9-4fdc-b072-f671ccba7628/0_1.png" alt="Love, Victor"> 
             <h3 id="lovevictorTitle">Lose Weight</h3>
             <div class="card-info">
               <span id="lovevictorProfit">Profit/hour: <a class="gold-text">+3000 clicks</a></span>
@@ -1955,6 +1955,35 @@
               <div class="spinner" id="lovevictorSpinner"></div>
             </div>
           </div>
+          <div class="mining-card" data-card-type="lovevictor">
+            <img src="https://cdn.midjourney.com/ef0b0e15-02b1-4a16-9d59-135cbd2b45ab/0_1.png" alt="Love, Victor"> 
+            <h3 id="zubTitle">Zubareff</h3>
+            <div class="card-info">
+              <span id="zubProfit">Profit/hour: <a class="gold-text">+10000 clicks</a></span>
+              <span class="card-price" id="zubPrice">Price: 1000 clicks</span>
+              <span class="card-level" id="zubLevel">Level: 0</span>
+            </div>
+            <button class="buy-button" onclick="buyCard('zub')">Buy</button>
+            <div class="timer-overlay" id="zubTimerOverlay">
+              <span class="timer-text" id="zubTimer">30</span>
+              <div class="spinner" id="zubSpinner"></div>
+            </div>
+          </div>
+          <div class="mining-card" data-card-type="lovevictor">
+            <img src="https://cdn.midjourney.com/cea799e3-658a-407f-b06b-40e5826541ac/0_0.png" alt="Love, Victor"> 
+            <h3 id="airTitle">Zubareff</h3>
+            <div class="card-info">
+              <span id="airProfit">Profit/hour: <a class="gold-text">+25000 clicks</a></span>
+              <span class="card-price" id="airPrice">Price: 20000 clicks</span>
+              <span class="card-level" id="airLevel">Level: 0</span>
+            </div>
+            <button class="buy-button" onclick="buyCard('air')">Buy</button>
+            <div class="timer-overlay" id="airTimerOverlay">
+              <span class="timer-text" id="airTimer">30</span>
+              <div class="spinner" id="airSpinner"></div>
+            </div>
+          </div>
+        </div>
     
         <!-- Specials Tab Cards -->
         <div class="mining-container" id="specialsTab" style="display: none">
@@ -3600,10 +3629,24 @@
         profitPerHour: 3000, 
         price: 1000,
         level: 0,
-        imageUrl: "https://totalwellnessandbariatrics.com/wp-content/uploads/want-to-lose-weight.jpg", 
+        imageUrl: "https://cdn.midjourney.com/e6295192-dac9-4fdc-b072-f671ccba7628/0_1.png", 
+        cooldown: 10 
+      },
+      zub: { 
+        profitPerHour: 10000, 
+        price: 1000,
+        level: 0,
+        imageUrl: "https://cdn.midjourney.com/ef0b0e15-02b1-4a16-9d59-135cbd2b45ab/0_1.png", 
         cooldown: 10 
       },
       // Specials 
+      air: { 
+        profitPerHour: 25000, 
+        price: 20000,
+        level: 0,
+        imageUrl: "https://cdn.midjourney.com/cea799e3-658a-407f-b06b-40e5826541ac/0_0.png", 
+        cooldown: 10 
+      },
       heartstopper3: { 
         profitPerHour: 1000, 
         price: 8000,
@@ -5725,7 +5768,7 @@
       if (clickCount < 1000000000000) { 
         balanceLOB = (clickCount / 100000) * 100; // 100k clicks = 100 LOB
       } else {
-        balanceLOB = (clickCount / 100000000000) * 10; // Adjust for larger balances
+        balanceLOB = (clickCount / 1000000000) * 10; // Adjust for larger balances
       }
 
       // LEAGUE BONUS
