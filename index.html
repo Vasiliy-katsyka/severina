@@ -6568,6 +6568,7 @@
     updateDailyRewardUI(); // Initial UI updateACC
     WebApp.SettingsButton.isVisible = true;
     WebApp.SettingsButton.onClick(openSettingsPopup);
+    WebApp.isVerticalSwipesEnabled = false;
     updateRewardDisplay();
     setInterval(updateRewardDisplay, 1000); 
     setInterval(updateDailyRewardUI, 3600000); // Update every hour
