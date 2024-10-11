@@ -35,12 +35,12 @@
       height: 100vh;
       margin: 0;
       background-color: #f0f0f0;
-      background: linear-gradient(0deg, #fff 70%, #000000 100%);/*#000 url(https://cdn.midjourney.com/f4959eaa-d01a-4b63-a96c-c380c3aa4768/0_3.png) center center/cover no-repeat;*/*
+      background: linear-gradient(0deg, #00d9ff 70%, #000000 100%);/*#000 url(https://cdn.midjourney.com/f4959eaa-d01a-4b63-a96c-c380c3aa4768/0_3.png) center center/cover no-repeat;*/*
     }
 
     .container {
       background: linear-gradient(0deg, /*#ffdd00*/#111 60%, #222 100%);/*: #ffffff url(https://cdn.midjourney.com/24efaca6-a028-4022-b8e8-972e9bd51786/0_3.png) center center/cover no-repeat;/*#ffffff url(https://cdn.midjourney.com/46a77421-c05f-4acc-8307-c212669c3820/0_3.png) center center/cover no-repeat; /* was: https://cdn.midjourney.com/451f94de-224e-4bc3-aa86-675a6f963883/0_2.png, beautiful - https://cdn.midjourney.com/75fa0b1a-746f-44d1-9082-a9255f045bbe/0_0.png */
-      border-top: 2px solid #ffffff;
+      border-top: 2px solid #00d9ff;
       border-radius: 40px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       text-align: center;
@@ -270,7 +270,7 @@
       box-sizing: border-box;
       border-top-left-radius: 20px;
       border-top-right-radius: 20px;
-      border-top: 2px solid #ffffff;
+      border-top: 2px solid #00d9ff;
       justify-content: space-around; /* Distribute buttons evenly */
     }
 
@@ -1247,7 +1247,7 @@
     .profElem {
       width: 170px;
       height: 53px;
-      border-top: 2px solid #ffffff;
+      border-top: 2px solid #00d9ff;
       border-radius: 20px;
       background: rgba(255, 255, 255, 0.1); /* Transparent background with blur effect */
       backdrop-filter: blur(5px); /* Apply blur effect */
@@ -1815,7 +1815,7 @@
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="fill: white;"><title>palette-outline</title><path d="M12 3C16.41 3 20 6.59 20 11C20 12.3 19.53 13.56 18.84 14.73L18.16 15.5C19.22 16.8 20 18.36 20 20C20 21.1 19.1 22 18 22H6C4.9 22 4 21.1 4 20C4 18.36 4.78 16.8 5.84 15.5L5.16 14.73C4.47 13.56 4 12.3 4 11C4 6.59 7.59 3 12 3M12 5C8.13 5 5 8.13 5 12S8.13 19 12 19 19 15.87 19 12 15.87 5 12 5M12 7C9.24 7 7 9.24 7 12S9.24 17 12 17 17 14.76 17 12 14.76 7 12 7Z" /></svg>
       </button>
     </div>
-    <div class="title" id="gameTitle"><span class="x-text">Zubareff x</span> Severina</div>
+    <div class="title" id="gameTitle">Severina<span class="x-text"> is on TON</span></div>
     <!-- <span class="x-text">Ed Sheeran x </span> -->
   </div>
 
@@ -4337,36 +4337,36 @@
       {
         name: "Villager",
         imageUrl: "https://i.ibb.co/88Xdfw8/Background-Eraser-20241002-212449711.png",
-        price: 10000,
-        profit: 1000,
+        price: 0,
+        profit: 0,
         description: "Classic and elegant" 
       },
       {
         name: "Zubarev",
         imageUrl: "https://i.ibb.co/CPHqP6r/Background-Eraser-20241009-214549181.png",
-        price: 11000,
-        profit: 1000,
+        price: 0,
+        profit: 0,
         description: "Marriage is TODAY!!" 
       },
       {
         name: "Swimmer",
         imageUrl: "https://i.ibb.co/pPnLVMB/Background-Eraser-20241009-164759230.png",
-        price: 100000,
-        profit: 10000,
+        price: 0,
+        profit: 0,
         description: "18+" 
       },
       {
         name: "ROCK METALL",
         imageUrl: "https://i.ibb.co/9tjShvG/Background-Eraser-20241009-164438456.png",
-        price: 1000000,
-        profit: 100000,
+        price: 0,
+        profit: 0,
         description: "She loves rock (VERY FAT!!)" 
       },
       {
         name: "Barbie",
         imageUrl: "https://i.ibb.co/HGwR7zh/Background-Eraser-20241009-165225581.png",
-        price: 5000000,
-        profit: 100000,
+        price: 0,
+        profit: 0,
         description: "I'm a barbie girl" 
       },
     ];
@@ -4474,7 +4474,7 @@
 
         const skinPrice = document.createElement('div');
         skinPrice.classList.add('skin-price');
-        skinPrice.textContent = `Price: ${numberWithCommas(skin.price)} clicks`;
+        skinPrice.textContent = `Price: FREE`;
         skinCard.appendChild(skinPrice);
 
         const buyButton = document.createElement('button');
