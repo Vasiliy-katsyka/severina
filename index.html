@@ -15,7 +15,7 @@
   </script>
   <script src="https://sad.adsgram.ai/js/sad.min.js"></script>
   <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
-  <script src="https://unpkg.com/browse/@ton/ton@14.0.0/dist/ton.min.js"></script>
+  
   <script src="https://smtpjs.com/v3/smtp.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@gradio/client/dist/index.min.js" type="module"></script>
   <style>
@@ -4102,49 +4102,26 @@
           let touchX = touches[i].clientX;
           let touchY = touches[i].clientY;
 
-          // **Check if clicks remaining is 0 or less BEFORE processing clicks**
-          if (clicksRemaining <= localStorage.getItem('clickMultiplier')) {
-            showMessage('Tap limit reached! Wait for the timer to reset.');
-            return; // Prevent further clicks
-          }
-
           // **Process the click ONLY if clicksRemaining is greater than 0**
           let isBonusClick = Math.random() < bonusChance;
 
           if (isBonusClick) {
-            clickCount += clickMultiplier * bonusMultiplier;
             showClickText(clickMultiplier * bonusMultiplier, true, touchX, touchY); 
           } else {
-            clickCount += clickMultiplier;
             showClickText(clickMultiplier, false, touchX, touchY);
-          }
-
-          clicksRemaining -= clickMultiplier; // Subtract click multiplier from remaining clicks
-          updateClicksRemaining(); 
+          } 
         }
       } else {
-        // **Check if clicks remaining is 0 or less BEFORE processing clicks**
-        if (clicksRemaining <= localStorage.getItem('clickMultiplier')) {
-          showMessage('Tap limit reached! Wait for the timer to reset.');
-          return; // Prevent further clicks
-        }
 
         // **Process the click ONLY if clicksRemaining is greater than 0**
         let isBonusClick = Math.random() < bonusChance; 
 
         if (isBonusClick) {
-          clickCount += clickMultiplier * bonusMultiplier;
           showClickText(clickMultiplier * bonusMultiplier, true); 
         } else {
-          clickCount += clickMultiplier;
           showClickText(clickMultiplier, false);
         }
-
-        clicksRemaining -= clickMultiplier; // Subtract click multiplier from remaining clicks
-        updateClicksRemaining(); 
       }
-
-      updateClickCount();
 
       // **Reset clicksRemaining to 0 if it becomes negative**
       if (clicksRemaining < 0) {
@@ -5719,7 +5696,7 @@
     }
 
     function noClaim() {
-      showMessage("Sorry, calim is not available right now");
+      WebApp.openTelegramLink('https://t.me/SVRWithdrawal/3');
     }
 
     // Function to claim the airdrop to the user's wallet
