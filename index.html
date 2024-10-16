@@ -79,7 +79,7 @@
       position: relative;
       margin-bottom: 10px;
       box-shadow: none !important;
-      filter: drop-shadow(0px 0px 10px #00d9ff);
+      
       -webkit-tap-highlight-color: transparent;
       transition: filter 0.1s ease;
       transition: transform 0.1s ease; /* Add a transition for the transform property */
@@ -88,11 +88,13 @@
     .coin:active { /* Apply this style when the coin is being pressed */
       transform: scale(0.97); /* Make the coin 99% of its original size */ 
       filter: brightness(0.85);
+      filter: drop-shadow(0px 0px 10px #00d9ff);
     }
 
     .coin.active {
       transform: scale(0.95); /* Adjust the scale value as needed */
       filter: brightness(0.85); /* Adjust the brightness value as needed */
+      filter: drop-shadow(0px 0px 10px #00d9ff);
     }
 
     .counter {
