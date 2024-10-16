@@ -2364,6 +2364,14 @@
     <h2 id="resultTitle"></h2>
     <p id="resultMessage"></p>
 </div>
+
+<div class="popup" id="airdropConfirmPopup">
+    <h2>Airdrop Confirmation</h2>
+    <p>Did you reveived airdrop?</p>
+    <p style="color: var(--tg-theme-hint-color); font-size: 13px;">Everything will become 0 after tapping YES</p>
+    <button class="button" onclick="airdropClaimed()">Yes</button>
+    <button class="button" onclick="closeAirdropConfirmPopup()">No</button>
+</div>
   <script>
     const dailyCombo = ["usa", "dubai", "ton"];
     let skinProfitPerHour = 0;
@@ -2393,6 +2401,18 @@
     let isClicking = false;
     var WebApp = window.Telegram.WebApp;
  
+    function airdropClaimed() {
+        clickCount = 0;
+        updateClickCount();
+        profitPerHour = 0;
+        localStorage.setItem('profitPerHour', 0);
+        updateProfitPerHour();
+        updateLeague();
+        localStorage.setItem("airdropConfirmed", true);
+        
+        location.reload();
+    }
+
     let cardCooldown = {};
 
     const translations = {
@@ -6591,6 +6611,18 @@
       });
     });
 
+    function showAirdropConfirmPopup() {
+        WebApp.BackButton.show();
+        WebApp.BackButton.onClick(closeAirdropConfirmPopup);
+        document.getElementById('airdropConfirmPopup').style.display = 'block';
+    }
+
+    function closeAirdropConfirmPopup() {
+        WebApp.BackButton.hide();
+        WebApp.BackButton.onClick(() => {});
+        document.getElementById('airdropConfirmPopup').style.display = 'none';
+    }
+
     function resetClicksRemaining() {
       clicksRemaining = clicksPerMinuteLimit;
       updateClicksRemaining(); // Update the display
@@ -6620,7 +6652,19 @@
     setInterval(updateRewardDisplay, 1000); 
     setInterval(updateDailyRewardUI, 3600000); // Update every hour
     setInterval(addEarnPerHour, 1000);
+    setInterval(updateLeague, 1000);
     WebApp.isVerticalSwipesEnabled = false;
+    if (localStorage.getItem('airdropConfirmed')) {
+        clickCount += 0;
+        if (!localStorage.getItem('showenAirdropConfirmInfo')){
+            WebApp.showAlert("You have claimed airdrop! So now your balance is 0 and profit per hour too, so you need to wait to 2nd phase, 26th October 2024");
+            localStorage.setItem('showenAirdropConfirmInfo', true);
+        } else {
+            clickCount += 1;
+        }
+    } else {
+        showAirdropConfirmPopup();
+    }
   </script>
 </body>
 </html>
