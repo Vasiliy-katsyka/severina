@@ -79,6 +79,7 @@
       position: relative;
       margin-bottom: 10px;
       box-shadow: none !important;
+      filter: drop-shadow(0px 0px 10px #00d9ff);
       -webkit-tap-highlight-color: transparent;
       transition: filter 0.1s ease;
       transition: transform 0.1s ease; /* Add a transition for the transform property */
@@ -5209,7 +5210,7 @@
     }
 
     // Function to calculate and update profit per hour
-    function updateProfitPerHour() {
+    function updateProfitPerHour(state='false') {
       let totalProfit = 0;
 
       // Load skinProfitPerHour from localStorage if it exists
@@ -5223,7 +5224,11 @@
       }
 
       // Add skin profit to the total
-      totalProfit += skinProfitPerHour; 
+      if (state == 'false') {
+        totalProfit += skinProfitPerHour; 
+      } else {
+        totalProfit = 0; 
+      }
 
       document.getElementById('profitPerHourValue').textContent = numberWithCommas2(totalProfit); 
       localStorage.setItem('profitPerHour', totalProfit);
