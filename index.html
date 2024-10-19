@@ -4890,7 +4890,7 @@
         showMessage("You've already claimed this bonus!");
         return; // Exit the function if the bonus is already claimed
       }
-      window.open("https://t.me/freemusic2023");
+      window.open("https://t.me/kviai1");
       clickCount += 1000;
       updateClickCount();
       showMessage("You earned 1,000 clicks! Thanks for subscribing!");
@@ -5092,6 +5092,7 @@
 
     function buyCard(cardType) {
       if (clickCount >= miningCards[cardType].price) {
+        navigator.vibrate(100);
         if (cardType === 'ed') {
           WebApp.openLink('https://edsheeran.com');
         }
