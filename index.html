@@ -614,7 +614,7 @@
 
     /* Title styles */
     .title {
-      font-size: 28px;
+      font-size: 25px;
       font-family: 'SeverinaKombatFont', sans-serif;
       font-weight: bold;
       margin-bottom: 20px;
@@ -1801,7 +1801,9 @@
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
+      width: 90%; /* Adjust the width as needed */
+      padding: 20px; /* Reduce padding for a more compact look */
+      border-radius: 10px; /* Rounded corners for a softer look */
       height: 100%;
       background: rgba(255, 255, 255, 0.1); /* Transparent background with blur effect */
       backdrop-filter: blur(50px); /* Apply blur effect */
@@ -1862,6 +1864,7 @@
   cursor: pointer;
   color: #ffae00; /* Set the copy-text color to gold */
   font-weight: bold;
+  word-wrap: break-word; /* Add this line */
 }
 
 #topUpPopup table {
@@ -1914,7 +1917,7 @@
 
 #topUpPopup .convert-container select {
   /* ... your existing select styles ... */
-  width: 150px;
+  width: 100px;
   margin-bottom: 10px;
   background: rgba(255, 255, 255, 0.1); /* Transparent background with blur effect */
   backdrop-filter: blur(5px); /* Apply blur effect */
@@ -2283,7 +2286,7 @@
 <div class="instructions">
     To top-up balance send $SVR or TON to this address: 
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>copy</title><path d="M16,1V3H8V1H16M8,19H16V17H8V19M16,9H16V7H8V9H16M14,14H14V12H10V14H14Z" /></svg>
-    <span class="copy-text" onclick="copyAddress()">UQBoRkvzUelDcxR65b5J9J3KM1Ic638n1QJUo5kZTKhT3O64</span>.
+    <span class="copy-text" onclick="copyAddress()">COPY ADDRESS</span>.
     <br> Funds will be available in the game in 1-4 hours, maximum is 24.
     <br> IMPORTANT: when you send tokens, please write your telegram username and we will send you a promo code to enter and get funds.
 </div>
