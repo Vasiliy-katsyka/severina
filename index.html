@@ -15,7 +15,7 @@
   </script>
   <script src="https://sad.adsgram.ai/js/sad.min.js"></script>
   <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
-  
+  <script src="https://unpkg.com/browse/ton@13.9.0/dist/index.d.ts"></script>
   <script src="https://smtpjs.com/v3/smtp.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@gradio/client/dist/index.min.js" type="module"></script>
   <style>
@@ -35,12 +35,12 @@
       height: 100vh;
       margin: 0;
       background-color: #f0f0f0;
-      background: linear-gradient(0deg, #00d9ff 70%, #000000 100%);/*#000 url(https://cdn.midjourney.com/f4959eaa-d01a-4b63-a96c-c380c3aa4768/0_3.png) center center/cover no-repeat;*/*
+      background: linear-gradient(0deg, #ff0000 70%, #000000 100%);/*#000 url(https://cdn.midjourney.com/f4959eaa-d01a-4b63-a96c-c380c3aa4768/0_3.png) center center/cover no-repeat;*/*
     }
 
     .container {
-      background: linear-gradient(0deg, /*#ffdd00*/#111 60%, #222 100%);/*: #ffffff url(https://cdn.midjourney.com/24efaca6-a028-4022-b8e8-972e9bd51786/0_3.png) center center/cover no-repeat;/*#ffffff url(https://cdn.midjourney.com/46a77421-c05f-4acc-8307-c212669c3820/0_3.png) center center/cover no-repeat; /* was: https://cdn.midjourney.com/451f94de-224e-4bc3-aa86-675a6f963883/0_2.png, beautiful - https://cdn.midjourney.com/75fa0b1a-746f-44d1-9082-a9255f045bbe/0_0.png */
-      border-top: 2px solid #00d9ff;
+      background: linear-gradient(0deg, /*#ffdd00*/#250000 60%, #222 100%);/*: #ffffff url(https://cdn.midjourney.com/24efaca6-a028-4022-b8e8-972e9bd51786/0_3.png) center center/cover no-repeat;/*#ffffff url(https://cdn.midjourney.com/46a77421-c05f-4acc-8307-c212669c3820/0_3.png) center center/cover no-repeat; /* was: https://cdn.midjourney.com/451f94de-224e-4bc3-aa86-675a6f963883/0_2.png, beautiful - https://cdn.midjourney.com/75fa0b1a-746f-44d1-9082-a9255f045bbe/0_0.png */
+      border-top: 2px solid #ff0000;
       border-radius: 40px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       text-align: center;
@@ -68,18 +68,18 @@
     }
 
     .coin {
-      width: 260px;
-      height: 260px;
+      width: 300px;
+      height: 300px;
       border-radius: 50%;
       opacity: 100%;
       cursor: pointer;
       margin: 0 auto;
       margin-top: 15px;  /*<a href="https://imgbb.com/"><img src="https://i.ibb.co/fdT7cKC/vasiliy939-very-cute-beautiful-logo-of-a-soft-lobster-soft-ma-71833c81-e4bb-4799-b26e-2610a9c3c0aa-0.png" alt="vasiliy939-very-cute-beautiful-logo-of-a-soft-lobster-soft-ma-71833c81-e4bb-4799-b26e-2610a9c3c0aa-0" border="0"></a>*/
-      background: url(https://i.ibb.co/NVZFVjr/Background-Eraser-20241002-205256004.png) center center/cover no-repeat; /*blue https://cdn.midjourney.com/6ba656b3-6dfa-438c-9a67-89df6a8c1618/0_0.png*/
+      background: url(https://i.ibb.co/3WRz1bh/Background-Eraser-20241017-190002653.png) center center/cover no-repeat; /*blue https://cdn.midjourney.com/6ba656b3-6dfa-438c-9a67-89df6a8c1618/0_0.png*/
       position: relative;
       margin-bottom: 10px;
       box-shadow: none !important;
-      
+      filter: drop-shadow(0px 0px 10px #ff0000);
       -webkit-tap-highlight-color: transparent;
       transition: filter 0.1s ease;
       transition: transform 0.1s ease; /* Add a transition for the transform property */
@@ -88,13 +88,13 @@
     .coin:active { /* Apply this style when the coin is being pressed */
       transform: scale(0.97); /* Make the coin 99% of its original size */ 
       filter: brightness(0.85);
-      filter: drop-shadow(0px 0px 10px #00d9ff);
+      filter: drop-shadow(0px 0px 10px #8d0000);
     }
 
     .coin.active {
       transform: scale(0.95); /* Adjust the scale value as needed */
       filter: brightness(0.85); /* Adjust the brightness value as needed */
-      filter: drop-shadow(0px 0px 10px #00d9ff);
+      filter: drop-shadow(0px 0px 10px #8d0000);
     }
 
     .counter {
@@ -104,6 +104,16 @@
       color: white;
       display: flex;
       align-items: center;
+    }
+
+    .counter #clickCount {
+     /* Your existing styles for clickCount */
+      display: block; /* This is key to force clickCount on its own line */
+    }
+
+    .counter #paidBalance {
+       /* Your existing styles for paidBalance */
+      display: block; /* Optional, ensures Paid on its own line */
     }
 
     .button {
@@ -167,7 +177,7 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background: #000 url(https://cdn.midjourney.com/c490f1b8-b776-4f2f-a902-d7268ddf8ea0/0_2.png) center center/cover no-repeat; /*(https://cdn.midjourney.com/ec33bf6a-3af0-4758-8156-fcb2f6ec6557/0_2.png) /* was https://cdn.midjourney.com/dc3904c2-6396-46d2-b55f-e90dc25d4637/0_1.png*/ 
+      background: #000 url(https://cdn.midjourney.com/f3d4cb88-5af9-4b3e-b218-30c3f960ce4a/0_2.png) center center/cover no-repeat; /*(https://cdn.midjourney.com/ec33bf6a-3af0-4758-8156-fcb2f6ec6557/0_2.png) /* was https://cdn.midjourney.com/dc3904c2-6396-46d2-b55f-e90dc25d4637/0_1.png*/ 
       padding: 20px; /*duvrov https://cdn.midjourney.com/16e3a3b9-ff9f-476e-87ec-d82dafc49196/0_1.png*/
       border-radius: 10px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -262,7 +272,7 @@
     }
 
     .menu-container {
-      background: linear-gradient(0deg, /*#ffdd00*/#111 60%, #222 100%); /*#ffffff url(https://cdn.midjourney.com/24efaca6-a028-4022-b8e8-972e9bd51786/0_3.png) center center/cover no-repeat;*/
+      background: linear-gradient(0deg, /*#ffdd00*/#250000 60%, #222 100%); /*#ffffff url(https://cdn.midjourney.com/24efaca6-a028-4022-b8e8-972e9bd51786/0_3.png) center center/cover no-repeat;*/
       width: 100%;
       display: flex;
       position: fixed;
@@ -273,7 +283,7 @@
       box-sizing: border-box;
       border-top-left-radius: 20px;
       border-top-right-radius: 20px;
-      border-top: 2px solid #00d9ff;
+      border-top: 2px solid #ff0000;
       justify-content: space-around; /* Distribute buttons evenly */
     }
 
@@ -292,12 +302,12 @@
       /*transition: background-color 0.2s ease, box-shadow 0.2s ease;*/
       font-size: 12px; /* Smaller font size */
       width: 70px; /* Reduced width */
-      color: #888; /* Set button text to white */
+      color: #ff0000; /* Set button text to white */
     }
 
     .bottom-button svg {
       width: 24px;
-      fill: #888;
+      fill: #ff0000;
       height: 24px;
       margin-bottom: 5px; /* Add space between icon and text */
       filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.5)); /* Add a drop shadow to icons */
@@ -391,7 +401,7 @@
 
     /* Style for bonus click text */
     .click-text.bonus { 
-      color: #FFD700; /* Gold color */
+      color: #ff0000; /* Gold color */
       font-size: 48px;
     }
 
@@ -424,8 +434,6 @@
       */position: relative;
       background: rgba(255, 255, 255, 0.1); 
       backdrop-filter: blur(5px);
-      justify-content: center;
-      text-align: center;
     }
 
     .mining-card h3 {
@@ -593,6 +601,7 @@
     .settings-button svg {
       width: 20px; /* Adjust size as needed */
       height: 20px; /* Adjust size as needed */
+      fill: #ff0000;
     }
 
     /* Title container styles */
@@ -605,20 +614,20 @@
 
     /* Title styles */
     .title {
-      font-size: 25px;
+      font-size: 28px;
       font-family: 'SeverinaKombatFont', sans-serif;
       font-weight: bold;
       margin-bottom: 20px;
       flex-direction: row;
       margin-top: 20px;
       text-align: left; /* Align title to the left */
-      background: #ffffff url(https://cdn.midjourney.com/5d055091-3959-4673-80a5-27eab3aa5fdc/0_1.png) center center/cover no-repeat;
+      background: #ff0000 url(https://cdn.midjourney.com/08617ec3-8965-4c7e-b843-672d86865b9e/0_3.png) center center/cover no-repeat;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
     .x-text {
-      font-size: 15px;
+      font-size: 18px;
       font-weight: bold;
       margin-bottom: 20px;
       margin-top: 20px;
@@ -700,14 +709,13 @@
     .task-check svg {
       width: 15px;
       height: 15px;
-      fill: #fff; /* White fill for the checkmark */
+      fill: #ff0000; /* White fill for the checkmark */
       margin-top: 3px;
     }
 
     .airdrop-popup {
       position: fixed;
       width: 100%;
-      padding: 0 !important;
       height: 100%;
       background: rgba(255, 255, 255, 0.1); /* Transparent background with blur effect */
       backdrop-filter: blur(50px); /* Apply blur effect */
@@ -1166,6 +1174,7 @@
     .skins-button svg {
       width: 20px; /* Adjust size as needed */
       height: 20px; /* Adjust size as needed */
+      fill: #ff0000;
     }
 
     /* Skins popup styles */
@@ -1230,27 +1239,21 @@
     }
 
     .airdrop-popup .airdrop-content {
-      padding-top: 0px;
       overflow-y: auto; /* Make the airdrop content scrollable */
       max-height: 400px; /* Set a fixed height for the container - adjust this value as needed */
     }
 
     .profContainer {
-        margin-top: 30px;
-        display: flex; /* Use flexbox layout */
-        flex-wrap: wrap; /* Allow elements to wrap to the next line */
-        justify-content: center; /* Center the items horizontally */
-    }
-
-    .profContainer > * { /* Target direct children of .profContainer */
-        width: calc(33.33% - 20px); /* Calculate width for 3 columns with 10px gap */
-        margin: 10px; /* Add 10px margin for spacing */
+      margin-top: 30px;
+      display: grid; /* Use grid layout */
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 10px;
     }
     
     .profElem {
-      width: 170px;
+      width: 120px;
       height: 53px;
-      border-top: 2px solid #00d9ff;
+      border-top: 2px solid #ff0000;
       border-radius: 20px;
       background: rgba(255, 255, 255, 0.1); /* Transparent background with blur effect */
       backdrop-filter: blur(5px); /* Apply blur effect */
@@ -1789,6 +1792,150 @@
     #miningbutton {
         disabled: true;
     }
+
+    #paidBalance {
+        font-size: 15px;
+    }
+
+    #toUpPopup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.1); /* Transparent background with blur effect */
+      backdrop-filter: blur(50px); /* Apply blur effect */
+      color: white;
+      z-index: 100; /* Ensure it's on top of other popups */
+      display: none; /* Initially hidden */
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+#topUpPopup h2 {
+  font-size: 3rem;
+  margin-top: 10px;
+  text-align: center;
+  /* Add a gradient for the "Paid balance" text */
+  background: linear-gradient(to right, #FF00D8, #00FFF3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: flex;
+  align-items: center;
+}
+
+#topUpPopup .top-up-icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 10px;
+}
+
+#topUpPopup .paid-balance-label { /* New label for paid balance */
+  font-size: 1.2rem;
+  margin-left: 10px; /* Add spacing between icon and label */
+  color: #ffae00; /* Gold color */
+}
+
+#topUpPopup #paidBalance {
+  font-size: 4rem; /* Make the paid balance count larger */
+  font-weight: bold;
+  margin-left: 10px; 
+  color: white; /* Set text color to white */
+}
+
+#topUpPopup .instructions {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 1rem;
+  color: #fff; /* Set text color to white */
+}
+
+#topUpPopup .instructions svg {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+#topUpPopup .instructions .copy-text {
+  cursor: pointer;
+  color: #ffae00; /* Set the copy-text color to gold */
+  font-weight: bold;
+}
+
+#topUpPopup table {
+  margin-top: 20px;
+  width: 80%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+#topUpPopup th,
+#topUpPopup td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  font-size: 1rem;
+  color: #fff; /* Set text color to white */
+}
+
+#topUpPopup .discount-label {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: #ff0000;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+#topUpPopup .convert-container {
+  margin-top: 20px;
+}
+
+#topUpPopup .convert-container input {
+  /* ... your existing input styles ... */
+  width: 100px;
+  margin-bottom: 10px;
+  background: rgba(255, 255, 255, 0.1); /* Transparent background with blur effect */
+  backdrop-filter: blur(5px); /* Apply blur effect */
+  font-size: 13px;
+  color: #fff;
+  padding: 10px 20px;
+  height: 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px; /* Adjust font size as needed */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  margin: 10px;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#topUpPopup .convert-container select {
+  /* ... your existing select styles ... */
+  width: 150px;
+  margin-bottom: 10px;
+  background: rgba(255, 255, 255, 0.1); /* Transparent background with blur effect */
+  backdrop-filter: blur(5px); /* Apply blur effect */
+  color: white; /* Set text color to white for visibility */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle white border */
+  border-radius: 14px; /* Rounded corners */
+  padding: 8px 12px; /* Add some padding */
+  font-size: 16px; /* Adjust font size as needed */
+  appearance: none; /* Remove default select arrow in some browsers */
+  -webkit-appearance: none; /* Remove default select arrow in WebKit browsers */
+  cursor: pointer; /* Indicate that the selector is clickable */
+  width: 100%; /* Make the selector take up the full width of its container */
+  margin-bottom: 10px; /* Add some space below the selector */
+}
+
+#topUpPopup .hint {
+  margin-top: 20px;
+  font-size: 1rem;
+  text-align: center;
+  color: #fff; /* Set text color to white */
+}
   </style>
 </head>
 <body>
@@ -1797,7 +1944,7 @@
     <p id="freedurov">SHE WILL KILL YOU</p>
     <h2 id="loadingTitle" style="background: linear-gradient(to right, #FF00D8, #00FFF3);
       -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent; font-size: 3.2rem;">Severina Kombat</h2>
+      -webkit-text-fill-color: transparent; font-size: 2.4rem;">Severina Kombat 2</h2>
     <div style="display: flex; align-items: center; justify-content: center; margin-top: 50px;">
       <div class="spinner"></div>
     </div>
@@ -1812,24 +1959,30 @@
   <div class="title-container">
     <div class="button-container">
       <button class="settings-button" onclick="openSettingsPopup()">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="fill: white;"><title>cog</title><path d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.67 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z" /></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>cog</title><path d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.21,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.21,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.67 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z" /></svg>
       </button>
       <button class="skins-button" onclick="openSkinsPopup()">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="fill: white;"><title>palette-outline</title><path d="M12 3C16.41 3 20 6.59 20 11C20 12.3 19.53 13.56 18.84 14.73L18.16 15.5C19.22 16.8 20 18.36 20 20C20 21.1 19.1 22 18 22H6C4.9 22 4 21.1 4 20C4 18.36 4.78 16.8 5.84 15.5L5.16 14.73C4.47 13.56 4 12.3 4 11C4 6.59 7.59 3 12 3M12 5C8.13 5 5 8.13 5 12S8.13 19 12 19 19 15.87 19 12 15.87 5 12 5M12 7C9.24 7 7 9.24 7 12S9.24 17 12 17 17 14.76 17 12 14.76 7 12 7Z" /></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>palette-outline</title><path d="M12 3C16.41 3 20 6.59 20 11C20 12.3 19.53 13.56 18.84 14.73L18.16 15.5C19.22 16.8 20 18.36 20 20C20 21.1 19.1 22 18 22H6C4.9 22 4 21.1 4 20C4 18.36 4.78 16.8 5.84 15.5L5.16 14.73C4.47 13.56 4 12.3 4 11C4 6.59 7.59 3 12 3M12 5C8.13 5 5 8.13 5 12S8.13 19 12 19 19 15.87 19 12 15.87 5 12 5M12 7C9.24 7 7 9.24 7 12S9.24 17 12 17 17 14.76 17 12 14.76 7 12 7Z" /></svg>
       </button>
     </div>
-    <div class="title" id="gameTitle">Severina<span class="x-text"> is on TON</span></div>
+    <div class="title" id="gameTitle">SeverinaKombat2</div>
     <!-- <span class="x-text">Ed Sheeran x </span> -->
   </div>
 
   <div class="container">
     <div class="profContainer">
-    <div class="profElem">
+      <div class="profElem">
         <div class="profit-per-hour">
-            <span id="profitPerHourLabel" class="des">Profit per Hour:</span> 
-            <br>
-            <span class="num" id="profitPerHourValue">0</span> </div>
-        </div>
+          <span id="profitPerHourLabel" class="des">Profit per Hour:</span> 
+          <br>
+          <span class="num" id="profitPerHourValue">0</span> </div>
+      </div>
+      <div class="profElem">
+        <div class="clicks-per-tap">
+          <span id="clicksPerTapLabel" class="des">Clicks per Tap:</span> 
+          <br>
+          <span class="num" id="clicksPerTapValue">1</span> </div>
+      </div>
       <div class="profElem">
         <div class="league">
           <span id="leagueLabel" class="des">League:</span> 
@@ -1838,22 +1991,48 @@
       </div>
     </div>
     <div class="counter">
-      <img src="https://i.ibb.co/2F4T168/KV-3-1-removebg-preview.png" alt="Coin Texture" width="35" height="35">
-      <span id="clickCount">0</span>
+        <img src="https://i.ibb.co/2F4T168/KV-3-1-removebg-preview.png" alt="Coin Texture" width="35" height="35">
+        <span id="clickCount">0</span>
     </div>
     <div class="coin" onclick="clickCoin()"></div>
     <div class="click-text" id="clickText"></div>
+    <div class="limandbo">
+      <div style="font-size: 18px; color: white; margin-top: 10px; display: flex; align-items: center; justify-content: flex-end; bottom: 150px;">
+        <img src="https://images.emojiterra.com/microsoft/fluent-emoji/128px/26a1_color.png" alt="Lightning Bolt" height="23" width="auto"> 
+        <span id="clicksRemaining"></span>
+      </div>
+      <div style="font-size: 18px; color: white; margin-top: 10px; display: flex; align-items: center; justify-content: flex-start; bottom: 150px;"> 
+        <img src="https://images.emojiterra.com/microsoft/fluent-emoji/512px/1f680_color.png" alt="Rocket" height="23" width="auto"> 
+        <span id="boost">Boost</span>
+      </div>
+    </div>
 
 
     <div class="menu-container">
-      <button class="bottom-button" id="airdropButton" onclick="openAirdrop()">
+      <!--<button class="bottom-button" id="leaderboardButton" onclick="openLeaderboardPopup()">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <title>trophy</title>
+          <path d="M18 2C17.1 2 16 3 16 4H8C8 3 6.9 2 6 2H2V11C2 12 3 13 4 13H6.2C6.6 15 7.9 16.7 11 17V19.08C8 19.54 8 22 8 22H16C16 22 16 19.54 13 19.08V17C16.1 16.7 17.4 15 17.8 13H20C21 13 22 12 22 11V2H18M6 11H4V4H6V11M20 11H18V4H20V11Z" />
+        </svg>
+        <span>Rank</span>
+      </button>-->
+      <button onclick="openTopUpPopup()" class="bottom-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>cart</title><path d="M17,18C15.89,18 15,18.89 15,20A2,2 0 0,0 17,22A2,2 0 0,0 19,20C19,18.89 18.1,18 17,18M1,2V4H3L6.6,11.59L5.24,14.04C5.09,14.32 5,14.65 5,15A2,2 0 0,0 7,17H19V15H7.42A0.25,0.25 0 0,1 7.17,14.75C7.17,14.7 7.18,14.66 7.2,14.63L8.1,13H15.55C16.3,13 16.96,12.58 17.3,11.97L20.88,5.5C20.95,5.34 21,5.17 21,5A1,1 0 0,0 20,4H5.21L4.27,2M7,18C5.89,18 5,18.89 5,20A2,2 0 0,0 7,22A2,2 0 0,0 9,20C9,18.89 8.1,18 7,18Z" /></svg><span>Shop</span></button>
+      <button class="bottom-button" id="earnButton" onclick="earnClick()">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>bitcoin</title><path d="M14.24 10.56C13.93 11.8 12 11.17 11.4 11L11.95 8.82C12.57 9 14.56 9.26 14.24 10.56M11.13 12.12L10.53 14.53C11.27 14.72 13.56 15.45 13.9 14.09C14.26 12.67 11.87 12.3 11.13 12.12M21.7 14.42C20.36 19.78 14.94 23.04 9.58 21.7C4.22 20.36 .963 14.94 2.3 9.58C3.64 4.22 9.06 .964 14.42 2.3C19.77 3.64 23.03 9.06 21.7 14.42M14.21 8.05L14.66 6.25L13.56 6L13.12 7.73C12.83 7.66 12.54 7.59 12.24 7.53L12.68 5.76L11.59 5.5L11.14 7.29C10.9 7.23 10.66 7.18 10.44 7.12L10.44 7.12L8.93 6.74L8.63 7.91C8.63 7.91 9.45 8.1 9.43 8.11C9.88 8.22 9.96 8.5 9.94 8.75L8.71 13.68C8.66 13.82 8.5 14 8.21 13.95C8.22 13.96 7.41 13.75 7.41 13.75L6.87 15L8.29 15.36C8.56 15.43 8.82 15.5 9.08 15.56L8.62 17.38L9.72 17.66L10.17 15.85C10.47 15.93 10.76 16 11.04 16.08L10.59 17.87L11.69 18.15L12.15 16.33C14 16.68 15.42 16.54 16 14.85C16.5 13.5 16 12.7 15 12.19C15.72 12 16.26 11.55 16.41 10.57C16.61 9.24 15.59 8.53 14.21 8.05Z" /></svg>
+        <span id="earnLabel">Earn</span>
+      </button>
+      <button class="bottom-button" id="aboutButton">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>information-outline</title><path d="M11,9H13V7H11M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11V17Z" /></svg>
+        <span id="aboutLabel">About</span>
+      </button>
+      <button class="bottom-button" id="miningButton" onclick="openMiningPopup()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>minecraft</title><path d="M4,2H20A2,2 0 0,1 22,4V20A2,2 0 0,1 20,22H4A2,2 0 0,1 2,20V4A2,2 0 0,1 4,2M6,6V10H10V12H8V18H10V16H14V18H16V12H14V10H18V6H14V10H10V6H6Z" /></svg><span id="miningLabel">Mining</span></button>
+      <!--<button class="bottom-button" id="airdropButton" onclick="openAirdrop()">
         <svg>
           <image href="https://i.ibb.co/2F4T168/KV-3-1-removebg-preview.png" width="23" height="23" /> 
         </svg>
         <span id="airdropLabel">Airdrop</span>
-      </button>
+      </button>-->
     </div>
-  </div>
 
   <div class="lobster-catch-popup" id="lobsterCatchPopup">
     <div class="title" id="lobsterCatchTitle">Lobster Catch</div>
@@ -1923,7 +2102,7 @@
         <!-- Series Tab Cards -->
         <div class="mining-container" id="seriesTab">
           <div class="mining-card" data-card-type="lovevictor">
-            <img src="https://totalwellnessandbariatrics.com/wp-content/uploads/want-to-lose-weight.jpg" alt="Love, Victor"> 
+            <img src="https://cdn.midjourney.com/e6295192-dac9-4fdc-b072-f671ccba7628/0_1.png" alt="Love, Victor"> 
             <h3 id="lovevictorTitle">Lose Weight</h3>
             <div class="card-info">
               <span id="lovevictorProfit">Profit/hour: <a class="gold-text">+3000 clicks</a></span>
@@ -1937,8 +2116,8 @@
             </div>
           </div>
           <div class="mining-card" data-card-type="lovevictor">
-            <img src="https://cdn.midjourney.com/ef0b0e15-02b1-4a16-9d59-135cbd2b45ab/0_1.png" alt="Love, Victor"> 
-            <h3 id="zubTitle">Zubareff</h3>
+            <img src="https://cdn.midjourney.com/42112552-bf7c-4d5e-b21c-a944c6f34854/0_3.png" alt="Love, Victor"> 
+            <h3 id="zubTitle">$SVR Airdrop</h3>
             <div class="card-info">
               <span id="zubProfit">Profit/hour: <a class="gold-text">+10000 clicks</a></span>
               <span class="card-price" id="zubPrice">Price: 1000 clicks</span>
@@ -1947,7 +2126,21 @@
             <button class="buy-button" onclick="buyCard('zub')">Buy</button>
             <div class="timer-overlay" id="zubTimerOverlay">
               <span class="timer-text" id="zubTimer">30</span>
-              <div class="spinner" id="lovevictorSpinner"></div>
+              <div class="spinner" id="zubSpinner"></div>
+            </div>
+          </div>
+          <div class="mining-card" data-card-type="lovevictor">
+            <img src=" https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZW9vVZ1aPEq1a1mnTotmFrIgUT8Y-z6mDug&s" alt="Love, Victor"> 
+            <h3 id="airTitle">$X Airdrop</h3>
+            <div class="card-info">
+              <span id="airProfit">Profit/hour: <a class="gold-text">+25000 clicks</a></span>
+              <span class="card-price" id="airPrice">Price: 20000 clicks</span>
+              <span class="card-level" id="airLevel">Level: 0</span>
+            </div>
+            <button class="buy-button" onclick="buyCard('air')">Buy</button>
+            <div class="timer-overlay" id="airTimerOverlay">
+              <span class="timer-text" id="airTimer">30</span>
+              <div class="spinner" id="airSpinner"></div>
             </div>
           </div>
         </div>
@@ -1955,8 +2148,8 @@
         <!-- Specials Tab Cards -->
         <div class="mining-container" id="specialsTab" style="display: none">
           <div class="mining-card" data-card-type="heartstopper3">
-            <img src="https://i0.wp.com/thenerdsofcolor.org/wp-content/uploads/2024/09/en_gb_hs_s3_main_charlie_and_nick_-_main_key_art_4_x_5_v_1080px1350p_rgb_pre_1.jpg?resize=1080%2C1200&ssl=1" alt="Heartstopper 3"> 
-            <h3 id="heartstopper3Title">Heartstopper 3</h3>
+            <img src="https://cdn.midjourney.com/4f4bfd74-dbac-490d-8eb3-ddcde5caa8bb/0_0.png" alt="Heartstopper 3"> 
+            <h3 id="heartstopper3Title">Helloween</h3>
             <div class="card-info">
               <span id="heartstopper3Profit">Profit/hour: <a class="gold-text">+1000 clicks</a></span>
               <span class="card-price" id="heartstopper3Price">Price: 8000 clicks</span>
@@ -1968,116 +2161,418 @@
               <div class="spinner" id="heartstopper3Spinner"></div>
             </div>
           </div>
+          <div class="mining-card" data-card-type="heartstopper3">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZUZIhEhEjd3zL-y9oCYReYHLxzub2EBHvbg&s" alt="Heartstopper 3"> 
+            <h3 id="terTitle">Terrifier 3</h3>
+            <div class="card-info">
+              <span id="terProfit">Profit/hour: <a class="gold-text">+1000 clicks</a></span>
+              <span class="card-price" id="terPrice">Price: 8000 clicks</span>
+              <span class="card-level" id="terLevel">Level: 0</span>
+            </div>
+            <button class="buy-button" onclick="buyCard('ter')">Buy</button>
+            <div class="timer-overlay" id="terTimerOverlay">
+              <span class="timer-text" id="terTimer">30</span>
+              <div class="spinner" id="terSpinner"></div>
+            </div>
+          </div>
     
           <!-- Add more Specials cards here following the same structure --> 
         </div>
       </div> 
     </div>
-</div>
 
-<div class="popup settings-popup" id="settingsPopup">
+  </div>
+
+  <div class="popup settings-popup" id="settingsPopup">
     <h2 id="settingsTitle">Settings</h2>
     <label for="languageSelect" id="languageSelectLabel">Language:</label>
     <select id="languageSelect">
-    <option value="en">English</option>
-    <option value="ru">Russian</option>
-    <option value="kr">Korean</option>
-    <option value="es">Español</option>
-    <option value="fr">French</option>
-    <option value="uk">Ukrainian</option>
-    <option value="zh">Chineese</option>
-    <option value="hi">Hindi</option>
-    <option value="ar">Arabic</option>
-    <option value="it">Italian</option>
-    <option value="et">Estonian</option>
-    <option value="no">Norwegian</option>
-    <option value="pl">Polish</option>
+      <option value="en">English</option>
+      <option value="ru">Russian</option>
+      <option value="kr">Korean</option>
+      <option value="es">Español</option>
+      <option value="fr">French</option>
+      <option value="uk">Ukrainian</option>
+      <option value="zh">Chineese</option>
+      <option value="hi">Hindi</option>
+      <option value="ar">Arabic</option>
+      <option value="it">Italian</option>
+      <option value="et">Estonian</option>
+      <option value="no">Norwegian</option>
+      <option value="pl">Polish</option>
     </select>
     <button class="menu-button" id="saveLanguageButton" onclick="saveLanguage()">Save Language</button>
     <button class="menu-button" id="privacyButton" onclick="openPrivacyPopup()">Privacy</button> 
     <input type="text" id="promoCode" placeholder="Enter promo code">
     <button class="menu-button" id="applyPromoCodeButton" onclick="applyPromoCode()">Apply Promo Code</button>
     <button class="menu-button" id="themeButton" onclick="openThemePopup()">Theme</button> 
-</div>
+  </div>
 
-<div class="popup privacy-popup" id="privacyPopup">
+  <div class="popup privacy-popup" id="privacyPopup">
     <h2 id="privacyPopupTitle">Privacy Settings</h2>
     <!--<div class="eighteen-plus-toggle">
-    <label for="eighteenPlusToggle" id="eighteenPlusToggleLabel">18+ Content:</label>
-    <input type="checkbox" id="eighteenPlusToggle" onclick="toggleEighteenPlus()">
+      <label for="eighteenPlusToggle" id="eighteenPlusToggleLabel">18+ Content:</label>
+      <input type="checkbox" id="eighteenPlusToggle" onclick="toggleEighteenPlus()">
     </div>-->
     <button class="menu-button" id="clearDataButton" onclick="confirmClearData()">Clear Data</button>
     <!-- ... Existing privacy settings options ... -->
-</div>
+  </div>
 
-<!-- Theme Customization Popup -->
-<div class="popup" id="themePopup">
+
+  
+  <!-- Theme Customization Popup -->
+  <div class="popup" id="themePopup">
     <h2 id="themePopupTitle">Theme Customization</h2>
 
     <div class="theme-option">
-    <label for="headerColor" id="headerColorLabel">Header Color:</label>
-    <input type="color" id="headerColor" value="#000000">
+      <label for="headerColor" id="headerColorLabel">Header Color:</label>
+      <input type="color" id="headerColor" value="#000000">
     </div>
 
     <div class="theme-option">
-    <label for="gradientColor1" id="gradientColor1Label">Gradient Color 1:</label>
-    <input type="color" id="gradientColor1" value="#ffdd00">
+      <label for="gradientColor1" id="gradientColor1Label">Gradient Color 1:</label>
+      <input type="color" id="gradientColor1" value="#ffdd00">
     </div>
 
     <div class="theme-option">
-    <label for="gradientColor2" id="gradientColor2Label">Gradient Color 2:</label>
-    <input type="color" id="gradientColor2" value="#000000">
+      <label for="gradientColor2" id="gradientColor2Label">Gradient Color 2:</label>
+      <input type="color" id="gradientColor2" value="#000000">
     </div>
 
     <div class="theme-option">
-    <label for="backgroundImageUploader" id="backgroundImageLabel">Background Image:</label>
-    <input type="file" id="backgroundImageUploader" accept="image/*">
+      <label for="backgroundImageUploader" id="backgroundImageLabel">Background Image:</label>
+      <input type="file" id="backgroundImageUploader" accept="image/*">
     </div>
 
     <div class="theme-option">
-    <label for="bottomMenuImageUploader" id="bottomMenuImageLabel">Bottom Menu Image:</label>
-    <input type="file" id="bottomMenuImageUploader" accept="image/*">
+      <label for="bottomMenuImageUploader" id="bottomMenuImageLabel">Bottom Menu Image:</label>
+      <input type="file" id="bottomMenuImageUploader" accept="image/*">
     </div>
 
     <button class="button" id="applyThemeButton" onclick="applyTheme()">Apply Theme</button>
-</div>
+  </div>
 
-<!-- AI Generator Popup -->
-<div class="popup" id="aiGeneratorPopup">
+  <!-- AI Generator Popup -->
+  <div class="popup" id="aiGeneratorPopup">
     <h2 id="aiGeneratorPopupTitle">AI Image Generator</h2>
 
     <div class="ai-input">
-    <label for="aiPrompt" id="aiPromptLabel">Prompt:</label>
-    <input type="text" id="aiPrompt" placeholder="Enter your prompt...">
+      <label for="aiPrompt" id="aiPromptLabel">Prompt:</label>
+      <input type="text" id="aiPrompt" placeholder="Enter your prompt...">
     </div>
 
     <div class="ai-result" id="aiResultContainer">
-    <span id="aiResultLabel">Enter a prompt and an image will appear here.</span>
+      <span id="aiResultLabel">Enter a prompt and an image will appear here.</span>
     </div> 
 
     <button class="generate-button" id="aiGenerateButton" onclick="generateImage()">Generate</button>
     <button class="button" id="aiApplyButton" onclick="applyGeneratedImage()">Apply</button>
-</div> 
+  </div> 
 
-<div class="popup" id="legalInfoPopup">
+  <div class="popup" id="legalInfoPopup">
     <h2 id="legalInfoTitle">Legal Information</h2>
     <div class="legal-info">
-    <p id="legalInfoMessage">By using SeverinaKombat, you agree to our <a href="https://www.e-droid.net/privacy.php?ida=2257006&idl=en">Terms of Service</a>, which govern your access and use of the game and all related content. Please review our <a href="https://www.e-droid.net/privacy.php?ida=2257006&idl=en">full Terms of Service</a> for more information.</p>
-    <button class="menu-button" href="https://www.e-droid.net/privacy.php?ida=2257006&idl=en" id="termsOfServiceButton">Terms Of Service</button>
+      <p id="legalInfoMessage">By using SeverinaKombat, you agree to our <a href="https://www.e-droid.net/privacy.php?ida=2257006&idl=en">Terms of Service</a>, which govern your access and use of the game and all related content. Please review our <a href="https://www.e-droid.net/privacy.php?ida=2257006&idl=en">full Terms of Service</a> for more information.</p>
+      <button class="menu-button" href="https://www.e-droid.net/privacy.php?ida=2257006&idl=en" id="termsOfServiceButton">Terms Of Service</button>
     </div>
+  </div>
 </div>
 
+<div class="popup" id="topUpPopup">
+<h2><span class="top-up-icon"></span> <span class="paid-balance-label">Paid Balance:</span> <span id="paidBalance">0</span></h2>
+<div class="instructions">
+    To top-up balance send $SVR or TON to this address: 
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>copy</title><path d="M16,1V3H8V1H16M8,19H16V17H8V19M16,9H16V7H8V9H16M14,14H14V12H10V14H14Z" /></svg>
+    <span class="copy-text" onclick="copyAddress()">UQBoRkvzUelDcxR65b5J9J3KM1Ic638n1QJUo5kZTKhT3O64</span>.
+    <br> Funds will be available in the game in 1-4 hours, maximum is 24.
+    <br> IMPORTANT: when you send tokens, please write your telegram username and we will send you a promo code to enter and get funds.
+</div>
+<table>
+    <thead>
+    <tr>
+        <th>Price in $SVR</th>
+        <th>Price in TON</th>
+        <th>In-game Currency</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>1</td>
+        <td>0.01</td>
+        <td>100 Paid balance</td>
+    </tr>
+    <tr>
+        <td>100</td>
+        <td>0.9</td>
+        <td>10k Paid Balance</td>
+    </tr>
+    </tbody>
+</table>
+<div class="convert-container">
+    <input type="number" id="paidBalanceInput" value="0">
+    <select id="convertType">
+    <option value="clicksPerTap">Clicks per Tap</option>
+    <option value="profitPerHour">Profit per Hour</option>
+    <option value="balance">Balance</option>
+    </select>
+    <button onclick="convertPaidBalance()">Convert</button>
+    <p id="conversionResult"></p>
+</div>
+<div class="hint">
+    You'll need some paid balance to buy some mining cards!
+</div>
+</div>
 
 <div class="airdropping-popup" id="airdroppingPopup">
-    <div style="font-size: 3rem;">
+  <div style="font-size: 3rem;">
     <span id="airdropAmount"></span>
-    </div>
-    <p style="margin-top: 20px;">Claim will be availible later, after listing</p>
-    <!--<button class="claim-button" id="getTonButton" onclick="getton()">Get Ton For Gas Fees</button> 
-    <!-<button class="claim-button" id="claimToWalletButton" onclick="claimToWallet()" disabled>Claim to Wallet</button> -->
+  </div>
+  <p style="margin-top: 20px;">Claim will be availible later, after listing</p>
+  <!--<button class="claim-button" id="getTonButton" onclick="getton()">Get Ton For Gas Fees</button> 
+  <!-<button class="claim-button" id="claimToWalletButton" onclick="claimToWallet()" disabled>Claim to Wallet</button> -->
 </div>
 
-<div class="airdrop-popup" id="airdropPopup">
+
+    <!--<input type="text" id="walletAddress" placeholder="Enter wallet address">
+
+    <div class="airdrop-form" id="airdropForm">
+      <h3>Swap Clicks To $SVR</h3>
+      <div class="form-group">
+        <label for="clicksToSwap">Clicks:</label>
+        <input type="number" id="clicksToSwap" min="100000" oninput="calculateLOB()" value="100000">
+      </div>
+      <div class="form-group">
+        <label for="lobAmount">$SVR:</label>
+        <input type="number" id="lobAmount" disabled>
+      </div>
+    </div>
+    <button class="claim-button" id="claimAirdropButton" onclick="claimAirdrop()">Recieve Money</button>
+  </div>
+</div>-->
+
+<div class="popup skins-popup" id="skinsPopup">
+  <h2 id="skinsPopupTitle">Skins</h2>
+  <div class="skins-container" id="skinCardsContainer">
+    <!-- Custom Skin Card -->
+    <div class="skin-card custom" id="customSkinCard">
+      <img src="https://cdn.midjourney.com/6ba656b3-6dfa-438c-9a67-89df6a8c1618/0_0.png" alt="Default Image">
+      <input type="file" id="customSkinUploader" accept="image/*">
+      <div>Custom Skin</div>
+      <div class="skin-price">Price: 1,000,000,000 clicks</div>
+      <button class="upload-button" onclick="buyCustomSkin()">Buy</button>
+    </div>
+    <!-- Other Skin Cards ... -->
+  </div>
+</div>
+
+<div class="airdrop-popup" id="earnPopup">
+  <div class="logo-1">
+    <img src="https://i.ibb.co/2F4T168/KV-3-1-removebg-preview.png" alt="SeverinaKombat Logo">
+  </div>
+  <h2 id="earnClicksTitle">Earn Clicks</h2>
+  <h4 class="adsWatchedTitle">Watched Ads: <span id="adsWatchedValue">0</span></h4>
+  <div class="airdrop-content"> 
+    <div class="task-item" id="youtubeTask">
+      <button class="earn-button" id="youtubeButton" onclick="openYouTube()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>youtube</title><path d="M10,15L15.19,12L10,9V15M21.56,7.17C21.69,7.64 21.78,8.27 21.84,9.07C21.91,9.87 21.94,10.56 21.94,11.16L22,12C22,14.19 21.84,15.8 21.56,16.83C21.31,17.73 20.73,18.31 19.83,18.56C19.36,18.69 18.5,18.78 17.18,18.84C15.88,18.91 14.69,18.94 13.59,18.94L12,19C7.81,19 5.2,18.84 4.17,18.56C3.27,18.31 2.69,17.73 2.44,16.83C2.31,16.36 2.22,15.73 2.16,14.93C2.09,14.13 2.06,13.44 2.06,12.84L2,12C2,9.81 2.16,8.2 2.44,7.17C2.69,6.27 3.27,5.69 4.17,5.44C4.64,5.31 5.5,5.22 6.82,5.16C8.12,5.09 9.31,5.06 10.41,5.06L12,5C16.19,5 18.8,5.16 19.83,5.44C20.73,5.69 21.31,6.27 21.56,7.17Z" /></svg><span id="subscribeYoutubeLabel">Subscribe YouTube</span>  | +<span id="youtubeReward">5k</span></button>
+      <span class="task-check" id="youtubeCheck"></span>
+    </div>
+    <div class="task-item" id="walletTask">
+      <button class="earn-button" id="walletButton" onclick="connectWalletTask()">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <title>wallet</title>
+          <path d="M21,18V20H3V18L10,12L3,6V8H21V6L14,12L21,18M12,3A9,9 0 0,1 21,12A9,9 0 0,1 12,21A9,9 0 0,1 3,12A9,9 0 0,1 12,3Z" />
+        </svg>
+        <span id="connectWalletTaskLabel">Connect TON Wallet</span> | +<span id="walletReward">500k</span>
+      </button>
+      <span class="task-check" id="walletCheck"></span>
+    </div>
+    <div class="task-item" id="gasTask">
+      <button class="earn-button" id="gasButton" onclick="gasPump()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>currency-btc</title><path d="M17.06 11.57C17.65 10.88 18 10 18 9C18 7.14 16.73 5.57 15 5.13V3H13V5H11V3H9V5H6V7H8V17H6V19H9V21H11V19H13V21H15V19C17.21 19 19 17.21 19 15C19 13.55 18.22 12.27 17.06 11.57M10 7H14C15.1 7 16 7.9 16 9S15.1 11 14 11H10V7M15 17H10V13H15C16.1 13 17 13.9 17 15S16.1 17 15 17Z" /></svg><span id="TradeLabel">Trade on GasPump</span> | +<span id="gasReward">100k</span></button>
+      <span class="task-check" id="gasCheck"></span>
+    </div>
+    <div class="task-item" id="telegramTask">
+      <button class="earn-button" id="telegramButton" onclick="subscribeTelegram()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>send</title><path d="M2,21L23,12L2,3V10L17,12L2,14V21Z" /></svg><span id="subscribeTelegramLabel">Subscribe Telegram</span> | +<span id="telegramReward">1k</span></button>
+      <span class="task-check" id="telegramCheck"></span>
+    </div>
+    <div class="task-item" id="votingTask">
+      <button class="earn-button" id="votingButton" onclick="openVotingPopup()">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>poll</title><path d="M11.99,2C6.47,2 2,6.48 2,12C2,17.52 6.47,22 11.99,22C17.52,22 22,17.52 22,12C22,6.48 17.52,2 11.99,2M12,20C7.6,20 4,16.4 4,12C4,7.6 7.6,4 12,4C16.4,4 20,7.6 20,12C20,16.4 16.4,20 12,20M12,6A4,4 0 0,1 16,10V12H18V10A4,4 0 0,1 22,6C22,2.69 19.31,0 16,0H8C4.69,0 2,2.69 2,6V12H4V10A4,4 0 0,1 8,6C8,2.69 11.69,0 16,0Z" /></svg>
+        <span id="votingLabel">Voting</span> | +<span id="votingReward">10k</span> 
+      </button>
+      <span class="task-check" id="votingCheck"></span> 
+    </div>
+    
+    <div class="task-item" id="xTask">
+      <button class="earn-button" id="xButton" onclick="subscribeX()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>twitter</title><path d="M22.46,6C21.69,6.35 20.86,6.58 20,6.69C20.88,6.16 21.56,5.32 21.88,4.31C21.05,4.81 20.13,5.16 19.16,5.36C18.37,4.5 17.26,4 16,4C13.65,4 11.73,5.92 11.73,8.29C11.73,8.63 11.77,8.96 11.84,9.27C8.28,9.09 5.11,7.38 3,4.79C2.63,5.42 2.42,6.16 2.42,6.94C2.42,8.43 3.17,9.75 4.33,10.5C3.62,10.5 2.96,10.3 2.38,10C2.38,10 2.38,10 2.38,10.03C2.38,12.11 3.86,13.85 5.82,14.24C5.46,14.34 5.08,14.39 4.69,14.39C4.42,14.39 4.15,14.36 3.89,14.31C4.43,16 6,17.26 7.89,17.29C6.43,18.45 4.58,19.13 2.56,19.13C2.22,19.13 1.88,19.11 1.54,19.07C3.44,20.29 5.7,21 8.12,21C16,21 20.33,14.46 20.33,8.79C20.33,8.6 20.33,8.42 20.32,8.23C21.16,7.63 21.88,6.87 22.46,6Z" /></svg><span id="subscribeXLabel">Subscribe X (Twitter)</span> | +<span id="xReward">5k</span></button>
+      <span class="task-check" id="xCheck"></span>
+    </div>
+    <div class="task-item" id="dailyRewardTask">
+      <button class="earn-button" id="dailyRewardButton" onclick="openDailyRewardsPopup()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>calendar-badge-outline</title><path d="M19.5 16C17.6 16 16 17.6 16 19.5S17.6 23 19.5 23 23 21.4 23 19.5 21.4 16 19.5 16M14 19.5C14 19.33 14 19.17 14.03 19H5V9H19V14.03C19.17 14 19.33 14 19.5 14C20 14 20.5 14.08 21 14.21V5C21 3.9 20.11 3 19 3H18V1H16V3H8V1H6V3H5C3.89 3 3 3.9 3 5V19C3 20.11 3.9 21 5 21H14.21C14.08 20.5 14 20 14 19.5M5 5H19V7H5V5Z" /></svg><span id="dailyRewardLabel">Daily Reward</span>   | +<span id="dailyRewardAmount">10k</span></button>
+      <span class="task-check" id="dailyRewardCheck"></span>
+    </div>
+    <div class="task-item" id="watchAdTask">
+      <button class="earn-button" id="watchAdButton" onclick="showAd()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>advertisements</title><path d="M19 7C17.9 7 17 7.9 17 9V11C17 12.1 17.9 13 19 13H21V15H17V17H21C22.1 17 23 16.1 23 15V13C23 11.9 22.1 11 21 11H19V9H23V7H19M9 7V17H13C14.1 17 15 16.1 15 15V9C15 7.9 14.1 7 13 7H9M11 9H13V15H11V9M3 7C1.9 7 1 7.9 1 9V17H3V13H5V17H7V9C7 7.9 6.1 7 5 7H3M3 9H5V11H3V9Z" /></svg><span id="watchAdLabel">Watch Ad</span>   | +<span id="adReward">10k</span></button>
+      <span class="task-check" id="watchAdCheck"></span>
+    </div>
+    <div class="task-item" id="postStoryTask">
+      <button class="earn-button" onclick="postStory()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>image-plus</title><path d="M19,19H5V5H19M14,14V8H8V14H14M12,10H10V12H12V10M19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M17,18H19V16H17V18M17,14H19V12H17V14M17,10H19V8H17V10Z" /></svg><span id="postStoryLabel">Post Story</span> | +<span id="storyReward">1M</span></button>
+      <span class="task-check" id="storyCheck"></span>
+    </div>
+    <div class="task-item" id="gasTask">
+      <button class="earn-button" id="gasButton" onclick="gasPump()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>currency-btc</title><path d="M17.06 11.57C17.65 10.88 18 10 18 9C18 7.14 16.73 5.57 15 5.13V3H13V5H11V3H9V5H6V7H8V17H6V19H9V21H11V19H13V21H15V19C17.21 19 19 17.21 19 15C19 13.55 18.22 12.27 17.06 11.57M10 7H14C15.1 7 16 7.9 16 9S15.1 11 14 11H10V7M15 17H10V13H15C16.1 13 17 13.9 17 15S16.1 17 15 17Z" /></svg><span id="TradeLabel">Trade on GasPump</span> | +<span id="gasReward">100k</span></button>
+      <span class="task-check" id="gasCheck"></span>
+    </div>
+    <div class="task-item">
+      <button class="earn-button" id="premiumButton" onclick="claimPremiumBonus()">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <title>star-circle-outline</title>
+          <path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" />
+        </svg>
+        <span id="premiumBonusLabel">Premium Bonus</span> | +<span id="premiumReward">50k</span>
+      </button>
+      <span class="task-check" id="premiumCheck"></span>
+    </div>
+  </div>
+</div>
+
+  <div class="popup" id="giftPopup">
+    <h2 id="giftPopupTitle">Gift Clicks</h2>
+    <div class="gift-option" onclick="prepareGift(10000)">
+      <span>Gift 10K Clicks</span>
+    </div>
+    <div class="gift-option" onclick="prepareGift(100000)">
+      <span>Gift 100K Clicks</span>
+    </div>
+    <div class="gift-option" onclick="prepareGift(1000000)">
+      <span>Gift 1M Clicks</span>
+    </div>
+    <div class="gift-option" onclick="prepareGift(1000000000)">
+      <span>Gift 1B Clicks</span>
+    </div>
+    <div id="promoCodeContainer">
+      <span id="promoCodeLabel">Promo Code:</span>
+      <span id="generatedPromoCode" onclick="copyPromoCode()"></span>
+    </div> 
+  </div>
+
+  <div class="league-popup" id="leaguePopup">
+    <h2 id="leagueName"></h2>
+    <div class="trophy-container">
+      <button class="arrow-button" onclick="previousLeague()"><</button>
+      <div class="trophy">
+        <img id="leagueTrophy" src="" alt="League Trophy">
+      </div>
+      <button class="arrow-button" onclick="nextLeague()">></button>
+    </div>
+    <p class="from" id="leagueFromLabel">From <span id="leagueRequirement"></span></p>
+    <p class="info" id="leagueInfoMessage">⚠ If trophy image is not changing, wait a bit time or check internet connection</p>
+  </div>
+
+  <div class="popup" id="votingPopup">
+    <h2 id="votingQuestion"></h2>
+    <div class="voting-cards">
+      <div class="voting-card" onclick="placeBet('Ed Sheeran')">
+        <h3 id="edSheeranTitle">Ed Sheeran</h3>
+        <img src="https://cdn.midjourney.com/6b6b7626-f796-475f-9e9f-0f56f20e8921/0_0.png" alt="Ed Sheeran">
+      </div>
+      <div class="voting-card" onclick="placeBet('Dua Lipa')">
+        <h3 id="duaLipaTitle">Dua Lipa</h3>
+        <img src="https://cdn.midjourney.com/00d69f33-0889-4fa5-853a-c7b27ba5a051/0_1.png" alt="Dua Lipa"> 
+      </div>
+      <div class="voting-card" onclick="placeBet('Taylor Swift')">
+        <h3 id="taylorSwiftTitle">Taylor Swift</h3>
+        <img src="https://cdn.midjourney.com/7c40e3d4-9df9-4555-82ab-0da884035305/0_3.png" alt="Taylor Swift"> 
+      </div>
+    </div>
+    <div class="bet-input-container">
+      <input type="number" id="betAmount" min="0" placeholder="Bet amount (clicks)">
+      <button class="button" id="maxBetButton" onclick="betMax()">MAX</button>
+    </div>
+    <button class="button" onclick="confirmBet()">Confirm Bet</button>
+  </div>
+
+  <div class="faq-popup" id="faqPopup">
+    <button class="close-button" onclick="closeFaqPopup()">×</button>
+    <h2>SeverinaKombat FAQ</h2>
+
+    <div class="faq-section">
+      <h3>How to Play</h3>
+      <p>Tap the lobster as fast as you can to earn clicks! Clicks are the main currency in SeverinaKombat. Use them to buy upgrades, mine crypto, purchase skins, and more!</p>
+    </div>
+
+    <div class="faq-section">
+      <h3>How to Get More Clicks</h3>
+      <p>There are multiple ways to boost your click earnings:
+        <ul>
+          <li><strong>Click Multiplier:</strong> Upgrade your click multiplier in the "Boosts" menu to earn more clicks per tap. This is a great early game investment.</li>
+          <li><strong>Mining Cards:</strong> Purchase mining cards in the "Mining" menu to passively generate clicks over time. Each card represents a different investment opportunity.</li>
+          <li><strong>Daily Tasks:</strong> Complete daily tasks in the "Earn" menu to earn bonus clicks. These tasks can include watching ads, subscribing to social media channels, and more.</li>
+          <li><strong>Referral Program:</strong> Share your referral link with friends to earn even more clicks.  The more players you refer, the bigger the bonus!</li>
+          <li><strong>Skins:</strong> Some skins provide a boost to your profit per hour. Try collecting different skins to maximize your earnings.</li>
+          <li><strong>Daily Rewards:</strong> Claim your daily reward in the "Earn" menu for a substantial bonus of clicks. The reward increases each day, following the Fibonacci sequence.</li>
+          <li><strong>Watch Ads:</strong> Watch ads to earn extra clicks. You can earn more clicks by watching a set amount of ads.</li>
+        </ul>
+      </p>
+    </div>
+
+    <div class="faq-section">
+      <h3>What are Mining Cards?</h3>
+      <p>Mining cards represent investments in different cryptocurrencies and assets. Each card has a different price and generates clicks per hour based on its level.  You can upgrade your mining cards to increase their profitability.</p>
+    </div>
+
+    <div class="faq-section">
+      <h3>What are Skins?</h3>
+      <p>Skins are purely cosmetic, but they can also offer boosts to your profit per hour.  Collect different skins to personalize your lobster and improve your earnings!</p>
+    </div>
+
+    <div class="faq-section">
+      <h3>How Do I Apply Promo Codes?</h3>
+      <p>Go to the "Settings" menu and enter a promo code in the provided field.  Promo codes can grant you free clicks, unlock special bonuses, or give you access to exclusive content.  You can get promo code on our telegram channel or from your friends.</p>
+    </div>
+
+    <div class="faq-section">
+      <h3>What is the Click Limit?</h3>
+      <p>You can only tap the lobster a certain number of times per minute. This limit exists to prevent abuse and maintain a fair gameplay experience.  You can upgrade your click limit in the "Boosts" menu to increase the number of clicks you can earn per minute.</p>
+    </div>
+
+    <div class="faq-section">
+      <h3>What Can I Do in the "Settings" Menu?</h3>
+      <p>The "Settings" menu offers a variety of customization and management options:
+        <ul>
+          <li><strong>Language:</strong> Change the language of the game to your preferred language.</li>
+          <li><strong>Clear Data:</strong> Reset your game progress and start fresh. This will remove all your earned clicks, purchased upgrades, and other data.</li>
+          <li><strong>Legal Info:</strong> View the game's Terms of Service and Privacy Policy.</li>
+          <li><strong>Theme:</strong> Customize the game's appearance by changing colors, backgrounds, and other visual elements.</li>
+          <li><strong>Apply Promo Codes:</strong> Enter promo codes to unlock bonuses and benefits.</li>
+        </ul>
+      </p>
+    </div>
+
+    <div class="faq-section">
+      <h3>What is the "Airdrop"?</h3>
+      <p>The "Airdrop" is a special event where SeverinaKombat will distribute $SVR tokens to players based on their game progress. The amount of tokens you receive will be determined by your balance, league, profit per hour, ads watched, and purchased skins. Stay tuned for details on the Airdrop!</p>
+    </div>
+
+    <div class="faq-section">
+      <h3>Credits</h3>
+      <li><strong>Copyright:</strong> C. SeverinaKombat 2024</li>
+      <li><strong>DISCLAIMER:</strong> This game is only for fun purposes. Any coincidences are accedential. No real persons or scenes or names used in game. All rights reserved.</li>
+    </div>
+  </div>
+
+  <div class="popup leaderboard-popup" id="leaderboardPopup">
+    <button class="close-button" onclick="closeLeaderboardPopup()">×</button>
+    <h2>SeverinaKombat Leaderboard</h2>
+    <div class="leaderboard-list" id="leaderboardList"></div>
+    <div id="playerPositionLabel">Your rank: <span id="playerPosition"></span></div>
+  </div>
+
+  <div class="popup" id="votingResultPopup">
+    <h2 id="resultTitle"></h2>
+    <p id="resultMessage"></p>
+  </div>
+
+  <div class="airdrop-popup" id="airdropPopup">
     <div class="logo-1">
       <img src="https://i.ibb.co/2F4T168/KV-3-1-removebg-preview.png" alt="SeverinaKombat Logo">
     </div>
@@ -2125,256 +2620,6 @@
       </script>
       <button class="claim-button" id="claimAirdropButton" onclick="noClaim()">Claim to Wallet</button>
     </div>
-</div>
-    <!--<input type="text" id="walletAddress" placeholder="Enter wallet address">
-    <button id="ton-connect" class="connect-wallet-button" onclick="connectToWallet()">Connect Wallet</button> 
-    <script>
-        // Initialize TONConnect UI when the popup opens
-        const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
-        manifestUrl: 'https://vasiliy-katsyka.github.io/fdsguai/tonconnect-manifest.json',
-        buttonRootId: 'ton-connect'
-        });
-        tonConnectUI.uiOptions = {
-        twaReturnUrl: 'https://t.me/lobster_coin_bot/SeverinaKombat'
-        };
-    </script>
-    <div class="airdrop-form" id="airdropForm">
-        <h3>Swap Clicks To $LOB</h3>
-        <div class="form-group">
-        <label for="clicksToSwap">Clicks:</label>
-        <input type="number" id="clicksToSwap" min="100000" oninput="calculateLOB()" value="100000">
-        </div>
-        <div class="form-group">
-        <label for="lobAmount">$LOB:</label>
-        <input type="number" id="lobAmount" disabled>
-        </div>
-    </div>
-    <button class="claim-button" id="claimAirdropButton" onclick="claimAirdrop()">Recieve Money</button>
-    </div>
-</div>-->
-
-<div class="popup skins-popup" id="skinsPopup">
-    <h2 id="skinsPopupTitle">Skins</h2>
-    <div class="skins-container" id="skinCardsContainer">
-    <!-- Custom Skin Card -->
-    <div class="skin-card custom" id="customSkinCard">
-        <img src="https://cdn.midjourney.com/6ba656b3-6dfa-438c-9a67-89df6a8c1618/0_0.png" alt="Default Image">
-        <input type="file" id="customSkinUploader" accept="image/*">
-        <div>Custom Skin</div>
-        <div class="skin-price">Price: 1,000,000,000 clicks</div>
-        <button class="upload-button" onclick="buyCustomSkin()">Buy</button>
-    </div>
-    <!-- Other Skin Cards ... -->
-    </div>
-</div>
-
-<div class="airdrop-popup" id="earnPopup">
-    <div class="logo-1">
-    <img src="https://i.ibb.co/2F4T168/KV-3-1-removebg-preview.png" alt="SeverinaKombat Logo">
-    </div>
-    <h2 id="earnClicksTitle">Earn Clicks</h2>
-    <h4 class="adsWatchedTitle">Watched Ads: <span id="adsWatchedValue">0</span></h4>
-    <div class="airdrop-content"> 
-    <div class="task-item" id="youtubeTask">
-        <button class="earn-button" id="youtubeButton" onclick="openYouTube()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>youtube</title><path d="M10,15L15.19,12L10,9V15M21.56,7.17C21.69,7.64 21.78,8.27 21.84,9.07C21.91,9.87 21.94,10.56 21.94,11.16L22,12C22,14.19 21.84,15.8 21.56,16.83C21.31,17.73 20.73,18.31 19.83,18.56C19.36,18.69 18.5,18.78 17.18,18.84C15.88,18.91 14.69,18.94 13.59,18.94L12,19C7.81,19 5.2,18.84 4.17,18.56C3.27,18.31 2.69,17.73 2.44,16.83C2.31,16.36 2.22,15.73 2.16,14.93C2.09,14.13 2.06,13.44 2.06,12.84L2,12C2,9.81 2.16,8.2 2.44,7.17C2.69,6.27 3.27,5.69 4.17,5.44C4.64,5.31 5.5,5.22 6.82,5.16C8.12,5.09 9.31,5.06 10.41,5.06L12,5C16.19,5 18.8,5.16 19.83,5.44C20.73,5.69 21.31,6.27 21.56,7.17Z" /></svg><span id="subscribeYoutubeLabel">Subscribe YouTube</span>  | +<span id="youtubeReward">5k</span></button>
-        <span class="task-check" id="youtubeCheck"></span>
-    </div>
-    <div class="task-item" id="adsTask">
-        <button class="earn-button" id="adsButton" onclick="check20ads()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>advertisements</title><path d="M19 7C17.9 7 17 7.9 17 9V11C17 12.1 17.9 13 19 13H21V15H17V17H21C22.1 17 23 16.1 23 15V13C23 11.9 22.1 11 21 11H19V9H23V7H19M9 7V17H13C14.1 17 15 16.1 15 15V9C15 7.9 14.1 7 13 7H9M11 9H13V15H11V9M3 7C1.9 7 1 7.9 1 9V17H3V13H5V17H7V9C7 7.9 6.1 7 5 7H3M3 9H5V11H3V9Z" /></svg><span id="watchAdsLabel">Watch <span id="adsTaskCount">20</span> Ads</span><span id="adsWatched">0/20</span>   | +<span id="adsReward">2M</span></button>
-        <span class="task-check" id="adsCheck"></span>
-    </div>
-    <div class="task-item" id="gasTask">
-        <button class="earn-button" id="gasButton" onclick="gasPump()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>currency-btc</title><path d="M17.06 11.57C17.65 10.88 18 10 18 9C18 7.14 16.73 5.57 15 5.13V3H13V5H11V3H9V5H6V7H8V17H6V19H9V21H11V19H13V21H15V19C17.21 19 19 17.21 19 15C19 13.55 18.22 12.27 17.06 11.57M10 7H14C15.1 7 16 7.9 16 9S15.1 11 14 11H10V7M15 17H10V13H15C16.1 13 17 13.9 17 15S16.1 17 15 17Z" /></svg><span id="TradeLabel">Trade on GasPump</span> | +<span id="gasReward">100k</span></button>
-        <span class="task-check" id="gasCheck"></span>
-    </div>
-    <div class="task-item" id="telegramTask">
-        <button class="earn-button" id="telegramButton" onclick="subscribeTelegram()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>send</title><path d="M2,21L23,12L2,3V10L17,12L2,14V21Z" /></svg><span id="subscribeTelegramLabel">Subscribe Telegram</span> | +<span id="telegramReward">1k</span></button>
-        <span class="task-check" id="telegramCheck"></span>
-    </div>
-    <div class="task-item" id="votingTask">
-        <button class="earn-button" id="votingButton" onclick="openVotingPopup()">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>poll</title><path d="M11.99,2C6.47,2 2,6.48 2,12C2,17.52 6.47,22 11.99,22C17.52,22 22,17.52 22,12C22,6.48 17.52,2 11.99,2M12,20C7.6,20 4,16.4 4,12C4,7.6 7.6,4 12,4C16.4,4 20,7.6 20,12C20,16.4 16.4,20 12,20M12,6A4,4 0 0,1 16,10V12H18V10A4,4 0 0,1 22,6C22,2.69 19.31,0 16,0H8C4.69,0 2,2.69 2,6V12H4V10A4,4 0 0,1 8,6C8,2.69 11.69,0 16,0Z" /></svg>
-        <span id="votingLabel">Voting</span> | +<span id="votingReward">10k</span> 
-        </button>
-        <span class="task-check" id="votingCheck"></span> 
-    </div>
-    
-    <div class="task-item" id="xTask">
-        <button class="earn-button" id="xButton" onclick="subscribeX()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>twitter</title><path d="M22.46,6C21.69,6.35 20.86,6.58 20,6.69C20.88,6.16 21.56,5.32 21.88,4.31C21.05,4.81 20.13,5.16 19.16,5.36C18.37,4.5 17.26,4 16,4C13.65,4 11.73,5.92 11.73,8.29C11.73,8.63 11.77,8.96 11.84,9.27C8.28,9.09 5.11,7.38 3,4.79C2.63,5.42 2.42,6.16 2.42,6.94C2.42,8.43 3.17,9.75 4.33,10.5C3.62,10.5 2.96,10.3 2.38,10C2.38,10 2.38,10 2.38,10.03C2.38,12.11 3.86,13.85 5.82,14.24C5.46,14.34 5.08,14.39 4.69,14.39C4.42,14.39 4.15,14.36 3.89,14.31C4.43,16 6,17.26 7.89,17.29C6.43,18.45 4.58,19.13 2.56,19.13C2.22,19.13 1.88,19.11 1.54,19.07C3.44,20.29 5.7,21 8.12,21C16,21 20.33,14.46 20.33,8.79C20.33,8.6 20.33,8.42 20.32,8.23C21.16,7.63 21.88,6.87 22.46,6Z" /></svg><span id="subscribeXLabel">Subscribe X (Twitter)</span> | +<span id="xReward">5k</span></button>
-        <span class="task-check" id="xCheck"></span>
-    </div>
-    <div class="task-item" id="dailyRewardTask">
-        <button class="earn-button" id="dailyRewardButton" onclick="openDailyRewardsPopup()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>calendar-badge-outline</title><path d="M19.5 16C17.6 16 16 17.6 16 19.5S17.6 23 19.5 23 23 21.4 23 19.5 21.4 16 19.5 16M14 19.5C14 19.33 14 19.17 14.03 19H5V9H19V14.03C19.17 14 19.33 14 19.5 14C20 14 20.5 14.08 21 14.21V5C21 3.9 20.11 3 19 3H18V1H16V3H8V1H6V3H5C3.89 3 3 3.9 3 5V19C3 20.11 3.9 21 5 21H14.21C14.08 20.5 14 20 14 19.5M5 5H19V7H5V5Z" /></svg><span id="dailyRewardLabel">Daily Reward</span>   | +<span id="dailyRewardAmount">10k</span></button>
-        <span class="task-check" id="dailyRewardCheck"></span>
-    </div>
-    <div class="task-item" id="watchAdTask">
-        <button class="earn-button" id="watchAdButton" onclick="showAd()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>advertisements</title><path d="M19 7C17.9 7 17 7.9 17 9V11C17 12.1 17.9 13 19 13H21V15H17V17H21C22.1 17 23 16.1 23 15V13C23 11.9 22.1 11 21 11H19V9H23V7H19M9 7V17H13C14.1 17 15 16.1 15 15V9C15 7.9 14.1 7 13 7H9M11 9H13V15H11V9M3 7C1.9 7 1 7.9 1 9V17H3V13H5V17H7V9C7 7.9 6.1 7 5 7H3M3 9H5V11H3V9Z" /></svg><span id="watchAdLabel">Watch Ad</span>   | +<span id="adReward">10k</span></button>
-        <span class="task-check" id="watchAdCheck"></span>
-    </div>
-    <div class="task-item" id="postStoryTask">
-        <button class="earn-button" onclick="postStory()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>image-plus</title><path d="M19,19H5V5H19M14,14V8H8V14H14M12,10H10V12H12V10M19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M17,18H19V16H17V18M17,14H19V12H17V14M17,10H19V8H17V10Z" /></svg><span id="postStoryLabel">Post Story</span> | +<span id="storyReward">1M</span></button>
-        <span class="task-check" id="storyCheck"></span>
-    </div>
-    <div class="task-item" id="gasTask">
-        <button class="earn-button" id="gasButton" onclick="gasPump()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>currency-btc</title><path d="M17.06 11.57C17.65 10.88 18 10 18 9C18 7.14 16.73 5.57 15 5.13V3H13V5H11V3H9V5H6V7H8V17H6V19H9V21H11V19H13V21H15V19C17.21 19 19 17.21 19 15C19 13.55 18.22 12.27 17.06 11.57M10 7H14C15.1 7 16 7.9 16 9S15.1 11 14 11H10V7M15 17H10V13H15C16.1 13 17 13.9 17 15S16.1 17 15 17Z" /></svg><span id="TradeLabel">Trade on GasPump</span> | +<span id="gasReward">100k</span></button>
-        <span class="task-check" id="gasCheck"></span>
-    </div>
-    <div class="task-item">
-        <button class="earn-button" id="premiumButton" onclick="claimPremiumBonus()">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <title>star-circle-outline</title>
-            <path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" />
-        </svg>
-        <span id="premiumBonusLabel">Premium Bonus</span> | +<span id="premiumReward">50k</span>
-        </button>
-        <span class="task-check" id="premiumCheck"></span>
-    </div>
-    </div>
-</div>
-
-<div class="popup" id="giftPopup">
-    <h2 id="giftPopupTitle">Gift Clicks</h2>
-    <div class="gift-option" onclick="prepareGift(10000)">
-    <span>Gift 10K Clicks</span>
-    </div>
-    <div class="gift-option" onclick="prepareGift(100000)">
-    <span>Gift 100K Clicks</span>
-    </div>
-    <div class="gift-option" onclick="prepareGift(1000000)">
-    <span>Gift 1M Clicks</span>
-    </div>
-    <div class="gift-option" onclick="prepareGift(1000000000)">
-    <span>Gift 1B Clicks</span>
-    </div>
-    <div id="promoCodeContainer">
-    <span id="promoCodeLabel">Promo Code:</span>
-    <span id="generatedPromoCode" onclick="copyPromoCode()"></span>
-    </div> 
-</div>
-
-<div class="league-popup" id="leaguePopup">
-    <h2 id="leagueName"></h2>
-    <div class="trophy-container">
-    <button class="arrow-button" onclick="previousLeague()"><</button>
-    <div class="trophy">
-        <img id="leagueTrophy" src="" alt="League Trophy">
-    </div>
-    <button class="arrow-button" onclick="nextLeague()">></button>
-    </div>
-    <p class="from" id="leagueFromLabel">From <span id="leagueRequirement"></span></p>
-    <p class="info" id="leagueInfoMessage">⚠ If trophy image is not changing, wait a bit time or check internet connection</p>
-</div>
-
-<div class="popup" id="votingPopup">
-    <h2 id="votingQuestion"></h2>
-    <div class="voting-cards">
-    <div class="voting-card" onclick="placeBet('Ed Sheeran')">
-        <h3 id="edSheeranTitle">Ed Sheeran</h3>
-        <img src="https://cdn.midjourney.com/6b6b7626-f796-475f-9e9f-0f56f20e8921/0_0.png" alt="Ed Sheeran">
-    </div>
-    <div class="voting-card" onclick="placeBet('Dua Lipa')">
-        <h3 id="duaLipaTitle">Dua Lipa</h3>
-        <img src="https://cdn.midjourney.com/00d69f33-0889-4fa5-853a-c7b27ba5a051/0_1.png" alt="Dua Lipa"> 
-    </div>
-    <div class="voting-card" onclick="placeBet('Taylor Swift')">
-        <h3 id="taylorSwiftTitle">Taylor Swift</h3>
-        <img src="https://cdn.midjourney.com/7c40e3d4-9df9-4555-82ab-0da884035305/0_3.png" alt="Taylor Swift"> 
-    </div>
-    </div>
-    <div class="bet-input-container">
-    <input type="number" id="betAmount" min="0" placeholder="Bet amount (clicks)">
-    <button class="button" id="maxBetButton" onclick="betMax()">MAX</button>
-    </div>
-    <button class="button" onclick="confirmBet()">Confirm Bet</button>
-</div>
-
-<div class="faq-popup" id="faqPopup">
-    <button class="close-button" onclick="closeFaqPopup()">×</button>
-    <h2>SeverinaKombat FAQ</h2>
-
-    <div class="faq-section">
-    <h3>How to Play</h3>
-    <p>Tap the lobster as fast as you can to earn clicks! Clicks are the main currency in SeverinaKombat. Use them to buy upgrades, mine crypto, purchase skins, and more!</p>
-    </div>
-
-    <div class="faq-section">
-    <h3>How to Get More Clicks</h3>
-    <p>There are multiple ways to boost your click earnings:
-        <ul>
-        <li><strong>Click Multiplier:</strong> Upgrade your click multiplier in the "Boosts" menu to earn more clicks per tap. This is a great early game investment.</li>
-        <li><strong>Mining Cards:</strong> Purchase mining cards in the "Mining" menu to passively generate clicks over time. Each card represents a different investment opportunity.</li>
-        <li><strong>Daily Tasks:</strong> Complete daily tasks in the "Earn" menu to earn bonus clicks. These tasks can include watching ads, subscribing to social media channels, and more.</li>
-        <li><strong>Referral Program:</strong> Share your referral link with friends to earn even more clicks.  The more players you refer, the bigger the bonus!</li>
-        <li><strong>Skins:</strong> Some skins provide a boost to your profit per hour. Try collecting different skins to maximize your earnings.</li>
-        <li><strong>Daily Rewards:</strong> Claim your daily reward in the "Earn" menu for a substantial bonus of clicks. The reward increases each day, following the Fibonacci sequence.</li>
-        <li><strong>Watch Ads:</strong> Watch ads to earn extra clicks. You can earn more clicks by watching a set amount of ads.</li>
-        </ul>
-    </p>
-    </div>
-
-    <div class="faq-section">
-    <h3>What are Mining Cards?</h3>
-    <p>Mining cards represent investments in different cryptocurrencies and assets. Each card has a different price and generates clicks per hour based on its level.  You can upgrade your mining cards to increase their profitability.</p>
-    </div>
-
-    <div class="faq-section">
-    <h3>What are Skins?</h3>
-    <p>Skins are purely cosmetic, but they can also offer boosts to your profit per hour.  Collect different skins to personalize your lobster and improve your earnings!</p>
-    </div>
-
-    <div class="faq-section">
-    <h3>How Do I Apply Promo Codes?</h3>
-    <p>Go to the "Settings" menu and enter a promo code in the provided field.  Promo codes can grant you free clicks, unlock special bonuses, or give you access to exclusive content.  You can get promo code on our telegram channel or from your friends.</p>
-    </div>
-
-    <div class="faq-section">
-    <h3>What is the Click Limit?</h3>
-    <p>You can only tap the lobster a certain number of times per minute. This limit exists to prevent abuse and maintain a fair gameplay experience.  You can upgrade your click limit in the "Boosts" menu to increase the number of clicks you can earn per minute.</p>
-    </div>
-
-    <div class="faq-section">
-    <h3>What Can I Do in the "Settings" Menu?</h3>
-    <p>The "Settings" menu offers a variety of customization and management options:
-        <ul>
-        <li><strong>Language:</strong> Change the language of the game to your preferred language.</li>
-        <li><strong>Clear Data:</strong> Reset your game progress and start fresh. This will remove all your earned clicks, purchased upgrades, and other data.</li>
-        <li><strong>Legal Info:</strong> View the game's Terms of Service and Privacy Policy.</li>
-        <li><strong>Theme:</strong> Customize the game's appearance by changing colors, backgrounds, and other visual elements.</li>
-        <li><strong>Apply Promo Codes:</strong> Enter promo codes to unlock bonuses and benefits.</li>
-        </ul>
-    </p>
-    </div>
-
-    <div class="faq-section">
-    <h3>What is the "Airdrop"?</h3>
-    <p>The "Airdrop" is a special event where SeverinaKombat will distribute $LOB tokens to players based on their game progress. The amount of tokens you receive will be determined by your balance, league, profit per hour, ads watched, and purchased skins. Stay tuned for details on the Airdrop!</p>
-    </div>
-
-    <div class="faq-section">
-    <h3>Credits</h3>
-    <h4>All concidences are accidental! All characters are fictitious</h4>
-    </div>
-</div>
-
-<div class="popup leaderboard-popup" id="leaderboardPopup">
-    <button class="close-button" onclick="closeLeaderboardPopup()">×</button>
-    <h2>SeverinaKombat Leaderboard</h2>
-    <div class="leaderboard-list" id="leaderboardList"></div>
-    <div id="playerPositionLabel">Your rank: <span id="playerPosition"></span></div>
-</div>
-
-<div class="popup" id="votingResultPopup">
-    <h2 id="resultTitle"></h2>
-    <p id="resultMessage"></p>
-</div>
-
-<div class="popup" id="airdropConfirmPopup">
-    <h2>Airdrop Confirmation</h2>
-    <p>Did you reveived airdrop?</p>
-    <p style="color: var(--tg-theme-hint-color); font-size: 13px;">Everything will become 0 after tapping YES</p>
-    <button class="button" onclick="airdropClaimed()">Yes</button>
-    <button class="button" onclick="closeAirdropConfirmPopup()">No</button>
-</div>
   <script>
     const dailyCombo = ["usa", "dubai", "ton"];
     let skinProfitPerHour = 0;
@@ -2397,26 +2642,59 @@
     let gameRunning = false;
     let fakeLobsterCount = 0;
    	let fakeLobsterPenalty = 0.7; 
-   	let clicksRemaining = 10000; 
-    let clicksPerMinuteLimit = 10000; 
+   	let clicksRemaining = 100; 
+    let clicksPerMinuteLimit = 100; 
     let limitBoostPrice = 1000; 
     let limitBoostLevel = 0;
     let isClicking = false;
     var WebApp = window.Telegram.WebApp;
  
-    function airdropClaimed() {
-        clickCount = 0;
-        updateClickCount();
-        profitPerHour = 0;
-        localStorage.setItem('profitPerHour', 0);
-        updateProfitPerHour();
-        updateLeague();
-        localStorage.setItem("airdropConfirmed", true);
-        
-        location.reload();
+    let cardCooldown = {};
+
+    function openTopUpPopup() {
+      WebApp.BackButton.show();
+      WebApp.BackButton.onClick(closeTopUpPopup);
+      document.getElementById('topUpPopup').style.display = 'block';
     }
 
-    let cardCooldown = {};
+    function closeTopUpPopup() {
+      WebApp.BackButton.hide();
+      WebApp.BackButton.onClick(() => {});
+      document.getElementById('topUpPopup').style.display = 'none';
+    }
+
+    function copyAddress() {
+      navigator.clipboard.writeText('UQBoRkvzUelDcxR65b5J9J3KM1Ic638n1QJUo5kZTKhT3O64')
+        .then(() => {
+          showMessage("Address copied to clipboard!");
+        })
+        .catch(err => {
+          console.error('Failed to copy: ', err);
+          showMessage('Failed to copy address. Please try again.');
+        });
+    }
+
+    // Function to convert paid balance 
+    function convertPaidBalance() {
+      let paidBalance = parseInt(document.getElementById('paidBalanceInput').value);
+      let convertType = document.getElementById('convertType').value;
+      let conversionResult = document.getElementById('conversionResult');
+
+      switch (convertType) {
+        case "clicksPerTap":
+          let clicksPerTapValue = paidBalance * 10; // 1 paid balance = 10 clicks per tap
+          conversionResult.textContent = `This amount is equivalent to ${clicksPerTapValue} clicks per tap!`;
+          break;
+        case "profitPerHour":
+          let profitPerHourValue = paidBalance * 1000; // 1 paid balance = 1000 profit per hour
+          conversionResult.textContent = `This amount is equivalent to ${profitPerHourValue} profit per hour!`;
+          break;
+        case "balance":
+          let balanceValue = paidBalance * 1000; // 1 paid balance = 1000 balance
+          conversionResult.textContent = `This amount is equivalent to ${balanceValue} in-game balance!`;
+          break;
+      }
+    }
 
     const translations = {
       en: { 
@@ -3614,7 +3892,7 @@
         profitPerHour: 3000, 
         price: 1000,
         level: 0,
-        imageUrl: "https://totalwellnessandbariatrics.com/wp-content/uploads/want-to-lose-weight.jpg", 
+        imageUrl: "https://cdn.midjourney.com/e6295192-dac9-4fdc-b072-f671ccba7628/0_1.png", 
         cooldown: 10 
       },
       zub: { 
@@ -3624,8 +3902,14 @@
         imageUrl: "https://cdn.midjourney.com/ef0b0e15-02b1-4a16-9d59-135cbd2b45ab/0_1.png", 
         cooldown: 10 
       },
-      
       // Specials 
+      air: { 
+        profitPerHour: 25000, 
+        price: 20000,
+        level: 0,
+        imageUrl: "https://cdn.midjourney.com/cea799e3-658a-407f-b06b-40e5826541ac/0_0.png", 
+        cooldown: 10 
+      },
       heartstopper3: { 
         profitPerHour: 1000, 
         price: 8000,
@@ -3633,7 +3917,15 @@
         imageUrl: "https://i0.wp.com/thenerdsofcolor.org/wp-content/uploads/2024/09/en_gb_hs_s3_main_charlie_and_nick_-_main_key_art_4_x_5_v_1080px1350p_rgb_pre_1.jpg?resize=1080%2C1200&ssl=1", 
         cooldown: 10 
       },
+      ter: { 
+        profitPerHour: 1000, 
+        price: 8000,
+        level: 0,
+        imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZUZIhEhEjd3zL-y9oCYReYHLxzub2EBHvbg&s", 
+        cooldown: 10 
+      },
     };
+    //document.getElementById('leaderboardButton').addEventListener('click', openLeaderboardPopup); 
     function updateLeaderboard() {
       const leaderboardList = document.getElementById('leaderboardList');
       leaderboardList.innerHTML = ''; // Clear previous content
@@ -3665,6 +3957,26 @@
       }
     }
 
+    function removeCommasAndUnits(numberString) {
+      // Remove commas
+      numberString = numberString.replace(/,/g, '');
+
+      // Remove units (case-insensitive)
+      const units = ["", "K", "M", "B", "T", "Qa", "Qi", "Sx", "Sp", "Oc", "No", "Dc", "Ud", "Dd", "Td", "Qad", "Qid", "Sxd", "Spd", "Ocd"];
+      for (let i = 0; i < units.length; i++) {
+        numberString = numberString.replace(units[i], '');
+      }
+
+      return parseFloat(numberString); // Convert to a floating-point number
+    }
+
+    function profitSaver() {
+      pro = document.getElementById('profitPerHourValue').textContent;
+      console.info('COmmas: ' +pro+'No: '+removeCommasAndUnits(pro));
+      localStorage.setItem('profitPerHourS', removeCommasAndUnits(pro));
+      console.log('Saved in local storage: '+localStorage.getItem('profitPerHourS'));
+    }
+
     // Function to open the leaderboard popup
     function openLeaderboardPopup() {
       WebApp.BackButton.show();
@@ -3694,8 +4006,8 @@
     }
 
     // Load data from localStorage
-    if (localStorage.getItem('clickCount')) {
-      clickCount = parseInt(localStorage.getItem('clickCount'));
+    if (localStorage.getItem('clickCountS')) {
+      clickCount = parseInt(localStorage.getItem('clickCountS'));
     }
     if (localStorage.getItem('clickMultiplier')) {
       clickMultiplier = parseInt(localStorage.getItem('clickMultiplier'));
@@ -3729,6 +4041,9 @@
     }
     if (localStorage.getItem('limitBoostPrice')) {
       limitBoostPrice = parseInt(localStorage.getItem('limitBoostPrice'));
+    }
+    if (localStorage.getItem('profitPerHourS')) {
+      profitPerHour = parseInt(localStorage.getItem('profitPerHourS'));
     }
     // Load mining card levels from localStorage
     for (const cardType in miningCards) {
@@ -3791,8 +4106,51 @@
     }
     rewardAds = getRewardAmount(localStorage.getItem('adTask') * 1000000);
     localStorage.setItem('ad20Reward', rewardAds);
+  
+    let storrew = null;
 
-    
+    async function isWalletConnected() {
+      try {
+        if (connectedWallet) {
+          return true; // Wallet exists in cloud storage
+        } else {
+          return false; // Wallet not found in cloud storage
+        }
+      } catch (error) {
+        console.error('Error checking wallet connection:', error);
+        return false; // Return false in case of an error
+      }
+    }
+
+    let walletTaskCompleted = localStorage.getItem('walletTaskCompleted');
+    if (localStorage.getItem('walletTaskCompleted') === 'true') {
+      addTaskCheck('wallet', true);
+      // You may also want to disable the button if the task is already completed
+      document.getElementById('walletButton').disabled = true;
+      document.getElementById('walletButton').style.backgroundColor = '#ccc';
+    }
+    async function connectWalletTask() {
+      if (walletTaskCompleted) {
+        showMessage("You've already completed this task!");
+      } else {
+        // Check if a wallet is already connected using the new function
+        const isConnected = await isWalletConnected(); 
+        if (connectedWallet) {
+          // Wallet is already connected, so complete the task
+          clickCount += 500000; 
+          updateClickCount();
+          walletTaskCompleted = true;
+          localStorage.setItem('walletTaskCompleted', 'true');
+          addTaskCheck('wallet', true);
+          showMessage('Wallet already connected! You earned 500,000 clicks!');
+        } else {
+          // Wallet is not connected, prompt the user to connect
+          closeEarnPopup();
+          openAirdrop();
+        }
+      }
+    }
+
     function check20ads() {
 
       if (localStorage.getItem('adTask') == 20) {
@@ -3953,7 +4311,6 @@
       if (!WebApp.isExpanded) {
         WebApp.expand();
       }
-      WebApp.enableClosingConfirmation();
       WebApp.setHeaderColor('#000000');
       WebApp.setBackgroundColor('#000000');
       WebApp.disableVerticalSwipes();
@@ -3972,7 +4329,6 @@
         if (!WebApp.isExpanded) {
           WebApp.expand();
         }
-        WebApp.enableClosingConfirmation();
         WebApp.setHeaderColor('#000000');
         WebApp.setBackgroundColor('#000000');
         WebApp.disableVerticalSwipes();
@@ -3994,6 +4350,7 @@
     }
 
     // Add event listener to the "About" button in the menu container
+    document.getElementById('aboutButton').addEventListener('click', openFaqPopup);
 
     function numberWithCommas(x) {
       const units = ["", "K", "M", "B", "T", "Qa", "Qi", "Sx", "Sp", "Oc", "No", "Dc", "Ud", "Dd", "Td", "Qad", "Qid", "Sxd", "Spd", "Ocd"]; 
@@ -4049,8 +4406,9 @@
     // Update click count display
     function updateClickCount() {
       document.getElementById('clickCount').textContent = numberWithCommas(clickCount); // Format clickCount
+      document.getElementById('clicksPerTapValue').textContent = numberWithCommas(clickMultiplier)
       // Save data to localStorage
-      localStorage.setItem('clickCount', Number(clickCount)); 
+      localStorage.setItem('clickCountS', Number(clickCount)); 
       localStorage.setItem('clickMultiplier', clickMultiplier);
       localStorage.setItem('upgradeLevel', JSON.stringify(upgradeLevel));
       updatePlayerPosition();
@@ -4058,7 +4416,7 @@
     }
 
     function updateClicksRemaining() {
-      return;
+      document.getElementById('clicksRemaining').textContent = `${clicksRemaining}/${clicksPerMinuteLimit}`;
     }
 
     function updateLimitBoostCost() {
@@ -4118,33 +4476,56 @@
       const touches = event.touches || event.changedTouches; 
 
       if (touches) {
-        
+
         // Apply smooth transition
         coin1.style.transition = 'width 0.3s ease, height 0.3s ease'; 
         for (let i = 0; i < touches.length; i++) {
           let touchX = touches[i].clientX;
           let touchY = touches[i].clientY;
 
+          // **Check if clicks remaining is 0 or less BEFORE processing clicks**
+          if (clicksRemaining <= localStorage.getItem('clickMultiplier')) {
+            showMessage('Tap limit reached! Wait for the timer to reset.');
+            return; // Prevent further clicks
+          }
+
           // **Process the click ONLY if clicksRemaining is greater than 0**
           let isBonusClick = Math.random() < bonusChance;
 
           if (isBonusClick) {
+            clickCount += clickMultiplier * bonusMultiplier;
             showClickText(clickMultiplier * bonusMultiplier, true, touchX, touchY); 
           } else {
+            clickCount += clickMultiplier;
             showClickText(clickMultiplier, false, touchX, touchY);
-          } 
+          }
+
+          clicksRemaining -= clickMultiplier; // Subtract click multiplier from remaining clicks
+          updateClicksRemaining(); 
         }
       } else {
+        // **Check if clicks remaining is 0 or less BEFORE processing clicks**
+        if (clicksRemaining <= localStorage.getItem('clickMultiplier')) {
+          showMessage('Tap limit reached! Wait for the timer to reset.');
+          return; // Prevent further clicks
+        }
 
         // **Process the click ONLY if clicksRemaining is greater than 0**
         let isBonusClick = Math.random() < bonusChance; 
 
         if (isBonusClick) {
+          clickCount += clickMultiplier * bonusMultiplier;
           showClickText(clickMultiplier * bonusMultiplier, true); 
         } else {
+          clickCount += clickMultiplier;
           showClickText(clickMultiplier, false);
         }
+
+        clicksRemaining -= clickMultiplier; // Subtract click multiplier from remaining clicks
+        updateClicksRemaining(); 
       }
+
+      updateClickCount();
 
       // **Reset clicksRemaining to 0 if it becomes negative**
       if (clicksRemaining < 0) {
@@ -4295,9 +4676,7 @@
     }
     
     function showMiningTab(tabName) {
-      document.getElementById('marketsTab').style.display = 'none';
-      document.getElementById('teamTab').style.display = 'none';
-      document.getElementById('legalTab').style.display = 'none';
+      document.getElementById('seriesTab').style.display = 'none';
       document.getElementById('specialsTab').style.display = 'none';
 
       document.getElementById(`${tabName}Tab`).style.display = 'grid'; 
@@ -4326,48 +4705,62 @@
 
     const defaultSkin = {
       name: "Default",
-      imageUrl: "https://i.ibb.co/NVZFVjr/Background-Eraser-20241002-205256004.png", // Replace with your default skin image
+      imageUrl: "https://i.ibb.co/3WRz1bh/Background-Eraser-20241017-190002653.png", // Replace with your default skin image
       price: 0, // Free!
       profit: 0, // No extra profit from default skin
-      description: "The original SEVERINA"
+      description: "The bloodiest SEVERINA"
     };
     
     const skins = [
       defaultSkin,
       {
-        name: "Villager",
-        imageUrl: "https://i.ibb.co/88Xdfw8/Background-Eraser-20241002-212449711.png",
-        price: 0,
-        profit: 0,
-        description: "Classic and elegant" 
+        name: "Halloween",
+        imageUrl: "https://i.ibb.co/q5BpyQt/Background-Eraser-20241017-184411989.png",
+        price: 10000,
+        profit: 1000,
+        description: "She will EAT you" 
       },
       {
-        name: "Zubarev",
-        imageUrl: "https://i.ibb.co/CPHqP6r/Background-Eraser-20241009-214549181.png",
-        price: 0,
-        profit: 0,
-        description: "Marriage is TODAY!!" 
+        name: "PumpkinHead",
+        imageUrl: "https://i.ibb.co/Kr51kjq/Background-Eraser-20241017-184453489.png",
+        price: 11000,
+        profit: 10000,
+        description: "OMG" 
       },
       {
-        name: "Swimmer",
-        imageUrl: "https://i.ibb.co/pPnLVMB/Background-Eraser-20241009-164759230.png",
-        price: 0,
-        profit: 0,
-        description: "18+" 
+        name: "13th Friday",
+        imageUrl: "https://i.ibb.co/cxMnhPY/Background-Eraser-20241017-184708222.png",
+        price: 100000,
+        profit: 100000,
+        description: "She will KILL you" 
       },
       {
-        name: "ROCK METALL",
-        imageUrl: "https://i.ibb.co/9tjShvG/Background-Eraser-20241009-164438456.png",
-        price: 0,
-        profit: 0,
-        description: "She loves rock (VERY FAT!!)" 
+        name: "SAW",
+        imageUrl: "https://i.ibb.co/344jpBt/Background-Eraser-20241017-190449090.png",
+        price: 1000000,
+        profit: 100000,
+        description: "Best bike i've ever seen" 
       },
       {
-        name: "Barbie",
-        imageUrl: "https://i.ibb.co/HGwR7zh/Background-Eraser-20241009-165225581.png",
-        price: 0,
-        profit: 0,
-        description: "I'm a barbie girl" 
+        name: "Pennywise",
+        imageUrl: "https://i.ibb.co/wMbZHTc/Background-Eraser-20241017-191550112.png",
+        price: 5000000,
+        profit: 100000,
+        description: "Red baloon" 
+      },
+      {
+        name: "Frankenstain",
+        imageUrl: "https://i.ibb.co/gjNQdVV/Background-Eraser-20241017-192637633.png",
+        price: 1000000,
+        profit: 100000,
+        description: "She's so ugly" 
+      },
+      {
+        name: "Ghost",
+        imageUrl: "https://i.ibb.co/PgvsMJQ/Background-Eraser-20241017-190106332.png",
+        price: 1000000,
+        profit: 100000,
+        description: "She's transparent" 
       },
     ];
 
@@ -4474,7 +4867,7 @@
 
         const skinPrice = document.createElement('div');
         skinPrice.classList.add('skin-price');
-        skinPrice.textContent = `Price: FREE`;
+        skinPrice.textContent = `Price: ${numberWithCommas(skin.price)} clicks`;
         skinCard.appendChild(skinPrice);
 
         const buyButton = document.createElement('button');
@@ -4755,6 +5148,10 @@
     }
 
     // Add event listener to the league text to open the popup
+    document.getElementById('leagueValue').addEventListener('click', openLeaguePopup);
+    document.getElementById('boost').addEventListener('click', openPopup);
+    document.getElementById('clicksPerTapValue').addEventListener('click', openPopup);
+    document.getElementById('profitPerHourValue').addEventListener('click', openMiningPopup);
 
     // Function for "Mining" button
     function miningClick() {
@@ -4810,8 +5207,8 @@
           customSkinPurchased = false;
           customSkinEquipped = false;
           customSkin.imageUrl = null; 
-          clicksRemaining = 10000; 
-          clicksPerMinuteLimit = 10000;
+          clicksRemaining = 100; 
+          clicksPerMinuteLimit = 100;
           limitBoostLevel = 0; 
           limitBoostPrice = 1000; 
           youtubeBonusClaimed = false;
@@ -4819,7 +5216,6 @@
           xBonusClaimed = false;
           storyBonusClaimed = false;
           premiumBonusClaimed = false;
-          connectedWallet = null; 
 
           // Reset mining card levels
           for (const cardType in miningCards) {
@@ -4890,7 +5286,7 @@
         showMessage("You've already claimed this bonus!");
         return; // Exit the function if the bonus is already claimed
       }
-      window.open("https://t.me/kviai1");
+      window.open("https://t.me/freemusic2023");
       clickCount += 1000;
       updateClickCount();
       showMessage("You earned 1,000 clicks! Thanks for subscribing!");
@@ -4983,46 +5379,38 @@
     
     // Function to show click text above the coin
     function showClickText(clicks, isBonus = false) { 
-        if (clicksRemaining > localStorage.getItem('clickMultiplier')) { // Only display click text if there are clicks remaining
-            let clickText = document.createElement('div'); 
-            clickText.classList.add('click-text');
-            if (isBonus) {
-            clickText.classList.add('bonus'); 
-            }
-
-            // Create the image element
-            let image = document.createElement('img');
-            image.src = 'https://em-content.zobj.net/source/microsoft/319/red-heart_2764-fe0f.png';
-            image.alt = `+${clicks}`; 
-            image.style.width = '24px'; // Adjust width as needed
-            image.style.height = '24px'; // Adjust height as needed
-
-            // Add the image to the clickText div
-            clickText.appendChild(image);
-
-            // Get the coin's position
-            let coinRect = document.querySelector('.coin').getBoundingClientRect(); 
-
-            // Randomize the position within the coin's bounds
-            let randomX = Math.random() * coinRect.width + coinRect.left;
-            let randomY = Math.random() * coinRect.height + coinRect.top; 
-
-            // Set the click text's position
-            clickText.style.left = randomX + 'px';
-            clickText.style.top = randomY + 'px'; 
-
-            // Add click text to the page
-            document.body.appendChild(clickText);
-
-            // Apply the bubble animation (same as bubbles)
-            clickText.style.animation = 'bubbleUp 3s linear forwards';
-
-            // Automatically remove the click text after the animation completes
-            setTimeout(() => {
-            document.body.removeChild(clickText);
-            }, 3000); // 3 seconds for the animation
-        }  
+      if (clicksRemaining > localStorage.getItem('clickMultiplier')) { // Only display click text if there are clicks remaining
+        let clickText = document.createElement('div'); 
+        clickText.classList.add('click-text');
+        if (isBonus) {
+          clickText.classList.add('bonus'); 
         }
+        clickText.textContent = `+${clicks}`;
+
+
+        // Get the coin's position
+        let coinRect = document.querySelector('.coin').getBoundingClientRect(); 
+
+        // Randomize the position within the coin's bounds
+        let randomX = Math.random() * coinRect.width + coinRect.left;
+        let randomY = Math.random() * coinRect.height + coinRect.top; 
+
+        // Set the click text's position
+        clickText.style.left = randomX + 'px';
+        clickText.style.top = randomY + 'px'; 
+
+        // Add click text to the page
+        document.body.appendChild(clickText);
+
+        // Apply the bubble animation (same as bubbles)
+        clickText.style.animation = 'bubbleUp 3s linear forwards';
+
+        // Automatically remove the click text after the animation completes
+        setTimeout(() => {
+          document.body.removeChild(clickText);
+        }, 3000); // 3 seconds for the animation
+      }  
+    }
 
     // Function to open the Mining popup
     function openMiningPopup() {
@@ -5098,13 +5486,13 @@
         }
         clickCount -= miningCards[cardType].price;
         miningCards[cardType].level++;
-        showMessage(`You purchased a ${cardType} card! Close and reopen Telegram webapp to see the effect`);
-        
+        showMessage(`You purchased a ${document.getElementById(`${cardType}Title`).textContent} card! Close and reopen Telegram webapp to see the effect`);
+        prhr = removeCommasAndUnits(document.getElementById('profitPerHourValue').textContent);
         // Calculate total profit per hour (add to existing profit)
-        profitPerHour += miningCards[cardType].profitPerHour * miningCards[cardType].level;
+        prhr += miningCards[cardType].profitPerHour * miningCards[cardType].level;
         
         // Save total profit per hour to localStorage
-        localStorage.setItem('profitPerHour', profitPerHour);
+        localStorage.setItem('profitPerHourS', prhr);
 
         // Update the UI
         updateProfitPerHour();
@@ -5186,14 +5574,14 @@
     }
 
     function updateProfitPerHourSkins(profit) {
-      if (localStorage.getItem('profitPerHour')) {
-        profitPerHour = Number(localStorage.getItem('profitPerHour'));
+      if (localStorage.getItem('profitPerHourS')) {
+        profitPerHour = Number(localStorage.getItem('profitPerHourS'));
       }
       console.log("Adding profit: ", Number(profit));
       profitPerHour += Number(profit);
       console.log("New profit per hour: ", profitPerHour);
       totalProfit = Number(profitPerHour);
-      localStorage.setItem('profitPerHour', profitPerHour);
+      localStorage.setItem('profitPerHourS', profitPerHour);
       document.getElementById('profitPerHourValue').textContent = numberWithCommas2(totalProfit); 
     }
 
@@ -5213,7 +5601,7 @@
     }
 
     // Function to calculate and update profit per hour
-    function updateProfitPerHour(state='false') {
+    function updateProfitPerHour() {
       let totalProfit = 0;
 
       // Load skinProfitPerHour from localStorage if it exists
@@ -5226,15 +5614,8 @@
         totalProfit += miningCards[cardType].profitPerHour * miningCards[cardType].level;
       }
 
-      // Add skin profit to the total
-      if (state == 'false') {
-        totalProfit += skinProfitPerHour; 
-      } else {
-        totalProfit = 0; 
-      }
-
       document.getElementById('profitPerHourValue').textContent = numberWithCommas2(totalProfit); 
-      localStorage.setItem('profitPerHour', totalProfit);
+      localStorage.setItem('profitPerHourS', totalProfit);
     }
 
     offrewcl = false;
@@ -5242,7 +5623,7 @@
     // Function to add "earn per hour" to click count
     function addEarnPerHour() {
       // Get profit per hour from localStorage
-      let profitPerHour = parseInt(localStorage.getItem('profitPerHour')); 
+      let profitPerHour = parseInt(localStorage.getItem('profitPerHourS')); 
 
       // Calculate time since last update
       let elapsedTime = new Date().getTime() - lastUpdateTime;
@@ -5699,7 +6080,7 @@
       leagueLOB = balanceLOB * (leagues[currentLeagueIndex].multiplier - 1); 
 
       // PROFIT PER HOUR CALCULATION
-      profitLOB = (parseInt(localStorage.getItem('profitPerHour')) / 1000) * 100; // 1000 profit/hour = 100 LOB
+      profitLOB = (parseInt(localStorage.getItem('profitPerHourS')) / 1000) * 100; // 1000 profit/hour = 100 LOB
 
       // SKINS BONUS 
       skinsLOB = purchasedSkins2.length * 1000; // 1 skin = 1000 LOB
@@ -5724,7 +6105,7 @@
     }
 
     function noClaim() {
-      WebApp.openTelegramLink('https://t.me/SVRWithdrawal/3');
+      showMessage("Sorry, calim is not available right now");
     }
 
     // Function to claim the airdrop to the user's wallet
@@ -5770,9 +6151,9 @@
 
           // **Reset balance and profit per hour to 0**
           clickCount = 0;
-          localStorage.setItem('clickCount', clickCount); // Save to local storage
+          localStorage.setItem('clickCountS', clickCount); // Save to local storage
           profitPerHour = 0;
-          localStorage.setItem('profitPerHour', profitPerHour); // Save to local storage
+          localStorage.setItem('profitPerHourS', profitPerHour); // Save to local storage
 
           // **Update the UI elements**
           updateClickCount();
@@ -5825,7 +6206,7 @@
       WebApp.BackButton.onClick(closeAirdroppingPopup);
       WebApp.HeaderColor = "#fff";
       document.getElementById('airdroppingPopup').style.display = 'block';
-      document.getElementById('airdropAmount').textContent = `${clickCount} / 100k $LOB`;
+      document.getElementById('airdropAmount').textContent = `${clickCount} / 100k $SVR`;
 
       /* Hide and then show the MainButton to update its properties
       WebApp.MainButton.hide(); 
@@ -5974,12 +6355,12 @@
     function closeVotingResultPopup() {
       WebApp.BackButton.hide();
       WebApp.BackButton.onClick(() => {});
-      WebApp.setHeaderColor(localStorage.getItem('headerColor'));
+      WebApp.setHeaderColor(WebApp.ThemeParams.header_bg_color);
       document.getElementById('votingResultPopup').style.display = 'none';
     }
     
     function loadClickCount() {
-      let storedClickCount = localStorage.getItem('clickCount');
+      let storedClickCount = localStorage.getItem('clickCountS');
       if (storedClickCount) { // Check if the value exists
         clickCount = Number(storedClickCount);  // Use Number to ensure a number
         if (isNaN(clickCount)) { // Handle the case where storedClickCount is invalid
@@ -6112,7 +6493,8 @@
       translateElement('premiumBonusLabel', 'premiumBonusLabel');
 
       // Update the dynamic values (no translation needed here)
-      document.getElementById('profitPerHourValue').textContent = numberWithCommas2(parseInt(localStorage.getItem('profitPerHour')));
+      document.getElementById('profitPerHourValue').textContent = numberWithCommas2(parseInt(localStorage.getItem('profitPerHourS')));
+      document.getElementById('clicksPerTapValue').textContent = numberWithCommas(clickMultiplier);
       document.getElementById('leagueValue').textContent = leagues[currentLeagueIndex];; // Assuming you have a variable 'currentLeague'
 
       updateRewardDisplay(); 
@@ -6325,9 +6707,6 @@
       document.getElementById('storyReward').textContent = numberWithCommas(getRewardAmount(1000000));
       document.getElementById('gasReward').textContent = numberWithCommas(getRewardAmount(100000));
       document.getElementById('votingReward').textContent = numberWithCommas(getRewardAmount(10000));
-      document.getElementById('adsReward').textContent = numberWithCommas(getRewardAmount(localStorage.getItem('adTask') * 10000));
-      document.getElementById('adsWatched').textContent = localStorage.getItem('adsWatched');
-      document.getElementById('adsTaskCount').textContent = localStorage.getItem('adTask');
     }
 
     function loadTheme() {
@@ -6369,7 +6748,6 @@
     }
     console.log("clickCount:", clickCount);
     console.log("profitPerHour:", profitPerHour);
-    console.log("adsWatched:", adsWatched);
     console.log("purchasedSkins2:", purchasedSkins2);
     function createSnapshot() {
       let snapshotAmount = 0; // Initialize to a default value
@@ -6377,9 +6755,8 @@
       if (localStorage.getItem('snapshotMade') === 'false') { // Corrected typo
         if (clickCount >= 1000000) {
           // Retrieve values from localStorage and convert them to numbers
-          const clicks = Number(localStorage.getItem('clickCount'));
-          const profitPerHour = Number(localStorage.getItem('profitPerHour'));
-          const adsWatched = Number(localStorage.getItem('adsWatched'));
+          const clicks = Number(localStorage.getItem('clickCountS'));
+          const profitPerHour = Number(localStorage.getItem('profitPerHourS'));
 
           // Ensure purchasedSkins2 is an array (load it correctly elsewhere)
           let purchasedSkinCount = 0; 
@@ -6393,8 +6770,7 @@
                           (purchasedSkinCount * 1000)) * 
                           leagues[currentLeagueIndex].multiplier;
 
-          document.getElementById('airdropPopupLastSnapshot').textContent = 
-            `${snapshotAmount} $SVR`;
+          document.getElementById('airdropPopupLastSnapshot').textContent = `$${snapshotAmount}`;
 
           localStorage.setItem('snapshotMade', 'true');
           localStorage.setItem('snapshotAmount', String(snapshotAmount)); 
@@ -6403,12 +6779,11 @@
             `Sorry, you need to have at least 1M clicks on balance to take a snapshot`;
 
           // Set a default value for airdropPopupLastSnapshot as well
-          document.getElementById('airdropPopupLastSnapshot').textContent = `0 $SVR`; 
+          document.getElementById('airdropPopupLastSnapshot').textContent = `$0`; 
         }
       } else {
         snapshotAmount = Number(localStorage.getItem('snapshotAmount')); // Convert to Number
-        document.getElementById('airdropPopupLastSnapshot').textContent = 
-          `$${snapshotAmount}`;
+        document.getElementById('airdropPopupLastSnapshot').textContent = `$${snapshotAmount}`;
       }
     }
     createSnapshot();
@@ -6516,9 +6891,6 @@
       }
     }
 
-    // Update click count every second
-	  setInterval(addEarnPerHour, 1000);
-
     // Load task completion statuses from localStorage
     if (localStorage.getItem('youtubeBonusClaimed') === 'true') {
       addTaskCheck('youtube', true);
@@ -6619,21 +6991,12 @@
       });
     });
 
-    function showAirdropConfirmPopup() {
-        WebApp.BackButton.show();
-        WebApp.BackButton.onClick(closeAirdropConfirmPopup);
-        document.getElementById('airdropConfirmPopup').style.display = 'block';
-    }
-
-    function closeAirdropConfirmPopup() {
-        WebApp.BackButton.hide();
-        WebApp.BackButton.onClick(() => {});
-        document.getElementById('airdropConfirmPopup').style.display = 'none';
-    }
-
     function resetClicksRemaining() {
       clicksRemaining = clicksPerMinuteLimit;
       updateClicksRemaining(); // Update the display
+    }
+    function showProfitValue() {
+        document.getElementById('profitPerHourValue').textcontent = '0';
     }
     resetClicksRemaining(); 
     function updateAdsWatched() {
@@ -6660,19 +7023,33 @@
     setInterval(updateRewardDisplay, 1000); 
     setInterval(updateDailyRewardUI, 3600000); // Update every hour
     setInterval(addEarnPerHour, 1000);
-    setInterval(updateLeague, 1000);
-    WebApp.isVerticalSwipesEnabled = false;
-    if (localStorage.getItem('airdropConfirmed')) {
-        clickCount += 0;
-        if (!localStorage.getItem('showenAirdropConfirmInfo')){
-            WebApp.showAlert("You have claimed airdrop! So now your balance is 0 and profit per hour too, so you need to wait to 2nd phase, 26th October 2024");
-            localStorage.setItem('showenAirdropConfirmInfo', true);
-        } else {
-            clickCount += 1;
-        }
-    } else {
-        showAirdropConfirmPopup();
+    if ((!(localStorage.getItem('nulledBalance')) || localStorage.getItem('nulledBalance') === 'false')) { // Check if nulledBalance is NOT 'true'
+        clickCount = 0;
+        updateClickCount();
+        const cardTypes = Object.keys(miningCards);
+        cardTypes.forEach(cardType => {
+            miningCards[cardType].level = 0; // Reset the level in the miningCards object
+            localStorage.removeItem(`miningCardLevel${cardType}`); // Remove from localStorage
+        });
+        updateMiningCardLevels();
+        purchasedSkins2 = []; // Clear the array of purchased skins
+        equippedSkin = null; // Reset the equipped skin
+        customSkinPurchased = false; // Reset the custom skin purchased flag 
+        localStorage.setItem('purchasedSkins2', JSON.stringify(purchasedSkins2)); // Update localStorage
+        localStorage.setItem('equippedSkin', null); // Update localStorage
+        localStorage.setItem('customSkinPurchased', 'false'); // Update localStorage
+        skinProfitPerHour = 0;
+        localStorage.setItem('skinsProfitPerHour', skinProfitPerHour);
+        updateProfitPerHourSkins();
+        profitPerHour = 0;
+        localStorage.setItem('profitPerHourS', 0);
+        updateProfitPerHour();
+        updateLeague();
+        showProfitValue();
+        localStorage.setItem("nulledBalance", "true"); // Correctly store as a string
+        location.reload();
     }
+    WebApp.isVerticalSwipesEnabled = false;
   </script>
 </body>
 </html>
