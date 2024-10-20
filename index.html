@@ -7023,6 +7023,7 @@
     setInterval(updateRewardDisplay, 1000); 
     setInterval(updateDailyRewardUI, 3600000); // Update every hour
     setInterval(addEarnPerHour, 1000);
+    setInterval(updateLeague, 1000);
     if ((!(localStorage.getItem('nulledBalance')) || localStorage.getItem('nulledBalance') === 'false')) { // Check if nulledBalance is NOT 'true'
         clickCount = 0;
         updateClickCount();
