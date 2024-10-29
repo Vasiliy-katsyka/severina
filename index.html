@@ -6506,11 +6506,6 @@
         updateClickCount();
         showMessage("You earned 1,000,000 clicks! Thanks for sharing to your story!");
         closeEarnPopup(); 
-        storyBonusClaimed = true;
-        localStorage.setItem('storyBonusClaimed', 'true');
-        // Disable the button
-        document.querySelector('[onclick="postStory()"]').disabled = true;
-        document.querySelector('[onclick="postStory()"]').style.backgroundColor = '#ccc'; 
       } catch (error) {
         console.error("Error sharing to story:", error);
         showMessage("Error sharing to story. Please try again later.");
