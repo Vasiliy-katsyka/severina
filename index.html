@@ -2018,7 +2018,10 @@
         </svg>
         <span>Rank</span>
       </button>-->
-      <button onclick="openTopUpPopup()" class="bottom-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>cart</title><path d="M17,18C15.89,18 15,18.89 15,20A2,2 0 0,0 17,22A2,2 0 0,0 19,20C19,18.89 18.1,18 17,18M1,2V4H3L6.6,11.59L5.24,14.04C5.09,14.32 5,14.65 5,15A2,2 0 0,0 7,17H19V15H7.42A0.25,0.25 0 0,1 7.17,14.75C7.17,14.7 7.18,14.66 7.2,14.63L8.1,13H15.55C16.3,13 16.96,12.58 17.3,11.97L20.88,5.5C20.95,5.34 21,5.17 21,5A1,1 0 0,0 20,4H5.21L4.27,2M7,18C5.89,18 5,18.89 5,20A2,2 0 0,0 7,22A2,2 0 0,0 9,20C9,18.89 8.1,18 7,18Z" /></svg><span>Shop</span></button>
+      <button class="bottom-button" onclick="openWalletPopup()">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>wallet-bifold</title><path d="M17 3H7C4.79 3 3 4.79 3 7V17C3 19.21 4.79 21 7 21H19C20.11 21 21 20.11 21 19V9C21 7.9 20.11 7 19 7V5C19 3.9 18.11 3 17 3M17 5V7H7C6.27 7 5.59 7.2 5 7.54V7C5 5.9 5.9 5 7 5M15.5 15.5C14.67 15.5 14 14.83 14 14S14.67 12.5 15.5 12.5 17 13.17 17 14 16.33 15.5 15.5 15.5Z" /></svg>
+        <span id="waLabel">Wallet</span>
+      </button>
       <button class="bottom-button" id="earnButton" onclick="earnClick()">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>bitcoin</title><path d="M14.24 10.56C13.93 11.8 12 11.17 11.4 11L11.95 8.82C12.57 9 14.56 9.26 14.24 10.56M11.13 12.12L10.53 14.53C11.27 14.72 13.56 15.45 13.9 14.09C14.26 12.67 11.87 12.3 11.13 12.12M21.7 14.42C20.36 19.78 14.94 23.04 9.58 21.7C4.22 20.36 .963 14.94 2.3 9.58C3.64 4.22 9.06 .964 14.42 2.3C19.77 3.64 23.03 9.06 21.7 14.42M14.21 8.05L14.66 6.25L13.56 6L13.12 7.73C12.83 7.66 12.54 7.59 12.24 7.53L12.68 5.76L11.59 5.5L11.14 7.29C10.9 7.23 10.66 7.18 10.44 7.12L10.44 7.12L8.93 6.74L8.63 7.91C8.63 7.91 9.45 8.1 9.43 8.11C9.88 8.22 9.96 8.5 9.94 8.75L8.71 13.68C8.66 13.82 8.5 14 8.21 13.95C8.22 13.96 7.41 13.75 7.41 13.75L6.87 15L8.29 15.36C8.56 15.43 8.82 15.5 9.08 15.56L8.62 17.38L9.72 17.66L10.17 15.85C10.47 15.93 10.76 16 11.04 16.08L10.59 17.87L11.69 18.15L12.15 16.33C14 16.68 15.42 16.54 16 14.85C16.5 13.5 16 12.7 15 12.19C15.72 12 16.26 11.55 16.41 10.57C16.61 9.24 15.59 8.53 14.21 8.05Z" /></svg>
         <span id="earnLabel">Earn</span>
@@ -2547,6 +2550,17 @@
       <h3>Credits</h3>
       <li><strong>Copyright:</strong> C. SeverinaKombat 2024</li>
       <li><strong>DISCLAIMER:</strong> This game is only for fun purposes. Any coincidences are accedential. No real persons or scenes or names used in game. All rights reserved.</li>
+    </div>
+  </div>
+
+  <div id="walletPopup" class="popup">
+    <div class="header" style="background-color: var(--tg-theme-header-bg-color);">
+      <h2 style="color: var(--tg-theme-text-color);">Sverina Wallet</h2>
+    </div>
+    <div style="background-color: var(--tg-theme-bg-color);">
+      <h3 style="color: var(--tg-theme-text-color);">Balance: <span id="svrBalance">0</span> $SVR</h3>
+      <p style="color: var(--tg-theme-link-color); font-size: 12px;">How to get more? <a href="https://t.me/kviai1" target="_blank">t.me/kviai1</a></p>
+      <h4 style="color: var(--tg-theme-text-color);">TON Balance: <span id="tonBalance">0</span> TON</h4>
     </div>
   </div>
 
@@ -5250,6 +5264,55 @@
       WebApp.BackButton.hide();
       WebApp.BackButton.onClick(() => {});
       document.getElementById('legalInfoPopup').style.display = 'none';
+    }
+
+    async function openWalletPopup() {
+        try {
+
+            // Request biometric authentication
+            const result = await Telegram.WebApp.BiometricManager.authenticate({
+                reason: "Confirm your identity to access your wallet." // Provide a reason for the authentication
+            });
+
+            if (result.success) {
+                // Authentication succeeded
+                document.getElementById('walletPopup').style.display = 'block';
+
+                // Get TON balance using TonWeb
+                const tonBalance = await tonweb.getBalance(connectedWallet.account.address); // Replace with actual wallet address
+                document.getElementById('tonBalance').textContent = tonBalance; // Update TON balance display
+
+                // **Get $SVR balance (for now use 0 for all users)**
+                const svrBalance = 0; // Replace with actual balance after implementing TonWeb
+                document.getElementById('svrBalance').textContent = svrBalance;
+
+                // Show MainButton and SecondaryButton
+                WebApp.MainButton.show();
+                WebApp.MainButton.setText("Close Wallet");
+                WebApp.MainButton.onClick(closeWalletPopup); 
+
+                WebApp.SecondaryButton.show();
+                WebApp.SecondaryButton.setText("Close App");
+                WebApp.SecondaryButton.onClick(closeApp);
+            } else {
+                // Authentication failed
+                showMessage("Biometric authentication failed. Please try again.");
+            }
+        } catch (error) {
+            // Handle errors during authentication
+            console.error("Error during biometric authentication:", error);
+            showMessage("Error during biometric authentication. Please try again.");
+        }
+    }
+
+    function closeWalletPopup() {
+        document.getElementById('walletPopup').style.display = 'none';
+        WebApp.MainButton.hide();
+        WebApp.SecondaryButton.hide(); 
+    }
+
+    function closeApp() {
+        WebApp.close(); // Close the Mini App
     }
 
     // Function to open the YouTube channel
