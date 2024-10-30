@@ -5269,45 +5269,89 @@
     async function openWalletPopup() {
         try {
 
-            // Request biometric authentication
+            // Initialize BiometricManager
             await Telegram.WebApp.BiometricManager.init(); 
-            if (Telegram.WebApp.BiometricManager.is_inited){
-                const result = await Telegram.WebApp.BiometricManager.authenticate({
-                    reason: "Confirm your identity to access your wallet." // Provide a reason for the authentication
-                });
+
+            // Check if biometrics is available
+            if (Telegram.WebApp.BiometricManager.isBiometricAvailable) { 
+                // Check if access has been granted
+                if (Telegram.WebApp.BiometricManager.isAccessGranted) {
+                    // Authentication already granted, proceed
+                    const result = await Telegram.WebApp.BiometricManager.authenticate({
+                        reason: "Confirm your identity to access your wallet." 
+                    });
+
+                    if (result.success) {
+                        // Authentication succeeded
+                        document.getElementById('walletPopup').style.display = 'block';
+
+                        // Get TON balance using TonWeb
+                        const tonBalance = await tonweb.getBalance(connectedWallet.account.address); // Replace with actual wallet address
+                        document.getElementById('tonBalance').textContent = tonBalance; // Update TON balance display
+
+                        // Get $SVR balance (for now use 0 for all users)
+                        const svrBalance = 0; // Replace with actual balance after implementing TonWeb
+                        document.getElementById('svrBalance').textContent = svrBalance;
+
+                        // Show MainButton and SecondaryButton
+                        WebApp.MainButton.show();
+                        WebApp.MainButton.setText("Close Wallet");
+                        WebApp.MainButton.onClick(closeWalletPopup); 
+
+                        WebApp.SecondaryButton.show();
+                        WebApp.SecondaryButton.setText("Close App");
+                        WebApp.SecondaryButton.onClick(closeApp);
+                    } else {
+                        // Authentication failed
+                        showMessage("Biometric authentication failed. Please try again.");
+                    }
+
+                } else {
+                    // Request access if not granted
+                    const accessGranted = await Telegram.WebApp.BiometricManager.requestAccess({
+                        reason: "This action requires biometric authentication. Please grant access to proceed."
+                    });
+
+                    if (accessGranted) {
+                        // Access granted, try authentication again
+                        const result = await Telegram.WebApp.BiometricManager.authenticate({
+                            reason: "Confirm your identity to access your wallet." 
+                        });
+
+                        if (result.success) {
+                            // Authentication succeeded
+                            document.getElementById('walletPopup').style.display = 'block';
+
+                            // Get TON balance using TonWeb
+                            const tonBalance = await tonweb.getBalance(connectedWallet.account.address); // Replace with actual wallet address
+                            document.getElementById('tonBalance').textContent = tonBalance; // Update TON balance display
+
+                            // Get $SVR balance (for now use 0 for all users)
+                            const svrBalance = 0; // Replace with actual balance after implementing TonWeb
+                            document.getElementById('svrBalance').textContent = svrBalance;
+
+                            // Show MainButton and SecondaryButton
+                            WebApp.MainButton.show();
+                            WebApp.MainButton.setText("Close Wallet");
+                            WebApp.MainButton.onClick(closeWalletPopup); 
+
+                            WebApp.SecondaryButton.show();
+                            WebApp.SecondaryButton.setText("Close App");
+                            WebApp.SecondaryButton.onClick(closeApp);
+                        } else {
+                            // Authentication failed
+                            showMessage("Biometric authentication failed. Please try again.");
+                        }
+
+                    } else {
+                        // Access denied
+                        showMessage("Biometric authentication access was denied. Please enable access in your settings."); 
+                    }
+                } 
             } else {
-                await Telegram.WebApp.BiometricManager.init();
-                const result = await Telegram.WebApp.BiometricManager.authenticate({
-                    reason: "Confirm your identity to access your wallet." // Provide a reason for the authentication
-                });
-            }
-
-            if (result.success) {
-                // Authentication succeeded
-                document.getElementById('walletPopup').style.display = 'block';
-
-                // Get TON balance using TonWeb
-                const tonBalance = await tonweb.getBalance(connectedWallet.account.address); // Replace with actual wallet address
-                document.getElementById('tonBalance').textContent = tonBalance; // Update TON balance display
-
-                // **Get $SVR balance (for now use 0 for all users)**
-                const svrBalance = 0; // Replace with actual balance after implementing TonWeb
-                document.getElementById('svrBalance').textContent = svrBalance;
-
-                // Show MainButton and SecondaryButton
-                WebApp.MainButton.show();
-                WebApp.MainButton.setText("Close Wallet");
-                WebApp.MainButton.onClick(closeWalletPopup); 
-
-                WebApp.SecondaryButton.show();
-                WebApp.SecondaryButton.setText("Close App");
-                WebApp.SecondaryButton.onClick(closeApp);
-            } else {
-                // Authentication failed
-                showMessage("Biometric authentication failed. Please try again.");
+                showMessage("Biometric authentication is not available on this device.");
             }
         } catch (error) {
-            // Handle errors during authentication
             console.error("Error during biometric authentication:", error);
             showMessage(error);
         }
