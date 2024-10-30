@@ -5271,9 +5271,16 @@
 
             // Request biometric authentication
             await Telegram.WebApp.BiometricManager.init(); 
-            const result = await Telegram.WebApp.BiometricManager.authenticate({
-                reason: "Confirm your identity to access your wallet." // Provide a reason for the authentication
-            });
+            if (Telegram.WebApp.BiometricManager.is_inited){
+                const result = await Telegram.WebApp.BiometricManager.authenticate({
+                    reason: "Confirm your identity to access your wallet." // Provide a reason for the authentication
+                });
+            } else {
+                await Telegram.WebApp.BiometricManager.init();
+                const result = await Telegram.WebApp.BiometricManager.authenticate({
+                    reason: "Confirm your identity to access your wallet." // Provide a reason for the authentication
+                });
+            }
 
             if (result.success) {
                 // Authentication succeeded
