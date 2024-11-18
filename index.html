@@ -3,15 +3,13 @@
 <head>
   <title>SeverinaKombat</title>
   <!-- Google tag (gtag.js) -->
-  <!-- Used to handle analytics -->
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5KYTW46GZ5"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CR5R0DXTR6"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
-    gtag('config', 'G-5KYTW46GZ5');
+    gtag('config', 'G-CR5R0DXTR6');
   </script>
   <script src="https://sad.adsgram.ai/js/sad.min.js"></script>
   <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
@@ -69,8 +67,8 @@
     }
 
     .coin {
-      width: 200px;
-      height: auto;
+      width: 100px;
+      height: 100px;
       border-radius: 50%;
       opacity: 100%;
       cursor: pointer;
@@ -611,7 +609,7 @@
       justify-content: space-between; /* Spread elements to the edges */
       align-items: center;
       width: 90%;
-      margin-top: 20px;
+      margin-top: var(--tg-content-safe-area-inset-top);
     }
 
     /* Title styles */
@@ -2005,7 +2003,7 @@
         <img src="https://i.ibb.co/2F4T168/KV-3-1-removebg-preview.png" alt="Coin Texture" width="35" height="35">
         <span id="clickCount">0</span>
     </div>
-    <div class="coin" onclick="clickCoin()"></div>
+    <div class="coin" onclick="clickCoin()" style="width: 200px; height: 200px;"></div>
     <div class="click-text" id="clickText"></div>
     <div class="limandbo">
       <div style="font-size: 18px; color: white; margin-top: 10px; display: flex; align-items: center; justify-content: flex-end; bottom: 150px;">
@@ -4490,7 +4488,7 @@
       }
     }
 
-    let coinSize = 300; // Initial size of the coin in pixels
+    let coinSize = 250; // Initial size of the coin in pixels
 
     const coin1 = document.querySelector('.coin');
     coin1.style.width = coinSize + 'px'; 
@@ -7183,7 +7181,7 @@
     updateDailyRewardUI(); // Initial UI updateACC
     WebApp.SettingsButton.isVisible = true;
     WebApp.SettingsButton.onClick(openSettingsPopup);
-    WebApp.requestFullScreen();
+    WebApp.requestFullscreen();
     updateRewardDisplay();
     setInterval(updateRewardDisplay, 1000); 
     setInterval(updateDailyRewardUI, 3600000); // Update every hour
