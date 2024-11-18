@@ -7153,22 +7153,6 @@
     let currentTranslations = loadTranslations(); 
     updateTranslatedText(); 
     let showOfflineEarningsPopupFlag = false;
-    window.addEventListener('load', () => {
-      if (WebApp.isActive && !WebApp.isMinimized) {
-          // Show alert only once (using localStorage)
-          if (!localStorage.getItem('newFeatureAlertShown')) {
-              WebApp.alert("Hey! New feature: when your app is opened and not minimized, you earn 2x more from profit per hour!");
-              localStorage.setItem('newFeatureAlertShown', 'true');
-          }
-          profitPerHour *= 2; // Double profit per hour
-      }
-    });
-
-    setInterval(() => {
-      if (WebApp.isActive && !WebApp.isMinimized) {
-        updateProfitPerHour();
-      }
-    }, 1000);
     // Initialize the game
     updateClickCount();
     updatePlayerPosition();
