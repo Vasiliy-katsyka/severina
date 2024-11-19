@@ -609,7 +609,7 @@
       justify-content: space-between; /* Spread elements to the edges */
       align-items: center;
       width: 90%;
-      margin-top: var(--tg-content-safe-area-inset-top);
+      margin-top: var(--tg-content-safe-area-inset-top+10);
     }
 
     /* Title styles */
@@ -4488,7 +4488,7 @@
       }
     }
 
-    let coinSize = 250; // Initial size of the coin in pixels
+    let coinSize = 300; // Initial size of the coin in pixels
 
     const coin1 = document.querySelector('.coin');
     coin1.style.width = coinSize + 'px'; 
