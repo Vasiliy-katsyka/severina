@@ -609,7 +609,7 @@
       justify-content: space-between; /* Spread elements to the edges */
       align-items: center;
       width: 90%;
-      margin-top: 100px;
+      margin-top: 45px;
     }
 
     /* Title styles */
@@ -7120,6 +7120,8 @@
       updateProfitPerHour(); // Update the profit display on page load
     }
 
+    WebApp.onEvent()
+
     document.addEventListener('DOMContentLoaded', function() {
       // Get all popups and airdrop-popups on the page
       const popups = document.querySelectorAll('.popup, .airdrop-popup, .league-popup'); 
@@ -7164,6 +7166,7 @@
     addEarnPerHour(); 
     updateDailyRewardUI(); // Initial UI updateACC
     WebApp.SettingsButton.isVisible = true;
+    WebApp.isOrientationLocked = true;
     WebApp.SettingsButton.onClick(openSettingsPopup);
     WebApp.requestFullscreen();
     updateRewardDisplay();
