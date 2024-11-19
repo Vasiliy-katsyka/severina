@@ -2402,6 +2402,10 @@
         <span id="addToHomeScreenLabel2">Add to Home Screen</span>
       </button>
     </div>
+    <div class="task-item" id="statusTask">
+      <button class="earn-button" onclick="setStatus()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>image-plus</title><path d="M19,19H5V5H19M14,14V8H8V14H14M12,10H10V12H12V10M19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M17,18H19V16H17V18M17,14H19V12H17V14M17,10H19V8H17V10Z" /></svg><span id="setstatuslibel">Set Emoji Status</span> | +<span id="statusreward">100k</span></button>
+      <span class="task-check" id="emojiCheck"></span>
+    </div>
     <div class="task-item" id="postStoryTask">
       <button class="earn-button" onclick="postStory()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>image-plus</title><path d="M19,19H5V5H19M14,14V8H8V14H14M12,10H10V12H12V10M19,3H5A2,2 0 0,0 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M17,18H19V16H17V18M17,14H19V12H17V14M17,10H19V8H17V10Z" /></svg><span id="postStoryLabel">Post Story</span> | +<span id="storyReward">1M</span></button>
       <span class="task-check" id="storyCheck"></span>
@@ -6992,6 +6996,11 @@
         }, 300); // Adjust animation duration if needed
       }
     });
+
+    function setStatus() {
+      WebApp.requestEmojiStatusAccess();
+      WebApp.setEmojiStatus('5323498378686911616');
+    }
 
     // Spawn bubbles every 1 second
     timeOut = randint(100, 900)
