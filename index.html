@@ -2122,7 +2122,7 @@
         <!-- Series Tab Cards -->
         <div class="mining-container" id="seriesTab">
           <div class="mining-card" data-card-type="lovevictor">
-            <img src="https://cdn.midjourney.com/e6295192-dac9-4fdc-b072-f671ccba7628/0_1.png" alt="Love, Victor"> 
+            <img src="https://cdn.midjourney.com/e6295192-dac9-4fdc-b072-f671ccba7628/0_1.png" alt="Lose Weight"> 
             <h3 id="lovevictorTitle">Lose Weight</h3>
             <div class="card-info">
               <span id="lovevictorProfit">Profit/hour: <a class="gold-text">+3000 clicks</a></span>
@@ -2163,13 +2163,27 @@
               <div class="spinner" id="airSpinner"></div>
             </div>
           </div>
+          <div class="mining-card" data-card-type="lovevictor">
+            <img src="https://pbs.twimg.com/profile_images/1809917852498919424/26degRHp_400x400.png" alt="Tomarket"> 
+            <h3 id="tomaTitle">$TOMA Airdrop</h3>
+            <div class="card-info">
+              <span id="tomaProfit">Profit/hour: <a class="gold-text">+15000 clicks</a></span>
+              <span class="card-price" id="tomaPrice">Price: 10000 clicks</span>
+              <span class="card-level" id="tomaLevel">Level: 0</span>
+            </div>
+            <button class="buy-button" onclick="buyCard('toma')">Buy</button>
+            <div class="timer-overlay" id="tomaTimerOverlay">
+              <span class="timer-text" id="tomaTimer">30</span>
+              <div class="spinner" id="tomaSpinner"></div>
+            </div>
+          </div>
         </div>
     
         <!-- Specials Tab Cards -->
         <div class="mining-container" id="specialsTab" style="display: none">
           <div class="mining-card" data-card-type="heartstopper3">
-            <img src="https://cdn.midjourney.com/4f4bfd74-dbac-490d-8eb3-ddcde5caa8bb/0_0.png" alt="Heartstopper 3"> 
-            <h3 id="heartstopper3Title">Helloween</h3>
+            <img src="https://cdn.midjourney.com/6d27249c-bbcf-40da-98d1-a7b47af86b2b/0_3.png" alt="Christmas"> 
+            <h3 id="heartstopper3Title">Christmas</h3>
             <div class="card-info">
               <span id="heartstopper3Profit">Profit/hour: <a class="gold-text">+1000 clicks</a></span>
               <span class="card-price" id="heartstopper3Price">Price: 8000 clicks</span>
@@ -2193,6 +2207,20 @@
             <div class="timer-overlay" id="terTimerOverlay">
               <span class="timer-text" id="terTimer">30</span>
               <div class="spinner" id="terSpinner"></div>
+            </div>
+          </div>
+          <div class="mining-card" data-card-type="heartstopper3">
+            <img src="https://cdn.midjourney.com/3f2aafbf-68c6-4405-8c4c-630fd9d54938/0_1.png" alt="Smile 2"> 
+            <h3 id="smileTitle">Smile 2</h3>
+            <div class="card-info">
+              <span id="smileProfit">Profit/hour: <a class="gold-text">+10000 clicks</a></span>
+              <span class="card-price" id="smilePrice">Price: 12000 clicks</span>
+              <span class="card-level" id="smileLevel">Level: 0</span>
+            </div>
+            <button class="buy-button" onclick="buyCard('smile')">Buy</button>
+            <div class="timer-overlay" id="smileTimerOverlay">
+              <span class="timer-text" id="smileTimer">30</span>
+              <div class="spinner" id="smileSpinner"></div>
             </div>
           </div>
     
@@ -3941,11 +3969,18 @@
         imageUrl: "https://cdn.midjourney.com/cea799e3-658a-407f-b06b-40e5826541ac/0_0.png", 
         cooldown: 10 
       },
+      toma: { 
+        profitPerHour: 15000, 
+        price: 10000,
+        level: 0,
+        imageUrl: "https://pbs.twimg.com/profile_images/1809917852498919424/26degRHp_400x400.png", 
+        cooldown: 10 
+      },
       heartstopper3: { 
         profitPerHour: 1000, 
         price: 8000,
         level: 0,
-        imageUrl: "https://i0.wp.com/thenerdsofcolor.org/wp-content/uploads/2024/09/en_gb_hs_s3_main_charlie_and_nick_-_main_key_art_4_x_5_v_1080px1350p_rgb_pre_1.jpg?resize=1080%2C1200&ssl=1", 
+        imageUrl: "https://cdn.midjourney.com/6d27249c-bbcf-40da-98d1-a7b47af86b2b/0_3.png", 
         cooldown: 10 
       },
       ter: { 
@@ -3953,6 +3988,13 @@
         price: 8000,
         level: 0,
         imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZUZIhEhEjd3zL-y9oCYReYHLxzub2EBHvbg&s", 
+        cooldown: 10 
+      },
+      smile: { 
+        profitPerHour: 10000, 
+        price: 12000,
+        level: 0,
+        imageUrl: "https://cdn.midjourney.com/6d27249c-bbcf-40da-98d1-a7b47af86b2b/0_3.png", 
         cooldown: 10 
       },
     };
