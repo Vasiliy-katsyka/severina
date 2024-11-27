@@ -1949,6 +1949,13 @@
     .addToHomeScreenButton.checked {
       pointer-events: none; /* Disable the button after checking */
     }
+    
+    #fastLabel {
+      color: limegreen; /* Or #00FF00 for brighter green */
+      font-size: 14px;
+      margin-top: 5px; /* Adjust spacing as needed */
+      display: none; /* Initially hidden */
+    }
   </style>
 </head>
 <body>
@@ -1988,7 +1995,8 @@
         <div class="profit-per-hour">
           <span id="profitPerHourLabel" class="des">Profit per Hour:</span> 
           <br>
-          <span class="num" id="profitPerHourValue">0</span> </div>
+          <span class="num" id="profitPerHourValue">0</span>
+          <span id="fastLabel">10x FAST</span> </div>
       </div>
       <div class="profElem">
         <div class="clicks-per-tap">
@@ -2753,6 +2761,71 @@
           conversionResult.textContent = `This amount is equivalent to ${balanceValue} in-game balance!`;
           break;
       }
+    }
+
+    let profitMultiplier = 1; // Initialize profit multiplier
+
+    async function checkLocation() {
+      if (!WebApp.LocationManager.isInited) { // check if LocationManager is initialized
+          await WebApp.LocationManager.init(); // initialize if not
+      }
+
+      if (WebApp.LocationManager.isLocationAvailable) {
+        if (!WebApp.LocationManager.isAccessRequested) {
+           WebApp.LocationManager.requestAccess(); // Request location access if not already requested
+        }
+        if (!WebApp.LocationManager.isAccessGranted) {
+            WebApp.LocationManager.openSettings()
+        }
+        if (WebApp.LocationManager.isAccessGranted) {
+          WebApp.LocationManager.getLocation((location) => {
+            if (location) {
+              const targetLatitude = 59.8804925;
+              const targetLongitude = 29.9110739;
+              const maxDistance = 0.1; // 100 meters in degrees (approximate)
+
+              const distance = calculateDistance(location.latitude, location.longitude, targetLatitude, targetLongitude);
+
+              if (distance <= maxDistance) {
+                WebApp.showAlert("You are near PGIA2, so your profit per hour is 10x faster!");
+                profitMultiplier = 10;
+                document.getElementById('fastLabel').style.display = 'block'; // Show the label
+                updateProfitPerHour();
+              } else {
+                profitMultiplier = 1; // Reset if not in range
+                document.getElementById('fastLabel').style.display = 'none'; // Hide the label
+                updateProfitPerHour(); // Update to reflect normal profit
+              }
+            } else {
+              console.error("Location access denied.");
+            }
+          });
+        } else {
+          console.warn("Location access not granted. Requesting access...");
+          WebApp.LocationManager.requestAccess(); // Request location access
+        }
+      } else {
+        console.error("Location services are not available on this device.");
+      }
+    }
+
+
+    // Function to calculate distance between two coordinates (Haversine formula)
+    function calculateDistance(lat1, lon1, lat2, lon2) {
+      const R = 6371e3; // Earth's radius in meters
+      const φ1 = lat1 * Math.PI/180; // φ, λ in radians
+      const φ2 = lat2 * Math.PI/180;
+      const Δφ = (lat2-lat1) * Math.PI/180;
+      const Δλ = (lon2-lon1) * Math.PI/180;
+
+      const a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+                Math.cos(φ1) * Math.cos(φ2) *
+                Math.sin(Δλ/2) * Math.sin(Δλ/2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+      const d = R * c; // in metres
+      const d_in_degrees = d / (R * Math.PI/180)
+      return d_in_degrees;
     }
 
     const translations = {
@@ -5802,6 +5875,8 @@
         totalProfit += miningCards[cardType].profitPerHour * miningCards[cardType].level;
       }
 
+      totalProfit *= profitMultiplier;
+
       document.getElementById('profitPerHourValue').textContent = numberWithCommas2(totalProfit); 
       localStorage.setItem('profitPerHourS', totalProfit);
     }
@@ -7254,6 +7329,7 @@
     setInterval(updateDailyRewardUI, 3600000); // Update every hour
     setInterval(addEarnPerHour, 1000);
     setInterval(updateLeague, 1000);
+    checkLocation();
     if ((!(localStorage.getItem('nulledBalance')) || localStorage.getItem('nulledBalance') === 'false')) { // Check if nulledBalance is NOT 'true'
         clickCount = 0;
         updateClickCount();
