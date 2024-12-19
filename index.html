@@ -4457,6 +4457,10 @@
       if (!WebApp.isExpanded) {
         WebApp.expand();
       }
+      let stt = window.Telegram.WebApp.initDataUnsafe.start_param;
+      if (stt == 'airdrop') {
+        openAirdrop();
+      }
       WebApp.setHeaderColor('#000000');
       WebApp.setBackgroundColor('#000000');
       WebApp.disableVerticalSwipes();
@@ -7310,10 +7314,7 @@
     function showProfitValue() {
         document.getElementById('profitPerHourValue').textcontent = '0';
     }
-    let stt = window.Telegram.WebApp.initDataUnsafe.start_param;
-    if (stt == 'airdrop') {
-      openAirdrop();
-    }
+
     resetClicksRemaining(); 
     document.getElementById('claimAirdropButton').disabled = false;
     let currentTranslations = loadTranslations(); 
