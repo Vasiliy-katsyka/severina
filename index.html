@@ -1242,7 +1242,7 @@
 
     .airdrop-popup .airdrop-content {
       overflow-y: auto; /* Make the airdrop content scrollable */
-      max-height: 400px; /* Set a fixed height for the container - adjust this value as needed */
+      max-height: 600px; /* Set a fixed height for the container - adjust this value as needed */
     }
 
     .profContainer {
@@ -2054,12 +2054,12 @@
         <span id="aboutLabel">About</span>
       </button>
       <button class="bottom-button" id="miningButton" onclick="openMiningPopup()"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>minecraft</title><path d="M4,2H20A2,2 0 0,1 22,4V20A2,2 0 0,1 20,22H4A2,2 0 0,1 2,20V4A2,2 0 0,1 4,2M6,6V10H10V12H8V18H10V16H14V18H16V12H14V10H18V6H14V10H10V6H6Z" /></svg><span id="miningLabel">Mining</span></button>
-      <!--<button class="bottom-button" id="airdropButton" onclick="openAirdrop()">
+      <button class="bottom-button" id="airdropButton" onclick="openAirdrop()">
         <svg>
           <image href="https://i.ibb.co/2F4T168/KV-3-1-removebg-preview.png" width="23" height="23" /> 
         </svg>
         <span id="airdropLabel">Airdrop</span>
-      </button>-->
+      </button>
     </div>
 
   <div class="lobster-catch-popup" id="lobsterCatchPopup">
@@ -2671,7 +2671,7 @@
           <div class="check-mark" id="totalCheck"></div>
           <span id="totalLOB">Total: Calculating...</span>
         </div>
-        <p>Blockchain Fee: 0.13 TON</p>
+        <p>SEASON 2 BONUS <bold style="font-size: 30px;">10x MORE TOKENS</bold></p>
       </div>
       <div id="ton-connect">
       </div>
@@ -2767,15 +2767,15 @@
 
     async function checkLocation() {
       if (!WebApp.LocationManager.isInited) { // check if LocationManager is initialized
-          await WebApp.LocationManager.init(); // initialize if not
+        await WebApp.LocationManager.init(); // initialize if not
       }
 
       if (WebApp.LocationManager.isLocationAvailable) {
         if (!WebApp.LocationManager.isAccessRequested) {
-           WebApp.LocationManager.requestAccess(); // Request location access if not already requested
+          WebApp.LocationManager.requestAccess(); // Request location access if not already requested
         }
         if (!WebApp.LocationManager.isAccessGranted) {
-            WebApp.LocationManager.openSettings()
+          WebApp.LocationManager.openSettings()
         }
         if (WebApp.LocationManager.isAccessGranted) {
           WebApp.LocationManager.getLocation((location) => {
@@ -6350,21 +6350,26 @@
 
       // TOTAL LOB
       totalLOB = balanceLOB + leagueLOB + profitLOB + skinsLOB;
-      totalLOB = Math.round(totalLOB);
+      totalLOB = Math.round(totalLOB*10);
 
-      // Update airdrop display 
-      document.getElementById('balanceAirdrop').textContent = `Balance: ${addCommas1(truncateDecimal(balanceLOB))} $SVR`;
-      document.getElementById('leagueAirdrop').textContent = `League Bonus: ${addCommas1(truncateDecimal(leagueLOB))} $SVR`;
-      document.getElementById('profitAirdrop').textContent = `Profit/hour Bonus: ${addCommas1(truncateDecimal(profitLOB))} $SVR`;
-      document.getElementById('skinsAirdrop').textContent = `Skins Bonus: ${addCommas1(truncateDecimal(skinsLOB))} $SVR`;
-      document.getElementById('totalLOB').textContent = `Total: ${addCommas1(truncateDecimal(totalLOB))} $SVR`;
+      if (totalLOB <= 1000) {
+        WebApp.alert("Увы, надо было проявлять больше активности. В этом сезоне ты не получил токенов, ждём тебя 26 декабря!");
+      } else {
 
-      // Update checkmarks 
-      document.getElementById('balanceCheck').classList.add('green');
-      document.getElementById('leagueCheck').classList.add('green');
-      document.getElementById('profitCheck').classList.add('green');
-      document.getElementById('skinsCheck').classList.add('green');
-      document.getElementById('totalCheck').classList.add('green');
+        // Update airdrop display 
+        document.getElementById('balanceAirdrop').textContent = `Balance: ${addCommas1(truncateDecimal(balanceLOB*10))} $SVR`;
+        document.getElementById('leagueAirdrop').textContent = `League Bonus: ${addCommas1(truncateDecimal(leagueLOB*10))} $SVR`;
+        document.getElementById('profitAirdrop').textContent = `Profit/hour Bonus: ${addCommas1(truncateDecimal(profitLOB*10))} $SVR`;
+        document.getElementById('skinsAirdrop').textContent = `Skins Bonus: ${addCommas1(truncateDecimal(skinsLOB*10))} $SVR`;
+        document.getElementById('totalLOB').textContent = `Total: ${addCommas1(truncateDecimal(totalLOB))} $SVR`;
+
+        // Update checkmarks 
+        document.getElementById('balanceCheck').classList.add('green');
+        document.getElementById('leagueCheck').classList.add('green');
+        document.getElementById('profitCheck').classList.add('green');
+        document.getElementById('skinsCheck').classList.add('green');
+        document.getElementById('totalCheck').classList.add('green');
+      }
     }
 
     function noClaim() {
@@ -7324,6 +7329,7 @@
     WebApp.isOrientationLocked = true;
     WebApp.SettingsButton.onClick(openSettingsPopup);
     WebApp.requestFullscreen();
+    WebApp.LocationManager.requestAccess();
     updateRewardDisplay();
     setInterval(updateRewardDisplay, 1000); 
     setInterval(updateDailyRewardUI, 3600000); // Update every hour
