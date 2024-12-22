@@ -2015,7 +2015,7 @@
         <img src="https://i.ibb.co/2F4T168/KV-3-1-removebg-preview.png" alt="Coin Texture" width="35" height="35">
         <span id="clickCount">0</span>
     </div>
-    <div class="coin" onclick="clickCoin()" style="width: 200px; height: 200px;"></div>
+    <div class="coin" onclick="clickCoin(event)" style="width: 200px; height: 200px;"></div>
     <div class="click-text" id="clickText"></div>
     <div class="limandbo">
       <div style="font-size: 18px; color: white; margin-top: 10px; display: flex; align-items: center; justify-content: flex-end; bottom: 150px;">
@@ -4623,63 +4623,66 @@
 
     // Function to handle coin click
     function clickCoin(event) {
-      const touches = event.touches || event.changedTouches; 
-
+      
+      let touches = null;
+      let touchX = null;
+      let touchY = null;
+      if (event) {
+          touches = event.touches || event.changedTouches;
+      }
       if (touches) {
-
         // Apply smooth transition
-        coin1.style.transition = 'width 0.3s ease, height 0.3s ease'; 
-        for (let i = 0; i < touches.length; i++) {
-          let touchX = touches[i].clientX;
-          let touchY = touches[i].clientY;
+        coin1.style.transition = 'width 0.3s ease, height 0.3s ease';
+            for (let i = 0; i < touches.length; i++) {
+            touchX = touches[i].clientX;
+            touchY = touches[i].clientY;
 
-          // **Check if clicks remaining is 0 or less BEFORE processing clicks**
+                // **Check if clicks remaining is 0 or less BEFORE processing clicks**
+            if (clicksRemaining <= localStorage.getItem('clickMultiplier')) {
+              showMessage('Tap limit reached! Wait for the timer to reset.');
+              return; // Prevent further clicks
+            }
+                // **Process the click ONLY if clicksRemaining is greater than 0**
+              let isBonusClick = Math.random() < bonusChance;
+
+            if (isBonusClick) {
+              clickCount += clickMultiplier * bonusMultiplier;
+              showClickText(clickMultiplier * bonusMultiplier, true, touchX, touchY);
+            } else {
+              clickCount += clickMultiplier;
+              showClickText(clickMultiplier, false, touchX, touchY);
+            }
+
+            clicksRemaining -= clickMultiplier; // Subtract click multiplier from remaining clicks
+            updateClicksRemaining();
+        }
+      }
+      else {
+        // **Check if clicks remaining is 0 or less BEFORE processing clicks**
           if (clicksRemaining <= localStorage.getItem('clickMultiplier')) {
             showMessage('Tap limit reached! Wait for the timer to reset.');
             return; // Prevent further clicks
           }
-
-          // **Process the click ONLY if clicksRemaining is greater than 0**
+            // **Process the click ONLY if clicksRemaining is greater than 0**
           let isBonusClick = Math.random() < bonusChance;
 
           if (isBonusClick) {
             clickCount += clickMultiplier * bonusMultiplier;
-            showClickText(clickMultiplier * bonusMultiplier, true, touchX, touchY); 
+            showClickText(clickMultiplier * bonusMultiplier, true, null, null);
           } else {
-            clickCount += clickMultiplier;
-            showClickText(clickMultiplier, false, touchX, touchY);
+              clickCount += clickMultiplier;
+              showClickText(clickMultiplier, false, null, null);
           }
 
-          clicksRemaining -= clickMultiplier; // Subtract click multiplier from remaining clicks
-          updateClicksRemaining(); 
-        }
-      } else {
-        // **Check if clicks remaining is 0 or less BEFORE processing clicks**
-        if (clicksRemaining <= localStorage.getItem('clickMultiplier')) {
-          showMessage('Tap limit reached! Wait for the timer to reset.');
-          return; // Prevent further clicks
-        }
-
-        // **Process the click ONLY if clicksRemaining is greater than 0**
-        let isBonusClick = Math.random() < bonusChance; 
-
-        if (isBonusClick) {
-          clickCount += clickMultiplier * bonusMultiplier;
-          showClickText(clickMultiplier * bonusMultiplier, true); 
-        } else {
-          clickCount += clickMultiplier;
-          showClickText(clickMultiplier, false);
-        }
-
         clicksRemaining -= clickMultiplier; // Subtract click multiplier from remaining clicks
-        updateClicksRemaining(); 
+        updateClicksRemaining();
       }
 
       updateClickCount();
 
       // **Reset clicksRemaining to 0 if it becomes negative**
       if (clicksRemaining < 0) {
-        clicksRemaining = 0; 
+        clicksRemaining = 0;
         updateClicksRemaining();
       }
     }
@@ -5643,26 +5646,26 @@
 
     
     // Function to show click text above the coin
-    function showClickText(clicks, isBonus = false) { 
+    function showClickText(clicks, isBonus = false, touchX, touchY) {
       if (clicksRemaining > localStorage.getItem('clickMultiplier')) { // Only display click text if there are clicks remaining
-        let clickText = document.createElement('div'); 
-        clickText.classList.add('click-text');
-        if (isBonus) {
-          clickText.classList.add('bonus'); 
-        }
-        clickText.textContent = `+${clicks}`;
+            let clickText = document.createElement('div');
+            clickText.classList.add('click-text');
+          if (isBonus) {
+            clickText.classList.add('bonus');
+          }
+          clickText.textContent = `+${clicks}`;
 
-
-        // Get the coin's position
-        let coinRect = document.querySelector('.coin').getBoundingClientRect(); 
-
-        // Randomize the position within the coin's bounds
-        let randomX = Math.random() * coinRect.width + coinRect.left;
-        let randomY = Math.random() * coinRect.height + coinRect.top; 
 
         // Set the click text's position
-        clickText.style.left = randomX + 'px';
-        clickText.style.top = randomY + 'px'; 
+        if (touchX !== null && touchY !== null) {
+          clickText.style.left = touchX + 'px';
+          clickText.style.top = touchY + 'px';
+        } else {
+          // Use default location
+          let coinRect = document.querySelector('.coin').getBoundingClientRect();
+          clickText.style.left = (coinRect.left + (coinRect.width / 2)) + 'px'; // Center on coin
+          clickText.style.top = (coinRect.top + (coinRect.height / 2)) + 'px'; // Center on coin
+        }
 
         // Add click text to the page
         document.body.appendChild(clickText);
@@ -5674,7 +5677,7 @@
         setTimeout(() => {
           document.body.removeChild(clickText);
         }, 3000); // 3 seconds for the animation
-      }  
+      }
     }
 
     // Function to open the Mining popup
@@ -6377,7 +6380,7 @@
     }
 
     function noClaim() {
-      showMessage("Sorry, calim is not available right now");
+      WebApp.openTelegramLink('https://t.me/SVRWithdrawal');
     }
 
     // Function to claim the airdrop to the user's wallet
